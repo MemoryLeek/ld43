@@ -5,7 +5,7 @@
 CONFIG += link_pkgconfig
 
 TEMPLATE = app
-TARGET = src
+TARGET = ld43
 INCLUDEPATH += .
 
 # The following define makes your compiler warn you if you use any
@@ -20,6 +20,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    states/LogoState.cpp \
+    StateTransition.cpp \
+    states/DummyState.cpp \
+    StateHandler.cpp \
+    states/TransitionState.cpp
 
 PKGCONFIG += sfml-all
+
+HEADERS += \
+    states/LogoState.h \
+    IState.h \
+    StateTransition.h \
+    states/DummyState.h \
+    Utility.h \
+    StateHandler.h \
+    states/TransitionState.h

@@ -34,3 +34,6 @@
 # Qt files
 *.pro.user
 .qmake.stash
+
+# Binary
+src/ld43
