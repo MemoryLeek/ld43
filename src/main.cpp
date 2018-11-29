@@ -81,6 +81,16 @@ int main()
 
 		while (window.pollEvent(event))
 		{
+			if (event.type == sf::Event::KeyPressed)
+			{
+				stateHandler.keyPressed(event.key);
+			}
+
+			if (event.type == sf::Event::KeyReleased)
+			{
+				stateHandler.keyReleased(event.key);
+			}
+
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();

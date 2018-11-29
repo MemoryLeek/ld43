@@ -1,6 +1,7 @@
 #ifndef LOGOSTATE_H
 #define LOGOSTATE_H
 
+#include "DummyState.h"
 #include "IState.h"
 
 class StateHandler;
@@ -19,8 +20,11 @@ class LogoState : public IState
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 	private:
+		void nextState();
+
 		sf::Texture m_logo;
 
+		DummyState m_dummyState;
 		StateHandler &m_stateHandler;
 
 		long m_duration;

@@ -15,6 +15,8 @@ LogoState::LogoState(StateHandler &stateHandler)
 void LogoState::keyPressed(const sf::Event::KeyEvent &event)
 {
 	UNUSED(event);
+
+	nextState();
 }
 
 void LogoState::keyReleased(const sf::Event::KeyEvent &event)
@@ -24,11 +26,9 @@ void LogoState::keyReleased(const sf::Event::KeyEvent &event)
 
 void LogoState::update(long delta)
 {
-	static DummyState dummyState;
-
-	if ((m_duration += delta) >= 2000)
+	if ((m_duration += delta) >= 500)
 	{
-		m_stateHandler.changeState(&dummyState, 1000);
+		nextState();
 	}
 }
 
@@ -44,4 +44,9 @@ void LogoState::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 	target.clear(sf::Color::White);
 	target.draw(sprite);
+}
+
+void LogoState::nextState()
+{
+	m_stateHandler.changeState(&m_dummyState, 500);
 }
