@@ -10,6 +10,9 @@ class LogoState : public IState
 	public:
 		LogoState(StateHandler &stateHandler);
 
+		void keyPressed(const sf::Event::KeyEvent &event) override;
+		void keyReleased(const sf::Event::KeyEvent &event) override;
+
 		void update(long delta) override;
 
 	protected:

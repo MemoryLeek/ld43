@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "StateTransition.h"
+class IState;
 
 class StateHandler : public sf::Drawable
 {
@@ -16,13 +16,12 @@ class StateHandler : public sf::Drawable
 		void update(long delta);
 
 		void changeState(IState *next, long duration);
+		void changeState(IState *next);
 
 	protected:
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 	private:
-		StateTransition m_transition;
-
 		IState *m_state;
 };
 

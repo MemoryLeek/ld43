@@ -6,6 +6,9 @@
 class DummyState : public IState
 {
 	public:
+		void keyPressed(const sf::Event::KeyEvent &event) override;
+		void keyReleased(const sf::Event::KeyEvent &event) override;
+
 		void update(long delta) override;
 
 	protected:

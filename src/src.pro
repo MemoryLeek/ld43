@@ -25,7 +25,6 @@ win32:DEFINES += M_PI=3.14159265358979323846
 # Input
 SOURCES += main.cpp \
     states/LogoState.cpp \
-    StateTransition.cpp \
     states/DummyState.cpp \
     StateHandler.cpp \
     states/TransitionState.cpp
@@ -33,7 +32,6 @@ SOURCES += main.cpp \
 HEADERS += \
     states/LogoState.h \
     IState.h \
-    StateTransition.h \
     states/DummyState.h \
     Utility.h \
     StateHandler.h \

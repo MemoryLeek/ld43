@@ -12,6 +12,16 @@ LogoState::LogoState(StateHandler &stateHandler)
 	m_logo.loadFromFile("resources/logo.png");
 }
 
+void LogoState::keyPressed(const sf::Event::KeyEvent &event)
+{
+	UNUSED(event);
+}
+
+void LogoState::keyReleased(const sf::Event::KeyEvent &event)
+{
+	UNUSED(event);
+}
+
 void LogoState::update(long delta)
 {
 	static DummyState dummyState;
