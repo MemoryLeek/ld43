@@ -65,6 +65,56 @@ class PlayerDrawable : public sf::Drawable
 		Player &m_player;
 };
 
+class IState
+{
+};
+
+class StateTransition
+{
+
+};
+
+class StateHandler : public sf::Drawable
+{
+	public:
+		StateHandler()
+			: m_current(nullptr)
+			, m_next(nullptr)
+		{
+		}
+
+		void keyPressed(const sf::Event::KeyEvent &event)
+		{
+			UNUSED(event);
+		}
+
+		void keyReleased(const sf::Event::KeyEvent &event)
+		{
+			UNUSED(event);
+		}
+
+		void update(long delta)
+		{
+			UNUSED(delta);
+		}
+
+//		void
+
+		// Drawable interface
+	protected:
+		void draw(sf::RenderTarget &target, sf::RenderStates states) const override
+		{
+			UNUSED(target);
+			UNUSED(states);
+		}
+
+	private:
+		StateTransition m_transition;
+
+		IState *m_current;
+		IState *m_next;
+};
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "ld43");
