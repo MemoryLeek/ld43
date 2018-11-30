@@ -37,3 +37,6 @@
 
 # Binary
 src/ld43
+
+# Makefiles
+Makefile

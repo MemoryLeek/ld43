@@ -37,6 +37,8 @@ HEADERS += \
     StateHandler.h \
     states/TransitionState.h
 
+unix:QMAKE_CXXFLAGS += -Wall
+
 unix:LIBS += -ltmxlite
 unix:PKGCONFIG += sfml-all
 
