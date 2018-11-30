@@ -21,12 +21,12 @@ void StateHandler::keyReleased(const sf::Event::KeyEvent &event)
 	m_state->keyReleased(event);
 }
 
-void StateHandler::update(long delta)
+void StateHandler::update(float delta)
 {
 	m_state->update(delta);
 }
 
-void StateHandler::changeState(IState *next, long duration)
+void StateHandler::changeState(IState *next, float duration)
 {
 	m_state = new TransitionState(*this, *m_state, *next, duration);
 }

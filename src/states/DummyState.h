@@ -9,7 +9,7 @@ class DummyState : public IState
 		void keyPressed(const sf::Event::KeyEvent &event) override;
 		void keyReleased(const sf::Event::KeyEvent &event) override;
 
-		void update(long delta) override;
+		void update(float delta) override;
 
 	protected:
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const override;

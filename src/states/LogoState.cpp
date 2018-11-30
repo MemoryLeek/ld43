@@ -7,7 +7,7 @@
 
 LogoState::LogoState(StateHandler &stateHandler)
 	: m_stateHandler(stateHandler)
-	, m_duration(0)
+	, m_duration(0.0f)
 {
 	m_logo.loadFromFile("resources/logo.png");
 }
@@ -24,9 +24,9 @@ void LogoState::keyReleased(const sf::Event::KeyEvent &event)
 	UNUSED(event);
 }
 
-void LogoState::update(long delta)
+void LogoState::update(float delta)
 {
-	if ((m_duration += delta) >= 500)
+	if ((m_duration += delta) >= 1)
 	{
 		nextState();
 	}
@@ -48,5 +48,5 @@ void LogoState::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void LogoState::nextState()
 {
-	m_stateHandler.changeState(&m_dummyState, 500);
+	m_stateHandler.changeState(&m_dummyState, 0.5f);
 }

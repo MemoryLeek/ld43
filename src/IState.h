@@ -9,7 +9,7 @@ class IState : public sf::Drawable
 		virtual void keyPressed(const sf::Event::KeyEvent &event) = 0;
 		virtual void keyReleased(const sf::Event::KeyEvent &event) = 0;
 
-		virtual void update(long delta) = 0;
+		virtual void update(float delta) = 0;
 };
 
 #endif // ISTATE_H

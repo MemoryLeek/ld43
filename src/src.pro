@@ -37,6 +37,7 @@ HEADERS += \
     StateHandler.h \
     states/TransitionState.h
 
+unix:LIBS += -ltmxlite
 unix:PKGCONFIG += sfml-all
 
 debug:win32:LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-system-d -lsfml-window-d

@@ -38,7 +38,7 @@ DISTNAME      = ld431.0.0
 DISTDIR = /home/znurre/Program/Develop/C++/ld43/src/.tmp/ld431.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now
-LIBS          = $(SUBLIBS) -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -ltmxlite -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -796,8 +796,8 @@ main.o: main.cpp Utility.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 LogoState.o: states/LogoState.cpp states/LogoState.h \
-		IState.h \
 		states/DummyState.h \
+		IState.h \
 		StateHandler.h \
 		Utility.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o LogoState.o states/LogoState.cpp
@@ -810,6 +810,7 @@ DummyState.o: states/DummyState.cpp states/DummyState.h \
 StateHandler.o: StateHandler.cpp StateHandler.h \
 		Utility.h \
 		states/LogoState.h \
+		states/DummyState.h \
 		IState.h \
 		states/TransitionState.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o StateHandler.o StateHandler.cpp

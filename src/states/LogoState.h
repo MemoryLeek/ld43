@@ -14,7 +14,7 @@ class LogoState : public IState
 		void keyPressed(const sf::Event::KeyEvent &event) override;
 		void keyReleased(const sf::Event::KeyEvent &event) override;
 
-		void update(long delta) override;
+		void update(float delta) override;
 
 	protected:
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
@@ -27,7 +27,7 @@ class LogoState : public IState
 		DummyState m_dummyState;
 		StateHandler &m_stateHandler;
 
-		long m_duration;
+		float m_duration;
 };
 
 

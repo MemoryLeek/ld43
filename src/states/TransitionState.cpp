@@ -4,7 +4,7 @@
 #include "StateHandler.h"
 #include "Utility.h"
 
-TransitionState::TransitionState(StateHandler &stateHandler, IState &subject, IState &next, long duration)
+TransitionState::TransitionState(StateHandler &stateHandler, IState &subject, IState &next, float duration)
 	: m_stateHandler(stateHandler)
 	, m_subject(subject)
 	, m_next(next)
@@ -23,7 +23,7 @@ void TransitionState::keyReleased(const sf::Event::KeyEvent &event)
 	UNUSED(event);
 }
 
-void TransitionState::update(long delta)
+void TransitionState::update(float delta)
 {
 	if ((m_remaining -= delta) <= 0)
 	{

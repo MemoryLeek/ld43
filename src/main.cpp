@@ -97,9 +97,9 @@ int main()
 			}
 		}
 
-		const long delta = deltaClock
+		const float delta = deltaClock
 			.restart()
-			.asMilliseconds();
+			.asSeconds();
 
 		stateHandler.update(delta);
 

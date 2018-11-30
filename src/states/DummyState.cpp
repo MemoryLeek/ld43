@@ -11,7 +11,7 @@ void DummyState::keyReleased(const sf::Event::KeyEvent &event)
 	UNUSED(event);
 }
 
-void DummyState::update(long delta)
+void DummyState::update(float delta)
 {
 	UNUSED(delta);
 }

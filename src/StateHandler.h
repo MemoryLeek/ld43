@@ -13,9 +13,9 @@ class StateHandler : public sf::Drawable
 		void keyPressed(const sf::Event::KeyEvent &event);
 		void keyReleased(const sf::Event::KeyEvent &event);
 
-		void update(long delta);
+		void update(float delta);
 
-		void changeState(IState *next, long duration);
+		void changeState(IState *next, float duration);
 		void changeState(IState *next);
 
 	protected:

@@ -8,12 +8,12 @@ class StateHandler;
 class TransitionState : public IState
 {
 	public:
-		TransitionState(StateHandler &stateHandler, IState &subject, IState &next, long duration);
+		TransitionState(StateHandler &stateHandler, IState &subject, IState &next, float duration);
 
 		void keyPressed(const sf::Event::KeyEvent &event) override;
 		void keyReleased(const sf::Event::KeyEvent &event) override;
 
-		void update(long delta) override;
+		void update(float delta) override;
 
 	protected:
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
