@@ -30,7 +30,8 @@ SOURCES += main.cpp \
     states/TransitionState.cpp \
     SpriteSheetMapper.cpp \
     Player.cpp \
-    PlayerDrawable.cpp
+    PlayerDrawable.cpp \
+    Map.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -42,7 +43,8 @@ HEADERS += \
     SpriteSheetMapper.h \
     Player.h \
     PlayerDrawable.h \
-    IUpdatable.h
+    IUpdatable.h \
+    Map.h
 
 unix:QMAKE_CXXFLAGS += -Werror
 unix:QMAKE_CFLAGS += -Werror

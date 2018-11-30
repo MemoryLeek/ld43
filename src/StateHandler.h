@@ -8,7 +8,7 @@ class IState;
 class StateHandler : public sf::Drawable
 {
 	public:
-		StateHandler();
+		StateHandler(const sf::Texture& spriteSheet);
 
 		void keyPressed(const sf::Event::KeyEvent &event);
 		void keyReleased(const sf::Event::KeyEvent &event);

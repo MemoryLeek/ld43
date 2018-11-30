@@ -2,9 +2,9 @@
 
 #include "SpriteSheetMapper.h"
 
-SpriteSheetMapper::SpriteSheetMapper()
+SpriteSheetMapper::SpriteSheetMapper(const sf::Texture& spriteSheet)
+	: m_spriteSheet(spriteSheet)
 {
-	m_spriteSheet.loadFromFile("resources/spritesheet.png");
 }
 
 sf::Sprite SpriteSheetMapper::get(SpriteId spriteId, int index) const

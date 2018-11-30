@@ -6,8 +6,8 @@
 #include "states/LogoState.h"
 #include "states/TransitionState.h"
 
-StateHandler::StateHandler()
-	: m_state(new LogoState(*this))
+StateHandler::StateHandler(const sf::Texture& spriteSheet)
+	: m_state(new LogoState(*this, spriteSheet))
 {
 }
 

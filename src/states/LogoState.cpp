@@ -5,8 +5,9 @@
 #include "StateHandler.h"
 #include "Utility.h"
 
-LogoState::LogoState(StateHandler &stateHandler)
-	: m_stateHandler(stateHandler)
+LogoState::LogoState(StateHandler &stateHandler, const sf::Texture& spriteSheet)
+	: m_dummyState(spriteSheet)
+	, m_stateHandler(stateHandler)
 	, m_duration(0.0f)
 {
 	m_logo.loadFromFile("resources/logo.png");

@@ -9,7 +9,7 @@ class StateHandler;
 class LogoState : public IState
 {
 	public:
-		LogoState(StateHandler &stateHandler);
+		LogoState(StateHandler &stateHandler, const sf::Texture& spriteSheet);
 
 		void keyPressed(const sf::Event::KeyEvent &event) override;
 		void keyReleased(const sf::Event::KeyEvent &event) override;

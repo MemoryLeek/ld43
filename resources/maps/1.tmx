@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="../spritesheet.tsx"/>
  <layer id="1" name="Tile Layer 1" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+   eJzt1VEKwjAMANDqTuYN9EjeXAcbjJh2RlCEvQdhTdbto1lYa8CeaYmYx1p8ZlRfXZ9xK1yPLjvzXq237r1vph81U3udh9F87PUs0o+aynz0nsvylX7U6AeMnZaI+bZ2SWJ2T4LPxT7E2ko/fqPXj6wnfJ/5+D/Z/yPSD47qvETMR7Usb8mamuzssrON+7K8t5f3xe99u87mY5RndWr2ZqEyH7171PS+9e3a/wMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAo3oAj84jDA==
   </data>
  </layer>
 </map>

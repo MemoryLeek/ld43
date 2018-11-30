@@ -14,11 +14,12 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "ld43");
 
-	StateHandler stateHandler;
+	sf::Texture spriteSheet;
+	spriteSheet.loadFromFile("resources/spritesheet.png");
+
+	StateHandler stateHandler(spriteSheet);
 
 	sf::Clock deltaClock;
-
-	tmx::Map map;
 
 	for (float elapsed = 0; window.isOpen();)
 	{
