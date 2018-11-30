@@ -42,5 +42,5 @@ unix:QMAKE_CXXFLAGS += -Wall
 unix:LIBS += -ltmxlite
 unix:PKGCONFIG += sfml-all
 
-debug:win32:LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-system-d -lsfml-window-d
-release:win32:LIBS += -lsfml-audio -lsfml-graphics -lsfml-system -lsfml-window
+debug:win32:LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-system-d -lsfml-window-d  -llibtmxlite-s-d
+release:win32:LIBS += -lsfml-audio -lsfml-graphics -lsfml-system -lsfml-window -llibtmxlite-s

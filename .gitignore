@@ -35,6 +35,9 @@
 *.pro.user
 .qmake.stash
 
+# Build dirs
+build-*
+
 # Binary
 src/ld43
 

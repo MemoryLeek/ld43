@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <tmxlite/Map.hpp>
+
 #include "Utility.h"
 #include "StateHandler.h"
 
@@ -74,6 +76,8 @@ int main()
 	StateHandler stateHandler;
 
 	sf::Clock deltaClock;
+
+	tmx::Map map;
 
 	while (window.isOpen())
 	{
