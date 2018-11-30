@@ -17,7 +17,7 @@ class SpriteSheetMapper
 	public:
 		SpriteSheetMapper();
 
-		sf::Sprite get(SpriteId spriteId) const;
+		sf::Sprite get(SpriteId spriteId, int index) const;
 
 	private:
 		sf::Texture m_spriteSheet;

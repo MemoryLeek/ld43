@@ -15,6 +15,8 @@ class PlayerDrawable : public sf::Drawable
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 	private:
+		sf::Sprite spriteForDirection(int direction) const;
+
 		const Player &m_player;
 		const SpriteSheetMapper &m_spriteSheetMapper;
 };

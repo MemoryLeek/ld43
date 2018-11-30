@@ -6,12 +6,12 @@ void DummyState::keyPressed(const sf::Event::KeyEvent &event)
 {
 	if (event.code == sf::Keyboard::A)
 	{
-		m_player.setDirection(-1);
+		m_player.setVelocity(-1);
 	}
 
 	if (event.code == sf::Keyboard::D)
 	{
-		m_player.setDirection(1);
+		m_player.setVelocity(1);
 	}
 }
 
@@ -19,7 +19,7 @@ void DummyState::keyReleased(const sf::Event::KeyEvent &event)
 {
 	UNUSED(event);
 
-	m_player.setDirection(0);
+	m_player.setVelocity(0);
 }
 
 void DummyState::update(float delta)

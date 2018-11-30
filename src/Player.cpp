@@ -3,6 +3,7 @@
 Player::Player()
 	: m_x(0)
 	, m_y(0)
+	, m_velocity(0)
 	, m_direction(0)
 {
 }
@@ -32,12 +33,17 @@ int Player::direction() const
 	return m_direction;
 }
 
-void Player::setDirection(int direction)
+void Player::setVelocity(int velocity)
 {
-	m_direction = direction;
+	m_velocity = velocity;
+
+	if (velocity != 0)
+	{
+		m_direction = velocity;
+	}
 }
 
 void Player::update(float delta)
 {
-	m_x += m_direction * (delta * 1000);
+	m_x += m_velocity * (delta * 200);
 }

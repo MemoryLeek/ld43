@@ -15,13 +15,14 @@ class Player : public IUpdatable
 		void setY(int y);
 
 		int direction() const;
-		void setDirection(int direction);
 
+		void setVelocity(int velocity);
 		void update(float delta);
 
 	private:
 		int m_x;
 		int m_y;
+		int m_velocity;
 		int m_direction;
 };
 

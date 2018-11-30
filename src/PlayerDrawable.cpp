@@ -9,19 +9,21 @@ PlayerDrawable::PlayerDrawable(const Player &player, const SpriteSheetMapper &sp
 {
 }
 
-SpriteId spriteForDirection(int direction)
+sf::Sprite PlayerDrawable::spriteForDirection(int direction) const
 {
+	const int index = (m_player.x() * 10) % 3;
+
 	if (direction == -1)
 	{
-		return SpriteId::PlayerRunningLeft;
+		return m_spriteSheetMapper.get(SpriteId::PlayerRunningLeft, index);
 	}
 
 	if (direction == 1)
 	{
-		return SpriteId::PlayerRunningRight;
+		return m_spriteSheetMapper.get(SpriteId::PlayerRunningRight, index);
 	}
 
-	return SpriteId::Player;
+	return m_spriteSheetMapper.get(SpriteId::PlayerRunningRight, 0);
 }
 
 void PlayerDrawable::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -30,9 +32,7 @@ void PlayerDrawable::draw(sf::RenderTarget &target, sf::RenderStates states) con
 
 	const int direction = m_player.direction();
 
-	const SpriteId spriteId = spriteForDirection(direction);
-
-	sf::Sprite sprite = m_spriteSheetMapper.get(spriteId);
+	sf::Sprite sprite = spriteForDirection(direction);
 	sprite.setPosition(m_player.x(), m_player.y());
 
 	target.draw(sprite);
