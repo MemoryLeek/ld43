@@ -3,13 +3,13 @@
 
 #include <SFML/Graphics.hpp>
 
-class IState : public sf::Drawable
+#include "IUpdatable.h"
+
+class IState : public sf::Drawable, public IUpdatable
 {
 	public:
 		virtual void keyPressed(const sf::Event::KeyEvent &event) = 0;
 		virtual void keyReleased(const sf::Event::KeyEvent &event) = 0;
-
-		virtual void update(float delta) = 0;
 };
 
 #endif // ISTATE_H

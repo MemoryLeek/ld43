@@ -27,7 +27,10 @@ SOURCES += main.cpp \
     states/LogoState.cpp \
     states/DummyState.cpp \
     StateHandler.cpp \
-    states/TransitionState.cpp
+    states/TransitionState.cpp \
+    SpriteSheetMapper.cpp \
+    Player.cpp \
+    PlayerDrawable.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -35,9 +38,14 @@ HEADERS += \
     states/DummyState.h \
     Utility.h \
     StateHandler.h \
-    states/TransitionState.h
+    states/TransitionState.h \
+    SpriteSheetMapper.h \
+    Player.h \
+    PlayerDrawable.h \
+    IUpdatable.h
 
-unix:QMAKE_CXXFLAGS += -Wall
+unix:QMAKE_CXXFLAGS += -Werror
+unix:QMAKE_CFLAGS += -Werror
 
 unix:LIBS += -ltmxlite
 unix:PKGCONFIG += sfml-all

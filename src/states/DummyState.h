@@ -2,6 +2,8 @@
 #define DUMMYSTATE_H
 
 #include "IState.h"
+#include "Player.h"
+#include "SpriteSheetMapper.h"
 
 class DummyState : public IState
 {
@@ -13,6 +15,10 @@ class DummyState : public IState
 
 	protected:
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+	private:
+		SpriteSheetMapper m_spriteSheetMapper;
+		Player m_player;
 };
 
 #endif // DUMMYSTATE_H
