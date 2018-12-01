@@ -57,7 +57,8 @@ HEADERS += \
     ISettingsProvider.h \
     SettingsProvider.h \
     DefaultSettingsProvider.h \
-    BinaryStream.h
+    BinaryStream.h \
+    ICollisionInformationProvider.h
 
 unix:QMAKE_CXXFLAGS += -Werror
 unix:QMAKE_CFLAGS += -Werror

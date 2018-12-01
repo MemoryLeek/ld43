@@ -12,15 +12,16 @@
 Map::Map(const std::string& path, const sf::Texture& spriteSheet)
 	: m_spriteSheet(spriteSheet)
 {
-	tmx::Map map;
-	const auto mapSuccessfullyLoaded = map.load(path);
+	const auto mapSuccessfullyLoaded = m_map.load(path);
 	assert(mapSuccessfullyLoaded);
 
 	std::cout << "Loading map: " << path << std::endl;
 
-	for (const auto& layer : map.getLayers())
+	m_collidables.assign(m_map.getTileCount().x * m_map.getTileCount().y, 0);
+
+	for (const auto& layer : m_map.getLayers())
 	{
-		loadLayer(layer.get(), map);
+		loadLayer(layer.get());
 	}
 }
 
@@ -39,6 +40,18 @@ void Map::moveOffset(const sf::Vector2f& delta)
 	m_offset += delta;
 }
 
+bool Map::isCollidable(const unsigned int tx, const unsigned int ty) const
+{
+	const auto idx = tx + m_map.getTileCount().x * ty;
+
+	if (idx > m_collidables.size())
+	{
+		return true;
+	}
+
+	return m_collidables[idx];
+}
+
 void Map::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.texture = &m_spriteSheet;
@@ -50,7 +63,7 @@ void Map::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	}
 }
 
-void Map::loadLayer(const tmx::Layer* layer, const tmx::Map& map)
+void Map::loadLayer(const tmx::Layer* layer)
 {
 	std::cout << "Loading map layer: " << layer->getName() << std::endl;
 
@@ -60,7 +73,7 @@ void Map::loadLayer(const tmx::Layer* layer, const tmx::Map& map)
 		case tmx::Layer::Type::Tile:
 		{
 			const auto tileLayer = static_cast<const tmx::TileLayer*>(layer);
-			loadTileLayer(tileLayer, map);
+			loadTileLayer(tileLayer);
 			break;
 		}
 		default:
@@ -68,7 +81,7 @@ void Map::loadLayer(const tmx::Layer* layer, const tmx::Map& map)
 	}
 }
 
-void Map::loadTileLayer(const tmx::TileLayer* layer, const tmx::Map& map)
+void Map::loadTileLayer(const tmx::TileLayer* layer)
 {
 	m_vertexBuffers.push_back(std::make_unique<sf::VertexBuffer>(sf::PrimitiveType::Triangles, sf::VertexBuffer::Usage::Static));
 
@@ -81,7 +94,8 @@ void Map::loadTileLayer(const tmx::TileLayer* layer, const tmx::Map& map)
 	size_t vertexIndex = 0;
 
 	const auto& tiles = layer->getTiles();
-	const auto tileCount = map.getTileCount();
+	const auto tileCount = m_map.getTileCount();
+	const auto isLastLayer = layer == m_map.getLayers().back().get();
 
 	for (unsigned int y = 0; y < tileCount.y; y++)
 	{
@@ -93,8 +107,14 @@ void Map::loadTileLayer(const tmx::TileLayer* layer, const tmx::Map& map)
 				continue;
 			}
 
-			const auto& tileVertices = calculateTilePosition(x, y, map.getTileSize());
-			const auto& textureVertices = calculateTexturePosition(tile.ID, map.getTilesets().at(0));
+			if (isLastLayer)
+			{
+				// Mark the tile as collidable
+				m_collidables[x + tileCount.x * y] = 1;
+			}
+
+			const auto& tileVertices = calculateTilePosition(x, y, m_map.getTileSize());
+			const auto& textureVertices = calculateTexturePosition(tile.ID, m_map.getTilesets().at(0));
 
 			for (size_t i = 0; i < 6; i++)
 			{

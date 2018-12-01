@@ -6,4 +6,6 @@ void UNUSED(T &)
 {
 }
 
+constexpr float GRAVITY = 10;
+
 #endif // UTILITY_H

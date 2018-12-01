@@ -27,9 +27,9 @@ class DummyState : public IState
 		Settings &m_settings;
 
 		SpriteSheetMapper m_spriteSheetMapper;
+		Map m_map;
 		Player m_player;
 		PlayerDrawable m_playerDrawable;
-		Map m_map;
 };
 
 #endif // DUMMYSTATE_H

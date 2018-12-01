@@ -6,8 +6,9 @@
 DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
 	: m_settings(settings)
 	, m_spriteSheetMapper(spriteSheet)
-	, m_playerDrawable(m_player, m_spriteSheetMapper)
 	, m_map("resources/maps/1.tmx", spriteSheet)
+	, m_player(m_map)
+	, m_playerDrawable(m_player, m_spriteSheetMapper)
 {
 	InputMapping &inputMapping = settings
 		.inputMapping();
@@ -21,6 +22,11 @@ DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
 		.right()
 		.onPress(m_player, &Player::moveRight)
 		.onRelease(m_player, &Player::stopMoving);
+
+	inputMapping
+		.jump()
+		.onPress(m_player, &Player::jump)
+		.onRelease(m_player, &Player::stopJumping);
 }
 
 void DummyState::keyPressed(const sf::Event &event)

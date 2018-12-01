@@ -20,7 +20,7 @@ void PlayerDrawable::update(float delta)
 sf::Sprite PlayerDrawable::spriteForDirection() const
 {
 	const int direction = m_player.direction();
-	const int velocity = m_player.velocity();
+	const int velocity = (int)m_player.velocity().x;
 
 	const int idleIndex = (int)(m_elapsed * 10) % 5;
 	const int runningIndex = (int)(m_elapsed * 20) % 10;

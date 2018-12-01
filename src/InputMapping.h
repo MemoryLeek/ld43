@@ -11,6 +11,7 @@ class InputMapping
 	public:
 		KeyMapping &left();
 		KeyMapping &right();
+		KeyMapping &jump();
 
 		KeyMapping *find(const sf::Event &event);
 
@@ -20,6 +21,7 @@ class InputMapping
 
 		KeyMapping m_left;
 		KeyMapping m_right;
+		KeyMapping m_jump;
 };
 
 #endif // INPUTMAPPING_H

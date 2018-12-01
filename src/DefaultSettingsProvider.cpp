@@ -16,6 +16,10 @@ Settings DefaultSettingsProvider::load() const
 		.right()
 		.setKey(sf::Keyboard::D);
 
+	inputMapping
+		.jump()
+		.setKey(sf::Keyboard::Space);
+
 	return settings;
 }
 
