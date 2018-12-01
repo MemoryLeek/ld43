@@ -38,7 +38,11 @@ SOURCES += main.cpp \
     SettingsProvider.cpp \
     DefaultSettingsProvider.cpp \
     BinaryStream.cpp \
-    Camera.cpp
+    Camera.cpp \
+    Enemy.cpp \
+    behaviors/StationaryEnemyBehavior.cpp \
+    EnemyDrawable.cpp \
+    ActorMovementHandler.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -60,7 +64,13 @@ HEADERS += \
     DefaultSettingsProvider.h \
     BinaryStream.h \
     Camera.h \
-    IMapInformationProvider.h
+    IMapInformationProvider.h \
+    Enemy.h \
+    behaviors/IEnemyBehavior.h \
+    behaviors/StationaryEnemyBehavior.h \
+    EnemyDrawable.h \
+    ActorMovementHandler.h \
+    IMovableActor.h
 
 OTHER_FILES += \
     ../resources/shaders/decay.frag

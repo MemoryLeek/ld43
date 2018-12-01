@@ -9,6 +9,8 @@ DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
 	, m_map("resources/maps/1.tmx", spriteSheet)
 	, m_player(m_map)
 	, m_playerDrawable(m_player, m_spriteSheetMapper)
+	, m_enemy(m_stationaryEnemyBehavior, m_map)
+	, m_enemyDrawable(m_enemy, m_spriteSheetMapper)
 {
 	InputMapping &inputMapping = settings
 		.inputMapping();
@@ -99,6 +101,9 @@ void DummyState::update(float delta)
 	m_player.update(delta);
 	m_playerDrawable.update(delta);
 
+	m_stationaryEnemyBehavior.update(delta);
+	m_enemy.update(delta);
+
 	m_camera.setTarget(sf::Vector2f(m_player.x() + TILE_SIZE / 2, m_player.y() + TILE_SIZE / 2));
 	m_camera.update(delta);
 }
@@ -114,4 +119,5 @@ void DummyState::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	target.clear(sf::Color(93, 152, 141));
 	target.draw(m_map);
 	target.draw(m_playerDrawable);
+	target.draw(m_enemyDrawable);
 }

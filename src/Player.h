@@ -6,10 +6,11 @@
 #include "Utility.h"
 
 #include "IUpdatable.h"
+#include "IMovableActor.h"
 
 class IMapInformationProvider;
 
-class Player : public IUpdatable
+class Player : public IUpdatable, public IMovableActor
 {
 	public:
 		Player(const IMapInformationProvider& collisionInformationProvider);
@@ -22,10 +23,15 @@ class Player : public IUpdatable
 
 		int decay() const;
 
-		float mass() const;
+		float mass() const override;
 
-		sf::Vector2f velocity() const;
 		sf::Vector2i direction() const;
+
+		sf::Vector2f position() const override;
+		void setPosition(sf::Vector2f position) override;
+
+		sf::Vector2f velocity() const override;
+		void setVelocity(sf::Vector2f velocity) override;
 
 		void moveLeft();
 		void moveRight();
@@ -41,11 +47,9 @@ class Player : public IUpdatable
 		void shoot();
 		void stopShooting();
 
-		void update(float delta);
+		void update(float delta) override;
 
 	private:
-		sf::Vector2u tilePosition() const;
-
 		const IMapInformationProvider& m_collisionInformationProvider;
 
 		sf::Vector2f m_position;

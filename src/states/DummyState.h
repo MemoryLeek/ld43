@@ -3,11 +3,14 @@
 
 #include "IState.h"
 #include "Camera.h"
+#include "Enemy.h"
+#include "EnemyDrawable.h"
 #include "Map.h"
 #include "Player.h"
 #include "SpriteSheetMapper.h"
 #include "InputMapping.h"
 #include "PlayerDrawable.h"
+#include "behaviors/StationaryEnemyBehavior.h"
 
 class Settings;
 
@@ -35,6 +38,10 @@ class DummyState : public IState
 		Player m_player;
 		PlayerDrawable m_playerDrawable;
 		Camera m_camera;
+
+		StationaryEnemyBehavior m_stationaryEnemyBehavior;
+		Enemy m_enemy;
+		EnemyDrawable m_enemyDrawable;
 };
 
 #endif // DUMMYSTATE_H

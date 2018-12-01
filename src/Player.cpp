@@ -3,10 +3,9 @@
 
 #include "Utility.h"
 
+#include "ActorMovementHandler.h"
 #include "IMapInformationProvider.h"
 #include "Player.h"
-
-constexpr int PLAYEROFFSET = 8;
 
 constexpr float JUMPVELOCITY = 2.5f;
 constexpr float DECAY = 1000.0f;
@@ -50,6 +49,11 @@ sf::Vector2f Player::velocity() const
 	return m_velocity;
 }
 
+void Player::setVelocity(sf::Vector2f velocity)
+{
+	m_velocity = velocity;
+}
+
 int Player::decay() const
 {
 	return m_decay;
@@ -58,6 +62,16 @@ int Player::decay() const
 float Player::mass() const
 {
 	return m_decay / DECAY / 2 + .5f;
+}
+
+sf::Vector2f Player::position() const
+{
+	return m_position;
+}
+
+void Player::setPosition(sf::Vector2f position)
+{
+	m_position = position;
 }
 
 void Player::moveLeft()
@@ -94,7 +108,7 @@ void Player::resetLook()
 
 void Player::jump()
 {
-	const sf::Vector2u currentTile = tilePosition();
+	const sf::Vector2u currentTile = Utility::tilePosition(x(), y());
 	if (!m_collisionInformationProvider.isCollidable(currentTile.x, currentTile.y + 1))
 	{
 		return;
@@ -121,7 +135,7 @@ void Player::stopShooting()
 
 void Player::update(float delta)
 {
-	const sf::Vector2u currentTile = tilePosition();
+	const sf::Vector2u currentTile = Utility::tilePosition(x(), y());
 
 	if (m_collisionInformationProvider.isCheckpoint(currentTile.x, currentTile.y) && m_lastCheckpointTilePosition != currentTile)
 	{
@@ -129,41 +143,7 @@ void Player::update(float delta)
 		m_lastCheckpointTilePosition = currentTile;
 	}
 
-	const auto isHittingWallLeft = m_collisionInformationProvider.isCollidable((int)currentTile.x - 1, (int)currentTile.y) && x() + PLAYEROFFSET < (int)currentTile.x * TILE_SIZE;
-	const auto isHittingWallRight = m_collisionInformationProvider.isCollidable((int)currentTile.x + 1, (int)currentTile.y) && x() - PLAYEROFFSET > (int)currentTile.x * TILE_SIZE;
-
-	if (isHittingWallLeft)
-	{
-		m_position.x = currentTile.x * TILE_SIZE - PLAYEROFFSET;
-	}
-	else if (isHittingWallRight)
-	{
-		m_position.x = currentTile.x * TILE_SIZE + PLAYEROFFSET;
-	}
-	else
-	{
-		m_position.x += m_velocity.x * (delta * 200);
-	}
-
-	m_position.y += m_velocity.y * (delta * 200);
-
-	const auto isGrounded = m_collisionInformationProvider.isCollidable((int)currentTile.x, (int)currentTile.y + 1) && y() >= (int)currentTile.y * TILE_SIZE;
-	const auto isHittingHead = m_collisionInformationProvider.isCollidable((int)currentTile.x, (int)currentTile.y - 1) && y() + PLAYEROFFSET < (int)currentTile.y * TILE_SIZE;
-
-	if (isGrounded || isHittingHead)
-	{
-		m_velocity.y = 0;
-		m_position.y = currentTile.y * TILE_SIZE;
-	}
-	else
-	{
-		m_velocity.y += (delta * GRAVITY * mass());
-	}
+	ActorMovementHandler::updateActorPosition(*this, m_collisionInformationProvider, delta);
 
 	m_decay -= abs(m_velocity.x) * delta;
-}
-
-sf::Vector2u Player::tilePosition() const
-{
-	return sf::Vector2u((x() + TILE_SIZE / 2) / TILE_SIZE, (y() + TILE_SIZE - 1) / TILE_SIZE);
 }
