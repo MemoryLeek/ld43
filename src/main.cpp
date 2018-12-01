@@ -8,6 +8,24 @@
 #include "Utility.h"
 #include "StateHandler.h"
 
+#ifdef SHOWFPS
+void fpsTimer()
+{
+	static sf::Clock frameClock;
+	static int frameCounter;
+
+	frameCounter++;
+	if (frameClock.getElapsedTime().asMilliseconds() > 1000)
+	{
+		frameClock.restart();
+		std::cout << frameCounter << " FPS" << std::endl;
+		frameCounter = 0;
+	}
+}
+#else
+#define fpsTimer() ((void)0)
+#endif // SHOWFPS
+
 const float TICK = 0.005;
 
 int main()
@@ -55,6 +73,7 @@ int main()
 		window.clear(sf::Color::Black);
 		window.draw(stateHandler);
 		window.display();
+		fpsTimer();
 	}
 
 	return 0;

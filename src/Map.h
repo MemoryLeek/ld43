@@ -24,7 +24,6 @@ class Map : public sf::Drawable
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	private:
-		void loadTileset(const tmx::Tileset& tileset);
 		void loadLayer(const tmx::Layer* layer, const tmx::Map& map);
 		void loadTileLayer(const tmx::TileLayer* layer, const tmx::Map& map);
 
