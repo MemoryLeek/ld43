@@ -59,11 +59,18 @@ void DummyState::update(float delta)
 
 	m_player.update(delta);
 	m_playerDrawable.update(delta);
+
+	m_camera.setTarget(sf::Vector2f(m_player.x() + TILE_SIZE / 2, m_player.y() + TILE_SIZE / 2));
+	m_camera.update(delta);
 }
 
 void DummyState::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	UNUSED(states);
+
+	auto view = target.getDefaultView();
+	view.setCenter(m_camera.position());
+	target.setView(view);
 
 	target.clear(sf::Color::Red);
 	target.draw(m_map);

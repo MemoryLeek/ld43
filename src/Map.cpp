@@ -7,6 +7,8 @@
 #include <tmxlite/Map.hpp>
 #include <tmxlite/TileLayer.hpp>
 
+#include "Utility.h"
+
 #include "Map.h"
 
 Map::Map(const std::string& path, const sf::Texture& spriteSheet)
@@ -25,21 +27,6 @@ Map::Map(const std::string& path, const sf::Texture& spriteSheet)
 	}
 }
 
-const sf::Vector2f& Map::offset() const
-{
-	return m_offset;
-}
-
-void Map::setOffset(const sf::Vector2f& offset)
-{
-	m_offset = offset;
-}
-
-void Map::moveOffset(const sf::Vector2f& delta)
-{
-	m_offset += delta;
-}
-
 bool Map::isCollidable(const unsigned int tx, const unsigned int ty) const
 {
 	const auto idx = tx + m_map.getTileCount().x * ty;
@@ -52,10 +39,22 @@ bool Map::isCollidable(const unsigned int tx, const unsigned int ty) const
 	return m_collidables[idx];
 }
 
+bool Map::isCheckpoint(const unsigned int tx, const unsigned int ty) const
+{
+	for (const auto& checkpoint : m_checkpoints)
+	{
+		 if (checkpoint.x == tx && checkpoint.y == ty)
+		 {
+			 return true;
+		 }
+	}
+
+	return false;
+}
+
 void Map::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.texture = &m_spriteSheet;
-	states.transform.translate(m_offset.x, m_offset.y);
 
 	for (const auto& vertexBuffer : m_vertexBuffers)
 	{
@@ -75,6 +74,11 @@ void Map::loadLayer(const tmx::Layer* layer)
 			const auto tileLayer = static_cast<const tmx::TileLayer*>(layer);
 			loadTileLayer(tileLayer);
 			break;
+		}
+		case tmx::Layer::Type::Object:
+		{
+			const auto objectLayer = static_cast<const tmx::ObjectGroup*>(layer);
+			loadObjectLayer(objectLayer);
 		}
 		default:
 			std::cout << "Unhandled layer type: " << static_cast<int>(layerType) << std::endl;
@@ -126,6 +130,14 @@ void Map::loadTileLayer(const tmx::TileLayer* layer)
 	}
 
 	m_vertexBuffers.back()->update(vertices.data());
+}
+
+void Map::loadObjectLayer(const tmx::ObjectGroup* layer)
+{
+	for (const auto& object : layer->getObjects())
+	{
+		m_checkpoints.emplace_back(object.getPosition().x / TILE_SIZE, object.getPosition().y / TILE_SIZE);
+	}
 }
 
 size_t Map::calculateActiveTileCount(const tmx::TileLayer* layer)

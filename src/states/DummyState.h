@@ -2,6 +2,7 @@
 #define DUMMYSTATE_H
 
 #include "IState.h"
+#include "Camera.h"
 #include "Map.h"
 #include "Player.h"
 #include "SpriteSheetMapper.h"
@@ -30,6 +31,7 @@ class DummyState : public IState
 		Map m_map;
 		Player m_player;
 		PlayerDrawable m_playerDrawable;
+		Camera m_camera;
 };
 
 #endif // DUMMYSTATE_H

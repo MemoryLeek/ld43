@@ -37,7 +37,8 @@ SOURCES += main.cpp \
     Settings.cpp \
     SettingsProvider.cpp \
     DefaultSettingsProvider.cpp \
-    BinaryStream.cpp
+    BinaryStream.cpp \
+    Camera.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -58,7 +59,8 @@ HEADERS += \
     SettingsProvider.h \
     DefaultSettingsProvider.h \
     BinaryStream.h \
-    ICollisionInformationProvider.h
+    Camera.h \
+    IMapInformationProvider.h
 
 OTHER_FILES += \
     ../resources/shaders/decay.frag

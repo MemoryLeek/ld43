@@ -3,7 +3,7 @@
 
 #include "Utility.h"
 
-#include "ICollisionInformationProvider.h"
+#include "IMapInformationProvider.h"
 #include "Player.h"
 
 constexpr int PLAYEROFFSET = 8;
@@ -11,7 +11,7 @@ constexpr int PLAYEROFFSET = 8;
 constexpr float JUMPVELOCITY = 2.5f;
 constexpr float DECAY = 1000.0f;
 
-Player::Player(const ICollisionInformationProvider& collisionInformationProvider)
+Player::Player(const IMapInformationProvider& collisionInformationProvider)
 	: m_collisionInformationProvider(collisionInformationProvider)
 	, m_position(0, 0)
 	, m_velocity(0, 0)
@@ -79,7 +79,7 @@ void Player::stopMoving()
 
 void Player::jump()
 {
-	const sf::Vector2i currentTile = tilePosition();
+	const sf::Vector2u currentTile = tilePosition();
 	if (!m_collisionInformationProvider.isCollidable(currentTile.x, currentTile.y + 1))
 	{
 		return;
@@ -97,7 +97,13 @@ void Player::stopJumping()
 
 void Player::update(float delta)
 {
-	const sf::Vector2i currentTile = tilePosition();
+	const sf::Vector2u currentTile = tilePosition();
+
+	if (m_collisionInformationProvider.isCheckpoint(currentTile.x, currentTile.y) && m_lastCheckpointTilePosition != currentTile)
+	{
+		std::cout << "Hit new checkpoint: " << currentTile.x << "x" << currentTile.y << std::endl;
+		m_lastCheckpointTilePosition = currentTile;
+	}
 
 	const auto isHittingWallLeft = m_collisionInformationProvider.isCollidable(currentTile.x - 1, currentTile.y) && x() + PLAYEROFFSET < currentTile.x * TILE_SIZE;
 	const auto isHittingWallRight = m_collisionInformationProvider.isCollidable(currentTile.x + 1, currentTile.y) && x() - PLAYEROFFSET > currentTile.x * TILE_SIZE;
@@ -133,7 +139,7 @@ void Player::update(float delta)
 	m_decay -= abs(m_velocity.x) * delta;
 }
 
-sf::Vector2i Player::tilePosition() const
+sf::Vector2u Player::tilePosition() const
 {
-	return sf::Vector2i((x() + TILE_SIZE / 2) / TILE_SIZE, (y() + TILE_SIZE - 1) / TILE_SIZE);
+	return sf::Vector2u((x() + TILE_SIZE / 2) / TILE_SIZE, (y() + TILE_SIZE - 1) / TILE_SIZE);
 }

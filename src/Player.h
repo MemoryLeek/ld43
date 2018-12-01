@@ -7,12 +7,12 @@
 
 #include "IUpdatable.h"
 
-class ICollisionInformationProvider;
+class IMapInformationProvider;
 
 class Player : public IUpdatable
 {
 	public:
-		Player(const ICollisionInformationProvider& collisionInformationProvider);
+		Player(const IMapInformationProvider& collisionInformationProvider);
 
 		int x() const;
 		void setX(int x);
@@ -37,12 +37,13 @@ class Player : public IUpdatable
 		void update(float delta);
 
 	private:
-		sf::Vector2i tilePosition() const;
+		sf::Vector2u tilePosition() const;
 
-		const ICollisionInformationProvider& m_collisionInformationProvider;
+		const IMapInformationProvider& m_collisionInformationProvider;
 
 		sf::Vector2f m_position;
 		sf::Vector2f m_velocity;
+		sf::Vector2u m_lastCheckpointTilePosition;
 
 		int m_direction;
 		int m_decay;

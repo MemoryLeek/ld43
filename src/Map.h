@@ -12,18 +12,15 @@
 #include <tmxlite/Tileset.hpp>
 #include <tmxlite/TileLayer.hpp>
 
-#include "ICollisionInformationProvider.h"
+#include "IMapInformationProvider.h"
 
-class Map : public sf::Drawable, public ICollisionInformationProvider
+class Map : public sf::Drawable, public IMapInformationProvider
 {
 	public:
 		Map(const std::string& path, const sf::Texture& spriteSheet);
 
-		const sf::Vector2f& offset() const;
-		void setOffset(const sf::Vector2f& offset);
-		void moveOffset(const sf::Vector2f& delta);
-
 		bool isCollidable(const unsigned int tx, const unsigned int ty) const override;
+		bool isCheckpoint(const unsigned int tx, const unsigned int ty) const override;
 
 	protected:
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -31,6 +28,7 @@ class Map : public sf::Drawable, public ICollisionInformationProvider
 	private:
 		void loadLayer(const tmx::Layer* layer);
 		void loadTileLayer(const tmx::TileLayer* layer);
+		void loadObjectLayer(const tmx::ObjectGroup* layer);
 
 		static size_t calculateActiveTileCount(const tmx::TileLayer* layer);
 		static std::array<sf::Vector2f, 6> calculateTilePosition(const unsigned int tx, const unsigned int ty, const tmx::Vector2u tileSize);
@@ -41,8 +39,7 @@ class Map : public sf::Drawable, public ICollisionInformationProvider
 		const sf::Texture& m_spriteSheet;
 		std::vector<std::unique_ptr<sf::VertexBuffer>> m_vertexBuffers;
 		std::vector<uint8_t> m_collidables;
-
-		sf::Vector2f m_offset;
+		std::vector<sf::Vector2u> m_checkpoints;
 };
 
 #endif // MAP_H

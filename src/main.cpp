@@ -31,14 +31,14 @@ const float TICK = 0.005;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "ld43");
+	sf::RenderWindow window(sf::VideoMode(RES_X, RES_Y), "ld43");
 	auto view = window.getDefaultView();
-	view.setSize(1280 / 4, 720 / 4);
-	view.setCenter(view.getCenter() / 4.f);
+	view.setSize(RES_X / RENDERSCALE, RES_Y / RENDERSCALE);
+	view.setCenter(view.getCenter() / RENDERSCALE);
 	window.setView(view);
 
 	sf::RenderTexture fbo;
-	const auto fboCreated = fbo.create(1280 / 4, 720 / 4);
+	const auto fboCreated = fbo.create(RES_X / RENDERSCALE, RES_Y / RENDERSCALE);
 	assert(fboCreated);
 
 	sf::Sprite fboSprite(fbo.getTexture());
