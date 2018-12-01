@@ -2,13 +2,16 @@
 #include "IBehaviorControllable.h"
 
 #include "StationaryEnemyBehavior.h"
+#include "Utility.h"
 
 void StationaryEnemyBehavior::update(float delta)
 {
+	UNUSED(delta);
 }
 
 void StationaryEnemyBehavior::invokeOnActor(IBehaviorControllable& actor)
 {
+	UNUSED(actor);
 }
 
 sf::Sprite StationaryEnemyBehavior::currentSpriteForActor(const SpriteSheetMapper& spriteSheetMapper, const IBehaviorControllable& actor) const

@@ -27,7 +27,7 @@ void PlayerDrawable::update(float delta)
 {
 	m_elapsed += delta;
 
-	m_decayShader.setUniform("decay", m_player.decay() / 1000.0f);
+	m_decayShader.setUniform("decay", m_player.decay() / 5000.0f);
 }
 
 sf::Sprite PlayerDrawable::spriteForDirection() const
@@ -35,8 +35,7 @@ sf::Sprite PlayerDrawable::spriteForDirection() const
 	const sf::Vector2i &direction = m_player.direction();
 	const sf::Vector2f &velocity = m_player.velocity();
 
-	const int idleIndex = (int)(m_elapsed * 10) % 5;
-	const int runningIndex = (int)(m_elapsed * 20) % 10;
+	const int runningIndex = (int)(m_elapsed * 20) % 4;
 
 	if (direction.y < 0)
 	{
@@ -52,7 +51,7 @@ sf::Sprite PlayerDrawable::spriteForDirection() const
 	{
 		if (velocity.x == 0)
 		{
-			return m_spriteSheetMapper.get(SpriteId::PlayerIdleLeft, idleIndex);
+			return m_spriteSheetMapper.get(SpriteId::PlayerIdleLeft, 0);
 		}
 
 		return m_spriteSheetMapper.get(SpriteId::PlayerRunningLeft, runningIndex);
@@ -60,7 +59,7 @@ sf::Sprite PlayerDrawable::spriteForDirection() const
 
 	if (velocity.x == 0)
 	{
-		return m_spriteSheetMapper.get(SpriteId::PlayerIdleRight, idleIndex);
+		return m_spriteSheetMapper.get(SpriteId::PlayerIdleRight, 0);
 	}
 
 	return m_spriteSheetMapper.get(SpriteId::PlayerRunningRight, runningIndex);

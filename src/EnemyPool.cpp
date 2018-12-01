@@ -22,7 +22,7 @@ std::vector<Enemy> EnemyPool::enemies() const
 
 void EnemyPool::update(float delta)
 {
-	for (int i = 0; i < m_enemies.size(); i++)
+	for (uint i = 0; i < m_enemies.size(); i++)
 	{
 		auto& enemy = m_enemies[i];
 

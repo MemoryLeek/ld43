@@ -1,8 +1,9 @@
-#include "EnemyPool.h"
+#include "Enemy.h"
 #include "SpriteSheetMapper.h"
-#include "behaviors/IEnemyBehavior.h"
-
+#include "EnemyPool.h"
 #include "EnemyDrawable.h"
+
+#include "behaviors/IEnemyBehavior.h"
 
 EnemyDrawable::EnemyDrawable(const EnemyPool& enemyPool, const SpriteSheetMapper& spriteSheetMapper)
 	: m_enemyPool(enemyPool)
