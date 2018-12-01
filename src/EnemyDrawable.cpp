@@ -1,25 +1,30 @@
-#include "Enemy.h"
+#include "EnemyPool.h"
 #include "SpriteSheetMapper.h"
+#include "behaviors/IEnemyBehavior.h"
 
 #include "EnemyDrawable.h"
 
-EnemyDrawable::EnemyDrawable(const Enemy& enemy, const SpriteSheetMapper& spriteSheetMapper)
-	: m_enemy(enemy)
+EnemyDrawable::EnemyDrawable(const EnemyPool& enemyPool, const SpriteSheetMapper& spriteSheetMapper)
+	: m_enemyPool(enemyPool)
 	, m_spriteSheetMapper(spriteSheetMapper)
-	, m_elapsed(0)
 {
 }
 
 void EnemyDrawable::update(float delta)
 {
-	m_elapsed += delta;
+	UNUSED(delta);
 }
 
 void EnemyDrawable::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	const int spriteIndex = (int)(m_elapsed * 5) % 3;
-	auto sprite = m_spriteSheetMapper.get(SpriteId::Blob, spriteIndex);
-	sprite.setPosition(m_enemy.position());
+	for (const auto& enemy : m_enemyPool.enemies())
+	{
+		if (enemy.isDead())
+		{
+			continue;
+		}
 
-	target.draw(sprite);
+		const auto& sprite = enemy.behavior().currentSpriteForActor(m_spriteSheetMapper, enemy);
+		target.draw(sprite, states);
+	}
 }

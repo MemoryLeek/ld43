@@ -52,6 +52,11 @@ bool Map::isCheckpoint(const unsigned int tx, const unsigned int ty) const
 	return false;
 }
 
+std::vector<SpawnPoint> Map::spawnPoints() const
+{
+	return m_spawnPoints;
+}
+
 void Map::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.texture = &m_spriteSheet;
@@ -137,7 +142,20 @@ void Map::loadObjectLayer(const tmx::ObjectGroup* layer)
 {
 	for (const auto& object : layer->getObjects())
 	{
-		m_checkpoints.emplace_back(object.getPosition().x / TILE_SIZE, object.getPosition().y / TILE_SIZE);
+		const auto& name = layer->getName();
+
+		if (name == "Checkpoints")
+		{
+			m_checkpoints.emplace_back(object.getPosition().x / TILE_SIZE, object.getPosition().y / TILE_SIZE);
+		}
+		else if (name == "Spawns")
+		{
+			m_spawnPoints.emplace_back(object.getType(), sf::Vector2f(object.getPosition().x, object.getPosition().y));
+		}
+		else
+		{
+			std::cout << "Unhandled object layer: " << name << std::endl;
+		}
 	}
 }
 

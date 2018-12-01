@@ -43,7 +43,10 @@ SOURCES += main.cpp \
     behaviors/StationaryEnemyBehavior.cpp \
     EnemyDrawable.cpp \
     ActorMovementHandler.cpp \
-    behaviors/BlobBehavior.cpp
+    behaviors/BlobBehavior.cpp \
+    SpawnPoint.cpp \
+    EnemyPool.cpp \
+    EnemyFactory.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -73,7 +76,10 @@ HEADERS += \
     ActorMovementHandler.h \
     IMovableActor.h \
     behaviors/BlobBehavior.h \
-    behaviors/IBehaviorControllable.h
+    behaviors/IBehaviorControllable.h \
+    SpawnPoint.h \
+    EnemyPool.h \
+    EnemyFactory.h
 
 OTHER_FILES += \
     ../resources/shaders/decay.frag

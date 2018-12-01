@@ -15,6 +15,11 @@ class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControlla
 	public:
 		Enemy(IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider);
 
+		IEnemyBehavior& behavior() const;
+
+		bool isDead() const;
+		void respawn(const sf::Vector2f& position);
+
 		void update(float delta) override;
 
 		sf::Vector2f position() const override;
@@ -31,6 +36,8 @@ class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControlla
 	private:
 		IEnemyBehavior& m_behavior;
 		const IMapInformationProvider& m_mapInformationProvider;
+
+		bool m_isDead;
 
 		sf::Vector2f m_position;
 		sf::Vector2f m_velocity;

@@ -2,11 +2,13 @@
 
 #include "Player.h"
 #include "IBehaviorControllable.h"
+#include "SpriteSheetMapper.h"
 
 #include "BlobBehavior.h"
 
 BlobBehavior::BlobBehavior(const Player& player)
 	: m_player(player)
+	, m_elapsed(0)
 {
 }
 
@@ -19,6 +21,8 @@ void BlobBehavior::update(float delta)
 			cooldown.second -= delta;
 		}
 	}
+
+	m_elapsed += delta;
 }
 
 void BlobBehavior::invokeOnActor(IBehaviorControllable& actor)
@@ -38,4 +42,12 @@ void BlobBehavior::invokeOnActor(IBehaviorControllable& actor)
 		actor.jump(1.f);
 		m_jumpCoolDowns[&actor] = .8f;
 	}
+}
+
+sf::Sprite BlobBehavior::currentSpriteForActor(const SpriteSheetMapper& spriteSheetMapper, const IBehaviorControllable& actor) const
+{
+	const int spriteIndex = (int)(m_elapsed * 5) % 3;
+	auto sprite = spriteSheetMapper.get(SpriteId::Blob, spriteIndex);
+	sprite.setPosition(actor.position());
+	return sprite;
 }

@@ -9,6 +9,8 @@ class StationaryEnemyBehavior : public IEnemyBehavior
 		void update(float delta) override;
 
 		void invokeOnActor(IBehaviorControllable& actor) override;
+
+		sf::Sprite currentSpriteForActor(const SpriteSheetMapper& spriteSheetMapper, const IBehaviorControllable& actor) const override;
 };
 
 #endif // STATIONARYENEMYBEHAVIOR_H

@@ -13,6 +13,7 @@
 #include <tmxlite/TileLayer.hpp>
 
 #include "IMapInformationProvider.h"
+#include "SpawnPoint.h"
 
 class Map : public sf::Drawable, public IMapInformationProvider
 {
@@ -22,8 +23,10 @@ class Map : public sf::Drawable, public IMapInformationProvider
 		bool isCollidable(const unsigned int tx, const unsigned int ty) const override;
 		bool isCheckpoint(const unsigned int tx, const unsigned int ty) const override;
 
+		std::vector<SpawnPoint> spawnPoints() const override;
+
 	protected:
-		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	private:
 		void loadLayer(const tmx::Layer* layer);
@@ -40,6 +43,7 @@ class Map : public sf::Drawable, public IMapInformationProvider
 		std::vector<std::unique_ptr<sf::VertexBuffer>> m_vertexBuffers;
 		std::vector<uint8_t> m_collidables;
 		std::vector<sf::Vector2u> m_checkpoints;
+		std::vector<SpawnPoint> m_spawnPoints;
 };
 
 #endif // MAP_H

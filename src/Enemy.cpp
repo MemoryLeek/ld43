@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "ActorMovementHandler.h"
 #include "Utility.h"
 #include "IMapInformationProvider.h"
@@ -8,8 +10,24 @@
 Enemy::Enemy(IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider)
 	: m_behavior(behavior)
 	, m_mapInformationProvider(m_mapInformationProvider)
-	, m_position(96, 0)
+	, m_isDead(true)
 {
+}
+
+IEnemyBehavior& Enemy::behavior() const
+{
+	return m_behavior;
+}
+
+bool Enemy::isDead() const
+{
+	return m_isDead;
+}
+
+void Enemy::respawn(const sf::Vector2f& position)
+{
+	m_position = position;
+	m_isDead = false;
 }
 
 void Enemy::update(float delta)

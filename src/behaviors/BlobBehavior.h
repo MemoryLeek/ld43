@@ -17,10 +17,13 @@ class BlobBehavior : public IEnemyBehavior
 
 		void invokeOnActor(IBehaviorControllable& actor) override;
 
+		sf::Sprite currentSpriteForActor(const SpriteSheetMapper& spriteSheetMapper, const IBehaviorControllable& actor) const override;
+
 	private:
 		const Player& m_player;
 
 		std::map<IBehaviorControllable*, float> m_jumpCoolDowns;
+		float m_elapsed;
 };
 
 #endif // BLOBBEHAVIOR_H

@@ -3,14 +3,14 @@
 
 #include "IState.h"
 #include "Camera.h"
-#include "Enemy.h"
 #include "EnemyDrawable.h"
 #include "Map.h"
 #include "Player.h"
 #include "SpriteSheetMapper.h"
 #include "InputMapping.h"
 #include "PlayerDrawable.h"
-#include "behaviors/BlobBehavior.h"
+#include "EnemyFactory.h"
+#include "EnemyPool.h"
 
 class Settings;
 
@@ -39,8 +39,8 @@ class DummyState : public IState
 		PlayerDrawable m_playerDrawable;
 		Camera m_camera;
 
-		BlobBehavior m_enemyBehavior;
-		Enemy m_enemy;
+		EnemyFactory m_enemyFactory;
+		EnemyPool m_enemyPool;
 		EnemyDrawable m_enemyDrawable;
 };
 

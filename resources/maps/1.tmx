@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="5">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="15">
  <tileset firstgid="1" source="../spritesheet.tsx"/>
- <objectgroup id="2" name="Checkpoints">
+ <objectgroup id="2" name="Checkpoints" visible="0">
   <object id="3" x="272" y="112">
    <point/>
   </object>
   <object id="4" x="528" y="80">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="Spawns">
+  <object id="6" type="blob" x="144" y="160">
    <point/>
   </object>
  </objectgroup>
