@@ -6,7 +6,7 @@
 #include "ICollisionInformationProvider.h"
 #include "Player.h"
 
-constexpr int SIZE = 32;
+constexpr int PLAYEROFFSET = 8;
 
 constexpr float JUMPVELOCITY = 2.5f;
 constexpr float DECAY = 1000.0f;
@@ -85,7 +85,7 @@ void Player::jump()
 		return;
 	}
 
-	if (y() == currentTile.y * SIZE)
+	if (y() == currentTile.y * TILE_SIZE)
 	{
 		m_velocity.y = -JUMPVELOCITY;
 	}
@@ -99,12 +99,16 @@ void Player::update(float delta)
 {
 	const sf::Vector2i currentTile = tilePosition();
 
-	const auto isHittingWallLeft = m_collisionInformationProvider.isCollidable(currentTile.x - 1, currentTile.y) && x() < currentTile.x * SIZE;
-	const auto isHittingWallRight = m_collisionInformationProvider.isCollidable(currentTile.x + 1, currentTile.y) && x() > currentTile.x * SIZE;
+	const auto isHittingWallLeft = m_collisionInformationProvider.isCollidable(currentTile.x - 1, currentTile.y) && x() + PLAYEROFFSET < currentTile.x * TILE_SIZE;
+	const auto isHittingWallRight = m_collisionInformationProvider.isCollidable(currentTile.x + 1, currentTile.y) && x() - PLAYEROFFSET > currentTile.x * TILE_SIZE;
 
-	if (isHittingWallLeft || isHittingWallRight)
+	if (isHittingWallLeft)
 	{
-		m_position.x = currentTile.x * SIZE;
+		m_position.x = currentTile.x * TILE_SIZE - PLAYEROFFSET;
+	}
+	else if (isHittingWallRight)
+	{
+		m_position.x = currentTile.x * TILE_SIZE + PLAYEROFFSET;
 	}
 	else
 	{
@@ -113,13 +117,13 @@ void Player::update(float delta)
 
 	m_position.y += m_velocity.y * (delta * 200);
 
-	const auto isGrounded = m_collisionInformationProvider.isCollidable(currentTile.x, currentTile.y + 1) && y() >= currentTile.y * SIZE;
-	const auto isHittingHead = m_collisionInformationProvider.isCollidable(currentTile.x, currentTile.y - 1) && y() < currentTile.y * SIZE;
+	const auto isGrounded = m_collisionInformationProvider.isCollidable(currentTile.x, currentTile.y + 1) && y() >= currentTile.y * TILE_SIZE;
+	const auto isHittingHead = m_collisionInformationProvider.isCollidable(currentTile.x, currentTile.y - 1) && y() + PLAYEROFFSET < currentTile.y * TILE_SIZE;
 
 	if (isGrounded || isHittingHead)
 	{
 		m_velocity.y = 0;
-		m_position.y = currentTile.y * SIZE;
+		m_position.y = currentTile.y * TILE_SIZE;
 	}
 	else
 	{
@@ -131,5 +135,5 @@ void Player::update(float delta)
 
 sf::Vector2i Player::tilePosition() const
 {
-	return sf::Vector2i((x() + SIZE / 2) / SIZE, (y() + SIZE / 2) / SIZE);
+	return sf::Vector2i((x() + TILE_SIZE / 2) / TILE_SIZE, (y() + TILE_SIZE - 1) / TILE_SIZE);
 }
