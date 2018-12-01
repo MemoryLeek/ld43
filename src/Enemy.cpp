@@ -1,10 +1,11 @@
 #include "ActorMovementHandler.h"
 #include "Utility.h"
+#include "IMapInformationProvider.h"
 #include "behaviors/IEnemyBehavior.h"
 
 #include "Enemy.h"
 
-Enemy::Enemy(const IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider)
+Enemy::Enemy(IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider)
 	: m_behavior(behavior)
 	, m_mapInformationProvider(m_mapInformationProvider)
 	, m_position(96, 0)
@@ -43,4 +44,31 @@ void Enemy::setVelocity(sf::Vector2f velocity)
 float Enemy::mass() const
 {
 	return 1.f;
+}
+
+void Enemy::jump(float velocity)
+{
+	const sf::Vector2u currentTile = Utility::tilePosition(m_position.x, m_position.y);
+	if (!m_mapInformationProvider.isCollidable(currentTile.x, currentTile.y + 1))
+	{
+		return;
+	}
+
+	if ((int)m_position.y == (int)currentTile.y * TILE_SIZE)
+	{
+		m_velocity.y = -velocity;
+	}
+}
+
+void Enemy::move(Direction direction, float velocity)
+{
+	switch (direction)
+	{
+		case Direction::Left:
+			m_velocity.x = -velocity;
+			break;
+		case Direction::Right:
+			m_velocity.x = velocity;
+			break;
+	}
 }

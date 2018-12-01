@@ -29,4 +29,10 @@ namespace Utility
 	}
 }
 
+enum class Direction
+{
+	Left,
+	Right,
+};
+
 #endif // UTILITY_H

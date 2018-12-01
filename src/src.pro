@@ -42,7 +42,8 @@ SOURCES += main.cpp \
     Enemy.cpp \
     behaviors/StationaryEnemyBehavior.cpp \
     EnemyDrawable.cpp \
-    ActorMovementHandler.cpp
+    ActorMovementHandler.cpp \
+    behaviors/BlobBehavior.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -70,7 +71,9 @@ HEADERS += \
     behaviors/StationaryEnemyBehavior.h \
     EnemyDrawable.h \
     ActorMovementHandler.h \
-    IMovableActor.h
+    IMovableActor.h \
+    behaviors/BlobBehavior.h \
+    behaviors/IBehaviorControllable.h
 
 OTHER_FILES += \
     ../resources/shaders/decay.frag

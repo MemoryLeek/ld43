@@ -13,6 +13,7 @@ enum class SpriteId
 	PlayerJumpingRight,
 	PlayerLookingUp,
 	PlayerLookingDown,
+	Blob,
 };
 
 class SpriteSheetMapper

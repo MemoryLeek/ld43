@@ -10,7 +10,7 @@
 #include "SpriteSheetMapper.h"
 #include "InputMapping.h"
 #include "PlayerDrawable.h"
-#include "behaviors/StationaryEnemyBehavior.h"
+#include "behaviors/BlobBehavior.h"
 
 class Settings;
 
@@ -39,7 +39,7 @@ class DummyState : public IState
 		PlayerDrawable m_playerDrawable;
 		Camera m_camera;
 
-		StationaryEnemyBehavior m_stationaryEnemyBehavior;
+		BlobBehavior m_enemyBehavior;
 		Enemy m_enemy;
 		EnemyDrawable m_enemyDrawable;
 };

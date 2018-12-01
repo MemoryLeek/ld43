@@ -3,12 +3,12 @@
 
 #include "IUpdatable.h"
 
-class Enemy;
+class IBehaviorControllable;
 
 class IEnemyBehavior : public IUpdatable
 {
 	public:
-		virtual void invokeOnActor(Enemy& enemy) const = 0;
+		virtual void invokeOnActor(IBehaviorControllable& actor) = 0;
 };
 
 #endif // IENEMYBEHAVIOR_H

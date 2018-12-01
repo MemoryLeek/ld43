@@ -4,6 +4,6 @@ void StationaryEnemyBehavior::update(float delta)
 {
 }
 
-void StationaryEnemyBehavior::invokeOnActor(Enemy& enemy) const
+void StationaryEnemyBehavior::invokeOnActor(IBehaviorControllable& actor)
 {
 }

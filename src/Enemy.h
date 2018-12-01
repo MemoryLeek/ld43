@@ -5,14 +5,15 @@
 
 #include "IUpdatable.h"
 #include "IMovableActor.h"
+#include "behaviors/IBehaviorControllable.h"
 
 class IEnemyBehavior;
 class IMapInformationProvider;
 
-class Enemy : public IUpdatable, public IMovableActor
+class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControllable
 {
 	public:
-		Enemy(const IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider);
+		Enemy(IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider);
 
 		void update(float delta) override;
 
@@ -24,8 +25,11 @@ class Enemy : public IUpdatable, public IMovableActor
 
 		float mass() const override;
 
+		void jump(float velocity) override;
+		void move(Direction direction, float velocity) override;
+
 	private:
-		const IEnemyBehavior& m_behavior;
+		IEnemyBehavior& m_behavior;
 		const IMapInformationProvider& m_mapInformationProvider;
 
 		sf::Vector2f m_position;

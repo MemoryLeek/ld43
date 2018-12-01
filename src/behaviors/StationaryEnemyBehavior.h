@@ -8,7 +8,7 @@ class StationaryEnemyBehavior : public IEnemyBehavior
 	public:
 		void update(float delta) override;
 
-		void invokeOnActor(Enemy& enemy) const override;
+		void invokeOnActor(IBehaviorControllable& actor) override;
 };
 
 #endif // STATIONARYENEMYBEHAVIOR_H
