@@ -31,7 +31,13 @@ SOURCES += main.cpp \
     SpriteSheetMapper.cpp \
     Player.cpp \
     PlayerDrawable.cpp \
-    Map.cpp
+    Map.cpp \
+    KeyMapping.cpp \
+    InputMapping.cpp \
+    Settings.cpp \
+    SettingsProvider.cpp \
+    DefaultSettingsProvider.cpp \
+    BinaryStream.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -44,7 +50,14 @@ HEADERS += \
     Player.h \
     PlayerDrawable.h \
     IUpdatable.h \
-    Map.h
+    Map.h \
+    KeyMapping.h \
+    InputMapping.h \
+    Settings.h \
+    ISettingsProvider.h \
+    SettingsProvider.h \
+    DefaultSettingsProvider.h \
+    BinaryStream.h
 
 unix:QMAKE_CXXFLAGS += -Werror
 unix:QMAKE_CFLAGS += -Werror

@@ -13,12 +13,12 @@ TransitionState::TransitionState(StateHandler &stateHandler, IState &subject, IS
 {
 }
 
-void TransitionState::keyPressed(const sf::Event::KeyEvent &event)
+void TransitionState::keyPressed(const sf::Event &event)
 {
 	UNUSED(event);
 }
 
-void TransitionState::keyReleased(const sf::Event::KeyEvent &event)
+void TransitionState::keyReleased(const sf::Event &event)
 {
 	UNUSED(event);
 }

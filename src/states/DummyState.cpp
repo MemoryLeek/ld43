@@ -1,52 +1,49 @@
 #include "DummyState.h"
 #include "Utility.h"
 #include "PlayerDrawable.h"
+#include "Settings.h"
 
-DummyState::DummyState(const sf::Texture& spriteSheet)
-	: m_spriteSheetMapper(spriteSheet)
+DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
+	: m_settings(settings)
+	, m_spriteSheetMapper(spriteSheet)
 	, m_map("resources/maps/1.tmx", spriteSheet)
 {
+	InputMapping &inputMapping = settings
+		.inputMapping();
+
+	inputMapping
+		.left()
+		.onPress(m_player, &Player::moveLeft)
+		.onRelease(m_player, &Player::stopMoving);
+
+	inputMapping
+		.right()
+		.onPress(m_player, &Player::moveRight)
+		.onRelease(m_player, &Player::stopMoving);
 }
 
-void DummyState::keyPressed(const sf::Event::KeyEvent &event)
+void DummyState::keyPressed(const sf::Event &event)
 {
-	if (event.code == sf::Keyboard::A)
-	{
-		m_player.setVelocity(-1);
-	}
+	KeyMapping *mapping = m_settings
+		.inputMapping()
+		.find(event);
 
-	if (event.code == sf::Keyboard::D)
+	if (mapping)
 	{
-		m_player.setVelocity(1);
-	}
-
-	if (event.code == sf::Keyboard::J)
-	{
-		m_mapVelocity.x = -1;
-	}
-
-	if (event.code == sf::Keyboard::L)
-	{
-		m_mapVelocity.x = 1;
-	}
-
-	if (event.code == sf::Keyboard::I)
-	{
-		m_mapVelocity.y = -1;
-	}
-
-	if (event.code == sf::Keyboard::K)
-	{
-		m_mapVelocity.y = 1;
+		mapping->keyPressed();
 	}
 }
 
-void DummyState::keyReleased(const sf::Event::KeyEvent &event)
+void DummyState::keyReleased(const sf::Event &event)
 {
-	UNUSED(event);
+	KeyMapping *mapping = m_settings
+		.inputMapping()
+		.find(event);
 
-	m_player.setVelocity(0);
-	m_mapVelocity = sf::Vector2f();
+	if (mapping)
+	{
+		mapping->keyReleased();
+	}
 }
 
 void DummyState::update(float delta)
@@ -54,7 +51,6 @@ void DummyState::update(float delta)
 	UNUSED(delta);
 
 	m_player.update(delta);
-	m_map.moveOffset(m_mapVelocity);
 }
 
 void DummyState::draw(sf::RenderTarget &target, sf::RenderStates states) const

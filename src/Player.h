@@ -16,7 +16,10 @@ class Player : public IUpdatable
 
 		int direction() const;
 
-		void setVelocity(int velocity);
+		void moveLeft();
+		void moveRight();
+		void stopMoving();
+
 		void update(float delta);
 
 	private:

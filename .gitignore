@@ -43,3 +43,6 @@ src/ld43
 
 # Makefiles
 Makefile
+
+# Settings
+settings.dat

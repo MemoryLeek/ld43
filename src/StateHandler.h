@@ -4,14 +4,15 @@
 #include <SFML/Graphics.hpp>
 
 class IState;
+class Settings;
 
 class StateHandler : public sf::Drawable
 {
 	public:
-		StateHandler(const sf::Texture& spriteSheet);
+		StateHandler(Settings &settings, const sf::Texture& spriteSheet);
 
-		void keyPressed(const sf::Event::KeyEvent &event);
-		void keyReleased(const sf::Event::KeyEvent &event);
+		void keyPressed(const sf::Event &event);
+		void keyReleased(const sf::Event &event);
 
 		void update(float delta);
 

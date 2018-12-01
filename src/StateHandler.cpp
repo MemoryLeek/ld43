@@ -6,17 +6,17 @@
 #include "states/LogoState.h"
 #include "states/TransitionState.h"
 
-StateHandler::StateHandler(const sf::Texture& spriteSheet)
-	: m_state(new LogoState(*this, spriteSheet))
+StateHandler::StateHandler(Settings &settings, const sf::Texture& spriteSheet)
+	: m_state(new LogoState(*this, settings, spriteSheet))
 {
 }
 
-void StateHandler::keyPressed(const sf::Event::KeyEvent &event)
+void StateHandler::keyPressed(const sf::Event &event)
 {
 	m_state->keyPressed(event);
 }
 
-void StateHandler::keyReleased(const sf::Event::KeyEvent &event)
+void StateHandler::keyReleased(const sf::Event &event)
 {
 	m_state->keyReleased(event);
 }

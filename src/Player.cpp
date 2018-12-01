@@ -33,14 +33,21 @@ int Player::direction() const
 	return m_direction;
 }
 
-void Player::setVelocity(int velocity)
+void Player::moveLeft()
 {
-	m_velocity = velocity;
+	m_velocity = -1;
+	m_direction = -1;
+}
 
-	if (velocity != 0)
-	{
-		m_direction = velocity;
-	}
+void Player::moveRight()
+{
+	m_velocity = 1;
+	m_direction = 1;
+}
+
+void Player::stopMoving()
+{
+	m_velocity = 0;
 }
 
 void Player::update(float delta)

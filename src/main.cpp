@@ -7,6 +7,7 @@
 
 #include "Utility.h"
 #include "StateHandler.h"
+#include "SettingsProvider.h"
 
 #ifdef SHOWFPS
 void fpsTimer()
@@ -35,9 +36,14 @@ int main()
 	sf::Texture spriteSheet;
 	spriteSheet.loadFromFile("resources/spritesheet.png");
 
-	StateHandler stateHandler(spriteSheet);
+	SettingsProvider settingsProvider;
+	Settings settings = settingsProvider.load();
+
+	StateHandler stateHandler(settings, spriteSheet);
 
 	sf::Clock deltaClock;
+
+	tmx::Map map;
 
 	for (float elapsed = 0; window.isOpen();)
 	{
@@ -47,12 +53,12 @@ int main()
 		{
 			if (event.type == sf::Event::KeyPressed)
 			{
-				stateHandler.keyPressed(event.key);
+				stateHandler.keyPressed(event);
 			}
 
 			if (event.type == sf::Event::KeyReleased)
 			{
-				stateHandler.keyReleased(event.key);
+				stateHandler.keyReleased(event);
 			}
 
 			if (event.type == sf::Event::Closed)
@@ -65,7 +71,7 @@ int main()
 			.restart()
 			.asSeconds();
 
-		for (elapsed += seconds; elapsed > TICK; elapsed -= TICK)
+		for (elapsed += seconds; elapsed >= TICK; elapsed -= TICK)
 		{
 			stateHandler.update(TICK);
 		}
@@ -73,6 +79,7 @@ int main()
 		window.clear(sf::Color::Black);
 		window.draw(stateHandler);
 		window.display();
+
 		fpsTimer();
 	}
 

@@ -10,8 +10,8 @@ class TransitionState : public IState
 	public:
 		TransitionState(StateHandler &stateHandler, IState &subject, IState &next, float duration);
 
-		void keyPressed(const sf::Event::KeyEvent &event) override;
-		void keyReleased(const sf::Event::KeyEvent &event) override;
+		void keyPressed(const sf::Event &event) override;
+		void keyReleased(const sf::Event &event) override;
 
 		void update(float delta) override;
 

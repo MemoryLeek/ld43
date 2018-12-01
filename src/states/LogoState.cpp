@@ -5,22 +5,22 @@
 #include "StateHandler.h"
 #include "Utility.h"
 
-LogoState::LogoState(StateHandler &stateHandler, const sf::Texture& spriteSheet)
-	: m_dummyState(spriteSheet)
+LogoState::LogoState(StateHandler &stateHandler, Settings &settings, const sf::Texture& spriteSheet)
+	: m_dummyState(settings, spriteSheet)
 	, m_stateHandler(stateHandler)
 	, m_duration(0.0f)
 {
 	m_logo.loadFromFile("resources/logo.png");
 }
 
-void LogoState::keyPressed(const sf::Event::KeyEvent &event)
+void LogoState::keyPressed(const sf::Event &event)
 {
 	UNUSED(event);
 
 	nextState();
 }
 
-void LogoState::keyReleased(const sf::Event::KeyEvent &event)
+void LogoState::keyReleased(const sf::Event &event)
 {
 	UNUSED(event);
 }
