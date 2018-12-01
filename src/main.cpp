@@ -32,6 +32,16 @@ const float TICK = 0.005;
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "ld43");
+	auto view = window.getDefaultView();
+	view.setSize(1280 / 4, 720 / 4);
+	view.setCenter(view.getCenter() / 4.f);
+	window.setView(view);
+
+	sf::RenderTexture fbo;
+	const auto fboCreated = fbo.create(1280 / 4, 720 / 4);
+	assert(fboCreated);
+
+	sf::Sprite fboSprite(fbo.getTexture());
 
 	sf::Texture spriteSheet;
 	spriteSheet.loadFromFile("resources/spritesheet.png");
@@ -76,8 +86,10 @@ int main()
 			stateHandler.update(TICK);
 		}
 
-		window.clear(sf::Color::Black);
-		window.draw(stateHandler);
+		fbo.draw(stateHandler);
+		fbo.display();
+
+		window.draw(fboSprite);
 		window.display();
 
 		fpsTimer();

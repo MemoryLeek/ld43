@@ -65,11 +65,6 @@ void DummyState::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	UNUSED(states);
 
-	auto view = target.getDefaultView();
-	view.setSize(view.getSize() / 4.f);
-	view.setCenter(view.getCenter() / 4.f);
-	target.setView(view);
-
 	target.clear(sf::Color::Red);
 	target.draw(m_map);
 	target.draw(m_playerDrawable);
