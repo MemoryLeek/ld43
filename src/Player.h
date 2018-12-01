@@ -23,6 +23,8 @@ class Player : public IUpdatable
 		int direction() const;
 		int decay() const;
 
+		float mass() const;
+
 		const sf::Vector2f& velocity() const;
 
 		void moveLeft();
@@ -41,7 +43,7 @@ class Player : public IUpdatable
 
 		sf::Vector2f m_position;
 		sf::Vector2f m_velocity;
-		float m_mass;
+
 		int m_direction;
 		int m_decay;
 };

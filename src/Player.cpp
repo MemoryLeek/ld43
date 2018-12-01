@@ -7,15 +7,16 @@
 #include "Player.h"
 
 constexpr int SIZE = 32;
+
 constexpr float JUMPVELOCITY = 2.5f;
+constexpr float DECAY = 1000.0f;
 
 Player::Player(const ICollisionInformationProvider& collisionInformationProvider)
 	: m_collisionInformationProvider(collisionInformationProvider)
 	, m_position(0, 0)
 	, m_velocity(0, 0)
-	, m_mass(1)
 	, m_direction(0)
-	, m_decay(1000)
+	, m_decay(DECAY)
 {
 }
 
@@ -52,6 +53,11 @@ const sf::Vector2f& Player::velocity() const
 int Player::decay() const
 {
 	return m_decay;
+}
+
+float Player::mass() const
+{
+	return m_decay / DECAY;
 }
 
 void Player::moveLeft()
@@ -117,12 +123,10 @@ void Player::update(float delta)
 	}
 	else
 	{
-		m_velocity.y += (delta * GRAVITY * m_mass);
+		m_velocity.y += (delta * GRAVITY * mass());
 	}
 
 	m_decay -= abs(m_velocity.x) * delta;
-
-//	std::cout << m_decay << std::endl;
 }
 
 sf::Vector2i Player::tilePosition() const

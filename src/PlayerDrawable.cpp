@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <numeric>
 
 #include "PlayerDrawable.h"
 #include "SpriteSheetMapper.h"
