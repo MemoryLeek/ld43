@@ -60,6 +60,9 @@ HEADERS += \
     BinaryStream.h \
     ICollisionInformationProvider.h
 
+OTHER_FILES += \
+    ../resources/shaders/decay.frag
+
 unix:QMAKE_CXXFLAGS += -Werror
 unix:QMAKE_CFLAGS += -Werror
 

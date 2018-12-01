@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 
 #include "PlayerDrawable.h"
 #include "SpriteSheetMapper.h"
@@ -10,11 +11,22 @@ PlayerDrawable::PlayerDrawable(const Player &player, const SpriteSheetMapper &sp
 	, m_spriteSheetMapper(spriteSheetMapper)
 	, m_elapsed(0)
 {
+	std::default_random_engine generator(TILE_SIZE * TILE_SIZE);
+
+	static std::vector<float> elements(TILE_SIZE * TILE_SIZE);
+
+	std::iota(begin(elements), end(elements), 0);
+	std::shuffle(begin(elements), end(elements), generator);
+
+	m_decayShader.loadFromFile("resources/shaders/decay.frag", sf::Shader::Fragment);
+	m_decayShader.setUniformArray("lookup", elements.data(), elements.size());
 }
 
 void PlayerDrawable::update(float delta)
 {
 	m_elapsed += delta;
+
+	m_decayShader.setUniform("decay", m_player.decay() / 1000.0f);
 }
 
 sf::Sprite PlayerDrawable::spriteForDirection() const
@@ -50,5 +62,5 @@ void PlayerDrawable::draw(sf::RenderTarget &target, sf::RenderStates states) con
 	sf::Sprite sprite = spriteForDirection();
 	sprite.setPosition(m_player.x(), m_player.y());
 
-	target.draw(sprite);
+	target.draw(sprite, &m_decayShader);
 }

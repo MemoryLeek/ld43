@@ -21,6 +21,9 @@ class PlayerDrawable : public sf::Drawable, public IUpdatable
 	private:
 		sf::Sprite spriteForDirection() const;
 
+		sf::Shader m_decayShader;
+//		sf::Texture m_decayTexture;
+
 		const Player &m_player;
 		const SpriteSheetMapper &m_spriteSheetMapper;
 

@@ -15,6 +15,7 @@ Player::Player(const ICollisionInformationProvider& collisionInformationProvider
 	, m_velocity(0, 0)
 	, m_mass(1)
 	, m_direction(0)
+	, m_decay(1000)
 {
 }
 
@@ -46,6 +47,11 @@ int Player::direction() const
 const sf::Vector2f& Player::velocity() const
 {
 	return m_velocity;
+}
+
+int Player::decay() const
+{
+	return m_decay;
 }
 
 void Player::moveLeft()
@@ -113,6 +119,10 @@ void Player::update(float delta)
 	{
 		m_velocity.y += (delta * GRAVITY * m_mass);
 	}
+
+	m_decay -= abs(m_velocity.x) * delta;
+
+//	std::cout << m_decay << std::endl;
 }
 
 sf::Vector2i Player::tilePosition() const
