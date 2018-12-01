@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="5">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="5">
  <tileset firstgid="1" source="../spritesheet.tsx"/>
  <objectgroup id="2" name="Checkpoints">
   <object id="3" x="272" y="112">
@@ -11,7 +11,7 @@
  </objectgroup>
  <layer id="1" name="Tile Layer 1" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt1sEKABAQBUD5/492cVKbCK2aqXdwfSurFCBSe6Iz7+32X4dwRtTlrGszuGO85ysByMxblYtZ5GKf5+QPBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/BglcAFs=
+   eJzt00EKwjAQBdBhrPFcFrH3v5GVKIoQFEthFu/Bhybpan4SAYxMGXHK1/q8fs85/p/9LX/Ov2Xv87NTthn10b7M+qqDXVzWuR7e7vo9x+z7z4zOASrLR6hBF7VkeCMV5Y8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoK4bIjYDXw==
   </data>
  </layer>
 </map>

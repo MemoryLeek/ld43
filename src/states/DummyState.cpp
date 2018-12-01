@@ -72,7 +72,7 @@ void DummyState::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	view.setCenter(m_camera.position());
 	target.setView(view);
 
-	target.clear(sf::Color::Red);
+	target.clear(sf::Color(93, 152, 141));
 	target.draw(m_map);
 	target.draw(m_playerDrawable);
 }
