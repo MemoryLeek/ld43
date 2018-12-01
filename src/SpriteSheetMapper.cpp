@@ -11,9 +11,10 @@ sf::Sprite SpriteSheetMapper::get(SpriteId spriteId, int index) const
 {
 	static std::unordered_map<SpriteId, sf::Vector2u> mapping =
 	{
-		{ SpriteId::Player, sf::Vector2u(0, 0) },
-		{ SpriteId::PlayerRunningLeft, sf::Vector2u(14, 2) },
-		{ SpriteId::PlayerRunningRight, sf::Vector2u(14, 1) },
+		{ SpriteId::PlayerIdleLeft, sf::Vector2u(0, 4) },
+		{ SpriteId::PlayerIdleRight, sf::Vector2u(0, 1) },
+		{ SpriteId::PlayerRunningLeft, sf::Vector2u(0, 5) },
+		{ SpriteId::PlayerRunningRight, sf::Vector2u(0, 2) },
 	};
 
 	const sf::Vector2u &coordinate = mapping.at(spriteId);

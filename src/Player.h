@@ -15,6 +15,7 @@ class Player : public IUpdatable
 		void setY(int y);
 
 		int direction() const;
+		int velocity() const;
 
 		void moveLeft();
 		void moveRight();

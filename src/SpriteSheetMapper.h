@@ -5,7 +5,8 @@
 
 enum class SpriteId
 {
-	Player,
+	PlayerIdleLeft,
+	PlayerIdleRight,
 	PlayerRunningLeft,
 	PlayerRunningRight,
 };

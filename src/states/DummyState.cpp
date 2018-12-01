@@ -6,6 +6,7 @@
 DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
 	: m_settings(settings)
 	, m_spriteSheetMapper(spriteSheet)
+	, m_playerDrawable(m_player, m_spriteSheetMapper)
 	, m_map("resources/maps/1.tmx", spriteSheet)
 {
 	InputMapping &inputMapping = settings
@@ -51,15 +52,14 @@ void DummyState::update(float delta)
 	UNUSED(delta);
 
 	m_player.update(delta);
+	m_playerDrawable.update(delta);
 }
 
 void DummyState::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	UNUSED(states);
 
-	PlayerDrawable playerDrawable(m_player, m_spriteSheetMapper);
-
 	target.clear(sf::Color::Red);
 	target.draw(m_map);
-	target.draw(playerDrawable);
+	target.draw(m_playerDrawable);
 }

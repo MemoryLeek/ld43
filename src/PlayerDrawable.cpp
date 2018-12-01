@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "PlayerDrawable.h"
 #include "SpriteSheetMapper.h"
 #include "Utility.h"
@@ -6,33 +8,46 @@
 PlayerDrawable::PlayerDrawable(const Player &player, const SpriteSheetMapper &spriteSheetMapper)
 	: m_player(player)
 	, m_spriteSheetMapper(spriteSheetMapper)
+	, m_elapsed(0)
 {
 }
 
-sf::Sprite PlayerDrawable::spriteForDirection(int direction) const
+void PlayerDrawable::update(float delta)
 {
-	const int index = (m_player.x() * 10) % 3;
+	m_elapsed += delta;
+}
+
+sf::Sprite PlayerDrawable::spriteForDirection() const
+{
+	const int direction = m_player.direction();
+	const int velocity = m_player.velocity();
+
+	const int idleIndex = (int)(m_elapsed * 10) % 5;
+	const int runningIndex = (int)(m_elapsed * 20) % 10;
 
 	if (direction == -1)
 	{
-		return m_spriteSheetMapper.get(SpriteId::PlayerRunningLeft, index);
+		if (velocity == 0)
+		{
+			return m_spriteSheetMapper.get(SpriteId::PlayerIdleLeft, idleIndex);
+		}
+
+		return m_spriteSheetMapper.get(SpriteId::PlayerRunningLeft, runningIndex);
 	}
 
-	if (direction == 1)
+	if (velocity == 0)
 	{
-		return m_spriteSheetMapper.get(SpriteId::PlayerRunningRight, index);
+		return m_spriteSheetMapper.get(SpriteId::PlayerIdleRight, idleIndex);
 	}
 
-	return m_spriteSheetMapper.get(SpriteId::PlayerRunningRight, 0);
+	return m_spriteSheetMapper.get(SpriteId::PlayerRunningRight, runningIndex);
 }
 
 void PlayerDrawable::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	UNUSED(states);
 
-	const int direction = m_player.direction();
-
-	sf::Sprite sprite = spriteForDirection(direction);
+	sf::Sprite sprite = spriteForDirection();
 	sprite.setPosition(m_player.x(), m_player.y());
 
 	target.draw(sprite);

@@ -33,6 +33,11 @@ int Player::direction() const
 	return m_direction;
 }
 
+int Player::velocity() const
+{
+	return m_velocity;
+}
+
 void Player::moveLeft()
 {
 	m_velocity = -1;

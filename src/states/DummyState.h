@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "SpriteSheetMapper.h"
 #include "InputMapping.h"
+#include "PlayerDrawable.h"
 
 class Settings;
 
@@ -27,6 +28,7 @@ class DummyState : public IState
 
 		SpriteSheetMapper m_spriteSheetMapper;
 		Player m_player;
+		PlayerDrawable m_playerDrawable;
 		Map m_map;
 };
 
