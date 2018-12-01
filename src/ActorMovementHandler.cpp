@@ -12,21 +12,23 @@ void ActorMovementHandler::updateActorPosition(IMovableActor& actor, const IMapI
 {
 	auto position = actor.position();
 	auto velocity = actor.velocity();
+
+	const auto& collisionBox = actor.collisionBox();
 	const auto currentTile = Utility::tilePosition(position.x, position.y);
 
 	const auto isHittingWallLeft = mapInformationProvider.isCollidable((int)currentTile.x - 1, (int)currentTile.y)
-		&& (int)position.x + ACTOROFFSET < (int)currentTile.x * TILE_SIZE;
+		&& (int)position.x + collisionBox.left < (int)currentTile.x * TILE_SIZE;
 
 	const auto isHittingWallRight = mapInformationProvider.isCollidable((int)currentTile.x + 1, (int)currentTile.y)
-		&& (int)position.x - ACTOROFFSET > (int)currentTile.x * TILE_SIZE;
+		&& (int)position.x - collisionBox.left > (int)currentTile.x * TILE_SIZE;
 
 	if (isHittingWallLeft)
 	{
-		position.x = currentTile.x * TILE_SIZE - ACTOROFFSET;
+		position.x = currentTile.x * TILE_SIZE - collisionBox.left;
 	}
 	else if (isHittingWallRight)
 	{
-		position.x = currentTile.x * TILE_SIZE + ACTOROFFSET;
+		position.x = currentTile.x * TILE_SIZE + collisionBox.left;
 	}
 	else
 	{
@@ -39,7 +41,7 @@ void ActorMovementHandler::updateActorPosition(IMovableActor& actor, const IMapI
 		&& (int)position.y >= (int)currentTile.y * TILE_SIZE;
 
 	const auto isHittingHead = mapInformationProvider.isCollidable((int)currentTile.x, (int)currentTile.y - 1)
-		&& (int)position.y + ACTOROFFSET < (int)currentTile.y * TILE_SIZE;
+		&& (int)position.y + collisionBox.top < (int)currentTile.y * TILE_SIZE;
 
 	if (isGrounded || isHittingHead)
 	{

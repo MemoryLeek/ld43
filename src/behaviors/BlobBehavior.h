@@ -19,6 +19,8 @@ class BlobBehavior : public IEnemyBehavior
 
 		sf::Sprite currentSpriteForActor(const SpriteSheetMapper& spriteSheetMapper, const IBehaviorControllable& actor) const override;
 
+		sf::FloatRect currentCollisionBoxForActor(const IBehaviorControllable& actor) const override;
+
 	private:
 		const Player& m_player;
 

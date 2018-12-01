@@ -39,6 +39,11 @@ void Enemy::update(float delta)
 	m_behavior.invokeOnActor(*this);
 }
 
+sf::FloatRect Enemy::collisionBox() const
+{
+	return m_behavior.currentCollisionBoxForActor(*this);
+}
+
 sf::Vector2f Enemy::position() const
 {
 	return m_position;

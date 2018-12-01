@@ -1,11 +1,14 @@
 #ifndef IMOVABLEACTOR_H
 #define IMOVABLEACTOR_H
 
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
 class IMovableActor
 {
 	public:
+		virtual sf::FloatRect collisionBox() const = 0;
+
 		virtual sf::Vector2f position() const = 0;
 		virtual void setPosition(sf::Vector2f position) = 0;
 

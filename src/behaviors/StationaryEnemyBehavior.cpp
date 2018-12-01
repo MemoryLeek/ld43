@@ -20,3 +20,8 @@ sf::Sprite StationaryEnemyBehavior::currentSpriteForActor(const SpriteSheetMappe
 	sprite.setPosition(actor.position());
 	return sprite;
 }
+
+sf::FloatRect StationaryEnemyBehavior::currentCollisionBoxForActor(const IBehaviorControllable& actor) const
+{
+	return sf::FloatRect(4, 16, 25, 16);
+}

@@ -27,6 +27,8 @@ class Player : public IUpdatable, public IMovableActor
 
 		sf::Vector2i direction() const;
 
+		sf::FloatRect collisionBox() const override;
+
 		sf::Vector2f position() const override;
 		void setPosition(sf::Vector2f position) override;
 

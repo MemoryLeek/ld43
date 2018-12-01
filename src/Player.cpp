@@ -44,6 +44,11 @@ sf::Vector2i Player::direction() const
 	return m_direction;
 }
 
+sf::FloatRect Player::collisionBox() const
+{
+	return sf::FloatRect(9, 10, 14 ,22);
+}
+
 sf::Vector2f Player::velocity() const
 {
 	return m_velocity;

@@ -22,6 +22,8 @@ class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControlla
 
 		void update(float delta) override;
 
+		sf::FloatRect collisionBox() const override;
+
 		sf::Vector2f position() const override;
 		void setPosition(sf::Vector2f position) override;
 

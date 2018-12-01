@@ -51,3 +51,8 @@ sf::Sprite BlobBehavior::currentSpriteForActor(const SpriteSheetMapper& spriteSh
 	sprite.setPosition(actor.position());
 	return sprite;
 }
+
+sf::FloatRect BlobBehavior::currentCollisionBoxForActor(const IBehaviorControllable& actor) const
+{
+	return sf::FloatRect(4, 16, 25, 16);
+}

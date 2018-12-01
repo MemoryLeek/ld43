@@ -11,6 +11,8 @@ class StationaryEnemyBehavior : public IEnemyBehavior
 		void invokeOnActor(IBehaviorControllable& actor) override;
 
 		sf::Sprite currentSpriteForActor(const SpriteSheetMapper& spriteSheetMapper, const IBehaviorControllable& actor) const override;
+
+		sf::FloatRect currentCollisionBoxForActor(const IBehaviorControllable& actor) const override;
 };
 
 #endif // STATIONARYENEMYBEHAVIOR_H
