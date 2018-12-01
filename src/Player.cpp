@@ -57,7 +57,7 @@ int Player::decay() const
 
 float Player::mass() const
 {
-	return m_decay / DECAY;
+	return m_decay / DECAY / 2 + .5f;
 }
 
 void Player::moveLeft()
