@@ -9,6 +9,10 @@ enum class SpriteId
 	PlayerIdleRight,
 	PlayerRunningLeft,
 	PlayerRunningRight,
+	PlayerJumpingLeft,
+	PlayerJumpingRight,
+	PlayerLookingUp,
+	PlayerLookingDown,
 };
 
 class SpriteSheetMapper

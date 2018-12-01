@@ -32,15 +32,25 @@ void PlayerDrawable::update(float delta)
 
 sf::Sprite PlayerDrawable::spriteForDirection() const
 {
-	const int direction = m_player.direction();
-	const int velocity = (int)m_player.velocity().x;
+	const sf::Vector2i &direction = m_player.direction();
+	const sf::Vector2f &velocity = m_player.velocity();
 
 	const int idleIndex = (int)(m_elapsed * 10) % 5;
 	const int runningIndex = (int)(m_elapsed * 20) % 10;
 
-	if (direction == -1)
+	if (direction.y < 0)
 	{
-		if (velocity == 0)
+		return m_spriteSheetMapper.get(SpriteId::PlayerLookingUp, 0);
+	}
+
+	if (direction.y > 0)
+	{
+		return m_spriteSheetMapper.get(SpriteId::PlayerLookingDown, 0);
+	}
+
+	if (direction.x < 0)
+	{
+		if (velocity.x == 0)
 		{
 			return m_spriteSheetMapper.get(SpriteId::PlayerIdleLeft, idleIndex);
 		}
@@ -48,7 +58,7 @@ sf::Sprite PlayerDrawable::spriteForDirection() const
 		return m_spriteSheetMapper.get(SpriteId::PlayerRunningLeft, runningIndex);
 	}
 
-	if (velocity == 0)
+	if (velocity.x == 0)
 	{
 		return m_spriteSheetMapper.get(SpriteId::PlayerIdleRight, idleIndex);
 	}

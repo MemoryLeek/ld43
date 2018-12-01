@@ -21,6 +21,16 @@ void StateHandler::keyReleased(const sf::Event &event)
 	m_state->keyReleased(event);
 }
 
+void StateHandler::mouseButtonPressed(const sf::Event &event)
+{
+	m_state->mouseButtonPressed(event);
+}
+
+void StateHandler::mouseButtonReleased(const sf::Event &event)
+{
+	m_state->mouseButtonReleased(event);
+}
+
 void StateHandler::update(float delta)
 {
 	m_state->update(delta);

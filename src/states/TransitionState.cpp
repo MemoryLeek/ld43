@@ -23,6 +23,16 @@ void TransitionState::keyReleased(const sf::Event &event)
 	UNUSED(event);
 }
 
+void TransitionState::mouseButtonPressed(const sf::Event &event)
+{
+	UNUSED(event);
+}
+
+void TransitionState::mouseButtonReleased(const sf::Event &event)
+{
+	UNUSED(event);
+}
+
 void TransitionState::update(float delta)
 {
 	if ((m_remaining -= delta) <= 0)

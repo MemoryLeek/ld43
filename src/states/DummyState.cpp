@@ -14,6 +14,16 @@ DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
 		.inputMapping();
 
 	inputMapping
+		.up()
+		.onPress(m_player, &Player::lookUp)
+		.onRelease(m_player, &Player::resetLook);
+
+	inputMapping
+		.down()
+		.onPress(m_player, &Player::lookDown)
+		.onRelease(m_player, &Player::resetLook);
+
+	inputMapping
 		.left()
 		.onPress(m_player, &Player::moveLeft)
 		.onRelease(m_player, &Player::stopMoving);
@@ -27,6 +37,11 @@ DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
 		.jump()
 		.onPress(m_player, &Player::jump)
 		.onRelease(m_player, &Player::stopJumping);
+
+	inputMapping
+		.shoot()
+		.onPress(m_player, &Player::shoot)
+		.onRelease(m_player, &Player::stopShooting);
 }
 
 void DummyState::keyPressed(const sf::Event &event)
@@ -42,6 +57,30 @@ void DummyState::keyPressed(const sf::Event &event)
 }
 
 void DummyState::keyReleased(const sf::Event &event)
+{
+	KeyMapping *mapping = m_settings
+		.inputMapping()
+		.find(event);
+
+	if (mapping)
+	{
+		mapping->keyReleased();
+	}
+}
+
+void DummyState::mouseButtonPressed(const sf::Event &event)
+{
+	KeyMapping *mapping = m_settings
+		.inputMapping()
+		.find(event);
+
+	if (mapping)
+	{
+		mapping->keyPressed();
+	}
+}
+
+void DummyState::mouseButtonReleased(const sf::Event &event)
 {
 	KeyMapping *mapping = m_settings
 		.inputMapping()

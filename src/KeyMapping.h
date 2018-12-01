@@ -14,10 +14,13 @@ class KeyMapping
 		KeyMapping();
 
 		int key() const;
-		void setKey(int key);
+		KeyMapping &setKey(int key);
 
 		int joystickButton() const;
-		void setJoystickButton(int joystickButton);
+		KeyMapping &setJoystickButton(int joystickButton);
+
+		int mouseButton() const;
+		KeyMapping &setMouseButton(int mouseButton);
 
 		template<typename TInstance>
 		KeyMapping &onPress(TInstance &instance, Callback<TInstance> callback)
@@ -44,6 +47,7 @@ class KeyMapping
 
 		int m_key;
 		int m_joystickButton;
+		int m_mouseButton;
 
 		std::function<void()> m_onPress;
 		std::function<void()> m_onRelease;

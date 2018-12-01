@@ -9,9 +9,12 @@
 class InputMapping
 {
 	public:
+		KeyMapping &up();
+		KeyMapping &down();
 		KeyMapping &left();
 		KeyMapping &right();
 		KeyMapping &jump();
+		KeyMapping &shoot();
 
 		KeyMapping *find(const sf::Event &event);
 
@@ -19,9 +22,12 @@ class InputMapping
 		friend BinaryStream &operator >>(BinaryStream &stream, InputMapping &inputMapping);
 		friend BinaryStream &operator <<(BinaryStream &stream, const InputMapping &inputMapping);
 
+		KeyMapping m_up;
+		KeyMapping m_down;
 		KeyMapping m_left;
 		KeyMapping m_right;
 		KeyMapping m_jump;
+		KeyMapping m_shoot;
 };
 
 #endif // INPUTMAPPING_H

@@ -71,6 +71,16 @@ int main()
 				stateHandler.keyReleased(event);
 			}
 
+			if (event.type == sf::Event::MouseButtonPressed)
+			{
+				stateHandler.mouseButtonPressed(event);
+			}
+
+			if (event.type == sf::Event::MouseButtonReleased)
+			{
+				stateHandler.mouseButtonReleased(event);
+			}
+
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();
@@ -94,6 +104,8 @@ int main()
 
 		fpsTimer();
 	}
+
+	settingsProvider.save(settings);
 
 	return 0;
 }

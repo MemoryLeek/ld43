@@ -13,6 +13,9 @@ class TransitionState : public IState
 		void keyPressed(const sf::Event &event) override;
 		void keyReleased(const sf::Event &event) override;
 
+		void mouseButtonPressed(const sf::Event &event) override;
+		void mouseButtonReleased(const sf::Event &event) override;
+
 		void update(float delta) override;
 
 	protected:

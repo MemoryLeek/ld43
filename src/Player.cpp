@@ -15,7 +15,7 @@ Player::Player(const IMapInformationProvider& collisionInformationProvider)
 	: m_collisionInformationProvider(collisionInformationProvider)
 	, m_position(0, 0)
 	, m_velocity(0, 0)
-	, m_direction(0)
+	, m_direction(0, 0)
 	, m_decay(DECAY)
 {
 }
@@ -40,12 +40,12 @@ void Player::setY(int y)
 	m_position.y = y;
 }
 
-int Player::direction() const
+sf::Vector2i Player::direction() const
 {
 	return m_direction;
 }
 
-const sf::Vector2f& Player::velocity() const
+sf::Vector2f Player::velocity() const
 {
 	return m_velocity;
 }
@@ -63,18 +63,33 @@ float Player::mass() const
 void Player::moveLeft()
 {
 	m_velocity.x = -1;
-	m_direction = -1;
+	m_direction.x = -1;
 }
 
 void Player::moveRight()
 {
 	m_velocity.x = 1;
-	m_direction = 1;
+	m_direction.x = 1;
 }
 
 void Player::stopMoving()
 {
 	m_velocity.x = 0;
+}
+
+void Player::lookUp()
+{
+	m_direction.y = -1;
+}
+
+void Player::lookDown()
+{
+	m_direction.y = 1;
+}
+
+void Player::resetLook()
+{
+	m_direction.y = 0;
 }
 
 void Player::jump()
@@ -92,6 +107,15 @@ void Player::jump()
 }
 
 void Player::stopJumping()
+{
+}
+
+void Player::shoot()
+{
+	std::cout << "shoot" << std::endl;
+}
+
+void Player::stopShooting()
 {
 }
 

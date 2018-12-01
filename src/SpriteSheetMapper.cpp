@@ -15,6 +15,10 @@ sf::Sprite SpriteSheetMapper::get(SpriteId spriteId, int index) const
 		{ SpriteId::PlayerIdleRight, sf::Vector2u(0, 1) },
 		{ SpriteId::PlayerRunningLeft, sf::Vector2u(0, 5) },
 		{ SpriteId::PlayerRunningRight, sf::Vector2u(0, 2) },
+		{ SpriteId::PlayerJumpingLeft, sf::Vector2u(0, 6) },
+		{ SpriteId::PlayerJumpingRight, sf::Vector2u(0, 3) },
+		{ SpriteId::PlayerLookingUp, sf::Vector2u(6, 1) },
+		{ SpriteId::PlayerLookingDown, sf::Vector2u(7, 1) },
 	};
 
 	const sf::Vector2u &coordinate = mapping.at(spriteId);

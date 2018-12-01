@@ -9,6 +9,14 @@ Settings DefaultSettingsProvider::load() const
 		.inputMapping();
 
 	inputMapping
+		.up()
+		.setKey(sf::Keyboard::W);
+
+	inputMapping
+		.down()
+		.setKey(sf::Keyboard::S);
+
+	inputMapping
 		.left()
 		.setKey(sf::Keyboard::A);
 
@@ -19,6 +27,11 @@ Settings DefaultSettingsProvider::load() const
 	inputMapping
 		.jump()
 		.setKey(sf::Keyboard::Space);
+
+	inputMapping
+		.shoot()
+		.setKey(sf::Keyboard::LShift)
+		.setMouseButton(sf::Mouse::Left);
 
 	return settings;
 }

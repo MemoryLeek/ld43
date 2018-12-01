@@ -25,6 +25,16 @@ void LogoState::keyReleased(const sf::Event &event)
 	UNUSED(event);
 }
 
+void LogoState::mouseButtonPressed(const sf::Event &event)
+{
+	UNUSED(event);
+}
+
+void LogoState::mouseButtonReleased(const sf::Event &event)
+{
+	UNUSED(event);
+}
+
 void LogoState::update(float delta)
 {
 	if ((m_duration += delta) >= 1)
