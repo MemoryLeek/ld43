@@ -79,6 +79,7 @@ void Map::loadLayer(const tmx::Layer* layer)
 		{
 			const auto objectLayer = static_cast<const tmx::ObjectGroup*>(layer);
 			loadObjectLayer(objectLayer);
+			break;
 		}
 		default:
 			std::cout << "Unhandled layer type: " << static_cast<int>(layerType) << std::endl;

@@ -85,7 +85,7 @@ void Player::jump()
 		return;
 	}
 
-	if (y() == currentTile.y * TILE_SIZE)
+	if (y() == (int)currentTile.y * TILE_SIZE)
 	{
 		m_velocity.y = -JUMPVELOCITY;
 	}
@@ -105,8 +105,8 @@ void Player::update(float delta)
 		m_lastCheckpointTilePosition = currentTile;
 	}
 
-	const auto isHittingWallLeft = m_collisionInformationProvider.isCollidable(currentTile.x - 1, currentTile.y) && x() + PLAYEROFFSET < currentTile.x * TILE_SIZE;
-	const auto isHittingWallRight = m_collisionInformationProvider.isCollidable(currentTile.x + 1, currentTile.y) && x() - PLAYEROFFSET > currentTile.x * TILE_SIZE;
+	const auto isHittingWallLeft = m_collisionInformationProvider.isCollidable((int)currentTile.x - 1, (int)currentTile.y) && x() + PLAYEROFFSET < (int)currentTile.x * TILE_SIZE;
+	const auto isHittingWallRight = m_collisionInformationProvider.isCollidable((int)currentTile.x + 1, (int)currentTile.y) && x() - PLAYEROFFSET > (int)currentTile.x * TILE_SIZE;
 
 	if (isHittingWallLeft)
 	{
@@ -123,8 +123,8 @@ void Player::update(float delta)
 
 	m_position.y += m_velocity.y * (delta * 200);
 
-	const auto isGrounded = m_collisionInformationProvider.isCollidable(currentTile.x, currentTile.y + 1) && y() >= currentTile.y * TILE_SIZE;
-	const auto isHittingHead = m_collisionInformationProvider.isCollidable(currentTile.x, currentTile.y - 1) && y() + PLAYEROFFSET < currentTile.y * TILE_SIZE;
+	const auto isGrounded = m_collisionInformationProvider.isCollidable((int)currentTile.x, (int)currentTile.y + 1) && y() >= (int)currentTile.y * TILE_SIZE;
+	const auto isHittingHead = m_collisionInformationProvider.isCollidable((int)currentTile.x, (int)currentTile.y - 1) && y() + PLAYEROFFSET < (int)currentTile.y * TILE_SIZE;
 
 	if (isGrounded || isHittingHead)
 	{
