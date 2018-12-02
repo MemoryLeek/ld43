@@ -108,6 +108,17 @@ void DummyState::update(float delta)
 
 	m_camera.setTarget(sf::Vector2f(m_player.x() + TILE_SIZE / 2, m_player.y() + TILE_SIZE / 2));
 	m_camera.update(delta);
+
+	const auto& pcb = m_player.collisionBox();
+	const auto playerBox = sf::FloatRect(m_player.position().x + pcb.left
+		, m_player.position().y + pcb.top
+		, pcb.width
+		, pcb.height);
+
+	if (m_map.intersectsGoal(playerBox))
+	{
+		std::cout << "GOOOOOOL" << std::endl;
+	}
 }
 
 void DummyState::draw(sf::RenderTarget &target, sf::RenderStates states) const

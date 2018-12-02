@@ -65,6 +65,19 @@ bool Map::intersectsKillzone(const sf::FloatRect& collisionBox) const
 	return false;
 }
 
+bool Map::intersectsGoal(const sf::FloatRect& collisionBox) const
+{
+	for (const auto& zone : m_goals)
+	{
+		 if (collisionBox.intersects(zone))
+		 {
+			 return true;
+		 }
+	}
+
+	return false;
+}
+
 std::vector<SpawnPoint> Map::spawnPoints() const
 {
 	return m_spawnPoints;
@@ -169,6 +182,11 @@ void Map::loadObjectLayer(const tmx::ObjectGroup* layer)
 		{
 			const auto& aabb = object.getAABB();
 			m_killZones.emplace_back(aabb.left, aabb.top, aabb.width, aabb.height);
+		}
+		else if (name == "Goal")
+		{
+			const auto& aabb = object.getAABB();
+			m_goals.emplace_back(aabb.left, aabb.top, aabb.width, aabb.height);
 		}
 		else
 		{
