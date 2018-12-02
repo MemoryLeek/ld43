@@ -43,8 +43,9 @@ class Player : public IUpdatable, public IMovableActor
 		void setVelocity(sf::Vector2f velocity) override;
 
 		void moveLeft();
+		void stopMovingLeft();
 		void moveRight();
-		void stopMoving();
+		void stopMovingRight();
 
 		void lookUp();
 		void lookDown();

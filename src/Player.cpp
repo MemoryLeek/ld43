@@ -138,15 +138,26 @@ void Player::moveLeft()
 	m_direction.x = -1;
 }
 
+void Player::stopMovingLeft()
+{
+	if (m_velocity.x < 0)
+	{
+		m_velocity.x = 0;
+	}
+}
+
 void Player::moveRight()
 {
 	m_velocity.x = 1;
 	m_direction.x = 1;
 }
 
-void Player::stopMoving()
+void Player::stopMovingRight()
 {
-	m_velocity.x = 0;
+	if (m_velocity.x > 0)
+	{
+		m_velocity.x = 0;
+	}
 }
 
 void Player::lookUp()

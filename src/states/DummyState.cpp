@@ -30,12 +30,12 @@ DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
 	inputMapping
 		.left()
 		.onPress(m_player, &Player::moveLeft)
-		.onRelease(m_player, &Player::stopMoving);
+		.onRelease(m_player, &Player::stopMovingLeft);
 
 	inputMapping
 		.right()
 		.onPress(m_player, &Player::moveRight)
-		.onRelease(m_player, &Player::stopMoving);
+		.onRelease(m_player, &Player::stopMovingRight);
 
 	inputMapping
 		.jump()
