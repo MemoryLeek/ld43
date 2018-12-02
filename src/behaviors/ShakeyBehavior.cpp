@@ -187,5 +187,5 @@ sf::FloatRect ShakeyBehavior::currentCollisionBoxForActor(const IBehaviorControl
 {
 	UNUSED(actor);
 
-	return sf::FloatRect(12, 14, 11, 18);
+	return sf::FloatRect(12, 14, 11, 25);
 }

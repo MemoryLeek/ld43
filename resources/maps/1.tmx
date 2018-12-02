@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="72">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="81">
  <tileset firstgid="1" source="../spritesheet.tsx"/>
  <objectgroup id="10" name="Checkpoints">
   <object id="4" x="848" y="240">
@@ -52,16 +52,13 @@
   <object id="22" type="turret_right" x="2064" y="608">
    <point/>
   </object>
-  <object id="23" type="expandy" x="2048" y="192">
+  <object id="23" type="expandy" x="2056" y="192">
    <point/>
   </object>
   <object id="24" type="blob" x="1080" y="256">
    <point/>
   </object>
   <object id="25" type="expandy" x="1280" y="448">
-   <point/>
-  </object>
-  <object id="28" type="expandy" x="1952" y="640">
    <point/>
   </object>
   <object id="29" type="turret_left" x="2432" y="832">
@@ -83,9 +80,6 @@
    <point/>
   </object>
   <object id="36" type="blob" x="1680" y="1440">
-   <point/>
-  </object>
-  <object id="37" type="blob" x="1840" y="1216">
    <point/>
   </object>
   <object id="49" type="turret_right" x="928" y="1152">
@@ -133,6 +127,21 @@
   <object id="71" type="shakey" x="2072" y="1632">
    <point/>
   </object>
+  <object id="74" type="blob" x="1712" y="1152">
+   <point/>
+  </object>
+  <object id="75" type="blob" x="1712" y="1280">
+   <point/>
+  </object>
+  <object id="76" type="shakey" x="1776" y="1376">
+   <point/>
+  </object>
+  <object id="77" type="shakey" x="1840" y="1216">
+   <point/>
+  </object>
+  <object id="80" type="blob" x="1968" y="64">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="12" name="Killzones">
   <object id="42" x="1760" y="352" width="32" height="8"/>
@@ -150,7 +159,7 @@
  </layer>
  <layer id="14" name="Tile Layer 1" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
 </map>

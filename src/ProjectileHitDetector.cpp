@@ -62,7 +62,7 @@ bool ProjectileHitDetector::checkIfTargetIsInLine(const sf::Vector2u& origin, Di
 	if (direction == Direction::Left || direction == Direction::Right)
 	{
 		// Check that we're horizoontal
-		if ((int)origin.y < (target.top - 3) || (int)origin.y > (target.top + target.height + 3))
+		if ((int)origin.y < target.top || (int)origin.y > (target.top + target.height))
 		{
 			return false;
 		}

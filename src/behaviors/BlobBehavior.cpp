@@ -8,6 +8,7 @@
 #include "Enemy.h"
 
 const sf::FloatRect COLLISION_BOX = sf::FloatRect(6, 23, 20, 9);
+const sf::FloatRect COLLISION_BOX_AIR = sf::FloatRect(6, 16, 20, 16);
 
 BlobBehavior::BlobBehavior(Player& player, const IMapInformationProvider &mapInformationProvider)
 	: m_player(player)
@@ -42,8 +43,8 @@ void BlobBehavior::invokeOnActor(IBehaviorControllable& actor)
 	// Blob likey jumpey
 	if (m_jumpCoolDowns[&actor] <= 0)
 	{
-		if (abs(playerPosition.x - actorPosition.x) > 500 ||
-			abs(playerPosition.y - actorPosition.y) > 500)
+		if (abs(playerPosition.x - actorPosition.x) > 200 ||
+			abs(playerPosition.y - actorPosition.y) > 200)
 		{
 			return;
 		}
@@ -87,7 +88,10 @@ sf::Sprite BlobBehavior::currentSpriteForActor(const SpriteSheetMapper& spriteSh
 
 sf::FloatRect BlobBehavior::currentCollisionBoxForActor(const IBehaviorControllable& actor) const
 {
-	UNUSED(actor);
+	if (actor.velocity().y >= 0)
+	{
+		return COLLISION_BOX;
+	}
 
-	return COLLISION_BOX;
+	return COLLISION_BOX_AIR;
 }
