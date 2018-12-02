@@ -4,6 +4,11 @@
 
 constexpr float SPEED = 20;
 
+Camera::Camera()
+	: m_position(10 * TILE_SIZE + TILE_SIZE / 2, 6 * TILE_SIZE + TILE_SIZE / 2) // This is GREAT, it's apparently impossible to run update() before draw()
+{
+}
+
 const sf::Vector2f&Camera::position() const
 {
 	return m_position;

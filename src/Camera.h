@@ -6,6 +6,8 @@
 class Camera
 {
 	public:
+		Camera();
+
 		const sf::Vector2f& position() const;
 		void setTarget(const sf::Vector2f& target);
 
