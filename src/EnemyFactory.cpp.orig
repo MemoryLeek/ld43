@@ -1,13 +1,27 @@
 #include "EnemyFactory.h"
 
+<<<<<<< HEAD
 EnemyFactory::EnemyFactory(Player& player, const IMapInformationProvider& mapInformationProvider, ProjectileHitDetector& projectileHitDetector)
+=======
+#include "states/DummyState.h"
+
+EnemyFactory::EnemyFactory(const Player& player
+	, const IMapInformationProvider& mapInformationProvider
+	, const DummyState &thisShouldNotBeThisWay
+	)
+>>>>>>> Shakey behavior
 	: m_player(player)
 	, m_mapInformationProvider(mapInformationProvider)
 	, m_blobBehavior(m_player)
 	, m_expandyBehavior(m_player)
+<<<<<<< HEAD
 	, m_turretLeftBehavior(0, projectileHitDetector)
 	, m_turretRightBehavior(1, projectileHitDetector)
-	, m_shakeyBehavior(mapInformationProvider, projectileHitDetector)
+=======
+	, m_turretLeftBehavior(0)
+	, m_turretRightBehavior(1)
+	, m_shakeyBehavior(mapInformationProvider, thisShouldNotBeThisWay.m_projectileHitDetector)
+>>>>>>> Shakey behavior
 {
 }
 

@@ -12,6 +12,7 @@ enum class SpawnType
 	Expandy,
 	TurretLeft,
 	TurretRight,
+	Shakey,
 };
 
 struct SpawnTypeResolver
@@ -36,6 +37,11 @@ struct SpawnTypeResolver
 		if (name == "turret_right")
 		{
 			return SpawnType::TurretRight;
+		}
+
+		if (name == "shakey")
+		{
+			return SpawnType::Shakey;
 		}
 
 		return SpawnType::Unknown;

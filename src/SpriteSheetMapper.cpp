@@ -23,6 +23,12 @@ sf::Sprite SpriteSheetMapper::get(SpriteId spriteId, int index) const
 		{ SpriteId::Expandy, sf::Vector2u(10, 7) },
 		{ SpriteId::TurretLookingLeft, sf::Vector2u(10, 5) },
 		{ SpriteId::TurretLookingRight, sf::Vector2u(10, 6) },
+		{ SpriteId::ShakeyWalkingLeft, sf::Vector2u(10, 11) },
+		{ SpriteId::ShakeyPreparingLeft, sf::Vector2u(10, 12) },
+		{ SpriteId::ShakeyChargingLeft, sf::Vector2u(10, 13) },
+		{ SpriteId::ShakeyWalkingRight, sf::Vector2u(10, 8) },
+		{ SpriteId::ShakeyPreparingRight, sf::Vector2u(10, 9) },
+		{ SpriteId::ShakeyChargingRight, sf::Vector2u(10, 10) },
 	};
 
 	const sf::Vector2u &coordinate = mapping.at(spriteId);

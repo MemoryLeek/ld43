@@ -17,6 +17,12 @@ enum class SpriteId
 	Expandy,
 	TurretLookingLeft,
 	TurretLookingRight,
+	ShakeyWalkingLeft,
+	ShakeyPreparingLeft,
+	ShakeyChargingLeft,
+	ShakeyWalkingRight,
+	ShakeyPreparingRight,
+	ShakeyChargingRight,
 };
 
 class SpriteSheetMapper

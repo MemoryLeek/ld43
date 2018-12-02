@@ -11,10 +11,19 @@
 #include "behaviors/TurretBehavior.h"
 #include "behaviors/ShakeyBehavior.h"
 
+class DummyState;
+
 class EnemyFactory : public IUpdatable
 {
 	public:
+<<<<<<< HEAD
 		EnemyFactory(Player& player, const IMapInformationProvider& mapInformationProvider, ProjectileHitDetector& projectileHitDetector);
+=======
+		EnemyFactory(const Player& player
+			, const IMapInformationProvider& mapInformationProvider
+			, const DummyState &thisShouldNotBeThisWay
+			);
+>>>>>>> Shakey behavior
 
 		Enemy* createInstance(SpawnType type);
 
