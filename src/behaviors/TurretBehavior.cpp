@@ -20,6 +20,15 @@ void TurretBehavior::update(float delta)
 			state.second.direction = !state.second.direction;
 			state.second.elapsed = 0;
 		}
+
+		if (state.second.shootingTimer > -1)
+		{
+			state.second.shootingTimer -= delta;
+		}
+		else
+		{
+			state.second.shootingTimer = 0;
+		}
 	}
 }
 
@@ -32,24 +41,21 @@ void TurretBehavior::invokeOnActor(IBehaviorControllable &actor)
 		m_states[&actor].direction = m_spawnDirection;
 	}
 
-	const auto &state = getTurretState(actor);
+	auto &state = m_states[&actor];
+
 	const auto gunPosition = sf::Vector2u(actor.position().x + TILE_SIZE / 2, actor.position().y + TILE_SIZE / 2);
 
-	if (state.direction == 0) // Left
+	if (state.shootingTimer > -1)
 	{
-		auto player = m_projectileHitDetector.queryForPlayerHit(gunPosition, Direction::Left);
-		if (player)
-		{
-			player->damage(DECAY / 2);
-		}
+		return;
 	}
-	else
+
+	auto player = m_projectileHitDetector.queryForPlayerHit(gunPosition, (Direction)state.direction);
+	if (player)
 	{
-		auto player = m_projectileHitDetector.queryForPlayerHit(gunPosition, Direction::Right);
-		if (player)
-		{
-			player->damage(DECAY / 2);
-		}
+		player->damage(DECAY / 2);
+
+		state.shootingTimer = 0.2;
 	}
 }
 
@@ -91,7 +97,17 @@ SpriteId TurretBehavior::getSprite(const TurretState &state) const
 {
 	if (state.direction == 0)
 	{
+		if (state.shootingTimer > 0)
+		{
+			return SpriteId::TurretShootingLeft;
+		}
+
 		return SpriteId::TurretLookingLeft;
+	}
+
+	if (state.shootingTimer > 0)
+	{
+		return SpriteId::TurretShootingRight;
 	}
 
 	return SpriteId::TurretLookingRight;
@@ -99,6 +115,11 @@ SpriteId TurretBehavior::getSprite(const TurretState &state) const
 
 int TurretBehavior::getSpriteIndex(const TurretState &state) const
 {
+	if (state.shootingTimer > 0)
+	{
+		return 0;
+	}
+
 	const float start = std::max(0.0f, (0.5f - state.elapsed) / 0.5f);
 	const float end = std::max(0.0f, (state.elapsed - 2.5f) / 0.5f);
 

@@ -12,11 +12,13 @@ struct TurretState
 {
 	TurretState()
 		: elapsed(rand())
+		, shootingTimer(0)
 		, direction(0)
 	{
 	}
 
 	float elapsed;
+	float shootingTimer;
 	int direction;
 };
 
