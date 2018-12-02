@@ -1,6 +1,7 @@
 #ifndef SHAKEYBEHAVIOR_H
 #define SHAKEYBEHAVIOR_H
 
+#include <array>
 #include <map>
 
 #include "IEnemyBehavior.h"
