@@ -7,7 +7,7 @@ EnemyFactory::EnemyFactory(Player& player, const IMapInformationProvider& mapInf
 	, m_expandyBehavior(m_player)
 	, m_turretLeftBehavior(0, projectileHitDetector)
 	, m_turretRightBehavior(1, projectileHitDetector)
-	, m_shakeyBehavior(mapInformationProvider, projectileHitDetector)
+	, m_shakeyBehavior(mapInformationProvider, projectileHitDetector, m_player)
 {
 }
 

@@ -4,12 +4,15 @@
 #include "IBehaviorControllable.h"
 #include "SpriteSheetMapper.h"
 #include "ProjectileHitDetector.h"
+#include "Player.h"
 
 ShakeyBehavior::ShakeyBehavior(const IMapInformationProvider &mapInformationProvider
 	, const ProjectileHitDetector &projectileHitDetector
+	, Player& player
 	)
 	: m_mapInformationProvider(mapInformationProvider)
 	, m_projectileHitDetector(projectileHitDetector)
+	, m_player(player)
 {
 }
 
@@ -149,6 +152,22 @@ void ShakeyBehavior::invokeOnActor(IBehaviorControllable &actor)
 	if (state.state == 2)
 	{
 		actor.move((Direction)state.direction, 1.0f);
+	}
+
+	const auto playerBox = sf::FloatRect(m_player.position().x + m_player.collisionBox().left
+		, m_player.position().y + m_player.collisionBox().top
+		, m_player.collisionBox().width
+		, m_player.collisionBox().height);
+
+	const auto collisionBox = currentCollisionBoxForActor(actor);
+	const auto actorBox = sf::FloatRect(actor.position().x + collisionBox.left
+		, actor.position().y + collisionBox.top
+		, collisionBox.width
+		, collisionBox.height);
+
+	if (actorBox.intersects(playerBox))
+	{
+		m_player.damage(DECAY / 2);
 	}
 }
 

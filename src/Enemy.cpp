@@ -41,7 +41,10 @@ void Enemy::update(float delta)
 
 	ActorMovementHandler::updateActorPosition(*this, m_mapInformationProvider, delta);
 
-	m_behavior.invokeOnActor(*this);
+	if (!m_isDead)
+	{
+		m_behavior.invokeOnActor(*this);
+	}
 }
 
 sf::FloatRect Enemy::collisionBox() const

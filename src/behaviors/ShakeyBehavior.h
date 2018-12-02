@@ -24,12 +24,14 @@ struct ShakeyState
 
 class IMapInformationProvider;
 class ProjectileHitDetector;
+class Player;
 
 class ShakeyBehavior : public IEnemyBehavior
 {
 	public:
 		ShakeyBehavior(const IMapInformationProvider &mapInformationProvider
 			, const ProjectileHitDetector &projectileHitDetector
+			, Player& player
 			);
 
 		void update(float delta) override;
@@ -47,6 +49,7 @@ class ShakeyBehavior : public IEnemyBehavior
 
 		const IMapInformationProvider &m_mapInformationProvider;
 		const ProjectileHitDetector &m_projectileHitDetector;
+		Player& m_player;
 
 		std::map<const IBehaviorControllable*, ShakeyState> m_states;
 };
