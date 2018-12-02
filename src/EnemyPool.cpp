@@ -15,7 +15,6 @@ EnemyPool::EnemyPool(EnemyFactory& enemyFactory, const IMapInformationProvider& 
 	for (const auto& spawn : m_mapInformationProvider.spawnPoints())
 	{
 		m_enemies.emplace_back(enemyFactory.createInstance(spawn.type()));
-//		m_enemies.back()->respawn(spawn.position());
 	}
 
 	m_respawnTimers.assign(m_enemies.size(), 0);
@@ -57,4 +56,13 @@ bool EnemyPool::canRespawn(size_t index) const
 void EnemyPool::setRespawnCooldown(size_t index, float cooldown)
 {
 	m_respawnTimers[index] = cooldown;
+}
+
+void EnemyPool::respawnAll()
+{
+	for (size_t i = 0; i < m_enemies.size(); i++)
+	{
+		m_enemies[i]->respawn(m_mapInformationProvider.spawnPoints()[i].position());
+		setRespawnCooldown(i, RESPAWN_DELAY);
+	}
 }

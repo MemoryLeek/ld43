@@ -6,17 +6,20 @@
 
 #include "ActorMovementHandler.h"
 #include "Enemy.h"
+#include "EnemyPool.h"
 #include "IMapInformationProvider.h"
 #include "ProjectileHitDetector.h"
 #include "Player.h"
 
 constexpr float JUMPVELOCITY = 2.5f;
 
-Player::Player(const IMapInformationProvider& collisionInformationProvider, const ProjectileHitDetector& projectileHitDetector)
+Player::Player(const IMapInformationProvider& collisionInformationProvider, const ProjectileHitDetector& projectileHitDetector, EnemyPool& enemyPool)
 	: m_collisionInformationProvider(collisionInformationProvider)
 	, m_projectileHitDetector(projectileHitDetector)
+	, m_enemyPool(enemyPool)
 	, m_position(0, 0)
 	, m_velocity(0, 0)
+	, m_lastCheckpointTilePosition(0, 0)
 	, m_direction(0, 0)
 	, m_decay(DECAY)
 {
@@ -176,5 +179,16 @@ void Player::update(float delta)
 
 	m_decay -= abs(m_velocity.x) * delta;
 
-	assert(m_decay > 0);
+	if (m_decay <= 0)
+	{
+		respawn();
+	}
+}
+
+void Player::respawn()
+{
+	m_position = sf::Vector2f(m_lastCheckpointTilePosition.x * TILE_SIZE, m_lastCheckpointTilePosition.y * TILE_SIZE);
+	m_decay = DECAY;
+
+	m_enemyPool.respawnAll();
 }

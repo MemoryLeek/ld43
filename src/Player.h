@@ -10,11 +10,12 @@
 
 class IMapInformationProvider;
 class ProjectileHitDetector;
+class EnemyPool;
 
 class Player : public IUpdatable, public IMovableActor
 {
 	public:
-		Player(const IMapInformationProvider& collisionInformationProvider, const ProjectileHitDetector& projectileHitDetector);
+		Player(const IMapInformationProvider& collisionInformationProvider, const ProjectileHitDetector& projectileHitDetector, EnemyPool& enemyPool);
 
 		int x() const;
 		void setX(int x);
@@ -54,8 +55,11 @@ class Player : public IUpdatable, public IMovableActor
 		void update(float delta) override;
 
 	private:
+		void respawn();
+
 		const IMapInformationProvider& m_collisionInformationProvider;
 		const ProjectileHitDetector& m_projectileHitDetector;
+		EnemyPool& m_enemyPool;
 
 		sf::Vector2f m_position;
 		sf::Vector2f m_velocity;

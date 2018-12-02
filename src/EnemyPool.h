@@ -21,6 +21,8 @@ class EnemyPool : public IUpdatable
 		bool canRespawn(size_t index) const;
 		void setRespawnCooldown(size_t index, float cooldown);
 
+		void respawnAll();
+
 	private:
 		const IMapInformationProvider& m_mapInformationProvider;
 
