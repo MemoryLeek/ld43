@@ -5,12 +5,14 @@
 
 #include "ActorMovementHandler.h"
 #include "IMapInformationProvider.h"
+#include "ProjectileHitDetector.h"
 #include "Player.h"
 
 constexpr float JUMPVELOCITY = 2.5f;
 
-Player::Player(const IMapInformationProvider& collisionInformationProvider)
+Player::Player(const IMapInformationProvider& collisionInformationProvider, const ProjectileHitDetector& projectileHitDetector)
 	: m_collisionInformationProvider(collisionInformationProvider)
+	, m_projectileHitDetector(projectileHitDetector)
 	, m_position(0, 0)
 	, m_velocity(0, 0)
 	, m_direction(0, 0)
@@ -41,6 +43,24 @@ void Player::setY(int y)
 sf::Vector2i Player::direction() const
 {
 	return m_direction;
+}
+
+Direction Player::shootDirection() const
+{
+	if (m_direction.y < 0)
+	{
+		return Direction::Up;
+	}
+	else if (m_direction.y > 0)
+	{
+		return Direction::Down;
+	}
+	else if (m_direction.x < 0)
+	{
+		return Direction::Left;
+	}
+
+	return Direction::Right;
 }
 
 sf::FloatRect Player::collisionBox() const
@@ -131,6 +151,12 @@ void Player::stopJumping()
 void Player::shoot()
 {
 	std::cout << "shoot" << std::endl;
+	const auto gunPosition = sf::Vector2u(m_position.x + TILE_SIZE / 2, m_position.y + TILE_SIZE / 2);
+	const auto result = m_projectileHitDetector.queryForEnemyHit(gunPosition, shootDirection());
+	if (result)
+	{
+		std::cout << "Hit enemy " << result << std::endl;
+	}
 }
 
 void Player::stopShooting()

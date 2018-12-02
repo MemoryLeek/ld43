@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "IMovableActor.h"
 #include "EnemyPool.h"
 #include "IMapInformationProvider.h"
@@ -21,7 +23,7 @@ const Enemy* ProjectileHitDetector::queryForEnemyHit(const sf::Vector2u& origin,
 		{
 			continue;
 		}
-		if (checkIfObstructed(origin, direction, cb))
+		if (checkIfObstructed(origin, direction, sf::Vector2u(cb.left + cb.width / 2, cb.top + cb.height / 2)))
 		{
 			continue;
 		}
@@ -35,7 +37,8 @@ const Enemy* ProjectileHitDetector::queryForEnemyHit(const sf::Vector2u& origin,
 const Player* ProjectileHitDetector::queryForPlayerHit(const sf::Vector2u& origin, Direction direction) const
 {
 	const auto cb = getCollisionBoxInWorldSpace(m_player);
-	if (checkIfTargetIsInLine(origin, direction, cb) && !checkIfObstructed(origin, direction, cb))
+	if (checkIfTargetIsInLine(origin, direction, cb)
+		&& !checkIfObstructed(origin, direction, sf::Vector2u(cb.left + cb.width / 2, cb.top + cb.height / 2)))
 	{
 		return &m_player;
 	}
@@ -89,45 +92,44 @@ bool ProjectileHitDetector::checkIfTargetIsInLine(const sf::Vector2u& origin, Di
 	return false;
 }
 
-bool ProjectileHitDetector::checkIfObstructed(const sf::Vector2u& origin, Direction direction, const sf::IntRect& target) const
+bool ProjectileHitDetector::checkIfObstructed(const sf::Vector2u& origin, Direction direction, const sf::Vector2u& target) const
 {
+	const auto originTile = Utility::correctTilePosition(origin.x, origin.y);
+	const auto targetTile = Utility::correctTilePosition(target.x, target.y);
+
 	switch (direction)
 	{
 		case Direction::Left:
-			for (int x = origin.x; x > target.left; x -= TILE_SIZE)
+			for (int x = originTile.x; x > targetTile.x; x--)
 			{
-				const auto tipo = Utility::tilePosition(x, origin.y);
-				if (m_mapInformationProvider.isCollidable(tipo.x, tipo.y))
+				if (m_mapInformationProvider.isCollidable(x, originTile.y))
 				{
 					return true;
 				}
 			}
 			break;
 		case Direction::Right:
-			for (int x = origin.x; x < target.left; x += TILE_SIZE)
+			for (int x = originTile.x; x < targetTile.x; x++)
 			{
-				const auto tipo = Utility::tilePosition(x, origin.y);
-				if (m_mapInformationProvider.isCollidable(tipo.x, tipo.y))
+				if (m_mapInformationProvider.isCollidable(x, originTile.y))
 				{
 					return true;
 				}
 			}
 			break;
 		case Direction::Up:
-			for (int y = origin.y; y > target.top; y -= TILE_SIZE)
+			for (int y = originTile.y; y > targetTile.y; y--)
 			{
-				const auto tipo = Utility::tilePosition(origin.x, y);
-				if (m_mapInformationProvider.isCollidable(tipo.x, tipo.y))
+				if (m_mapInformationProvider.isCollidable(originTile.x, y))
 				{
 					return true;
 				}
 			}
 			break;
 		case Direction::Down:
-			for (int y = origin.y; y < target.top; y += TILE_SIZE)
+			for (int y = originTile.y; y < targetTile.y; y++)
 			{
-				const auto tipo = Utility::tilePosition(origin.x, y);
-				if (m_mapInformationProvider.isCollidable(tipo.x, tipo.y))
+				if (m_mapInformationProvider.isCollidable(originTile.x, y))
 				{
 					return true;
 				}

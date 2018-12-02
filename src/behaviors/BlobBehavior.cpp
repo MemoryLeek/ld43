@@ -55,5 +55,5 @@ sf::FloatRect BlobBehavior::currentCollisionBoxForActor(const IBehaviorControlla
 {
 	UNUSED(actor);
 
-	return sf::FloatRect(4, 16, 25, 16);
+	return sf::FloatRect(6, 23, 20, 9);
 }

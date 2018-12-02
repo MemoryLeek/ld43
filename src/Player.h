@@ -9,11 +9,12 @@
 #include "IMovableActor.h"
 
 class IMapInformationProvider;
+class ProjectileHitDetector;
 
 class Player : public IUpdatable, public IMovableActor
 {
 	public:
-		Player(const IMapInformationProvider& collisionInformationProvider);
+		Player(const IMapInformationProvider& collisionInformationProvider, const ProjectileHitDetector& projectileHitDetector);
 
 		int x() const;
 		void setX(int x);
@@ -26,6 +27,7 @@ class Player : public IUpdatable, public IMovableActor
 		float mass() const override;
 
 		sf::Vector2i direction() const;
+		Direction shootDirection() const;
 
 		sf::FloatRect collisionBox() const override;
 
@@ -53,6 +55,7 @@ class Player : public IUpdatable, public IMovableActor
 
 	private:
 		const IMapInformationProvider& m_collisionInformationProvider;
+		const ProjectileHitDetector& m_projectileHitDetector;
 
 		sf::Vector2f m_position;
 		sf::Vector2f m_velocity;

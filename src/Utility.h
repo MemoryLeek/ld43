@@ -28,6 +28,11 @@ namespace Utility
 	{
 		return sf::Vector2u((px + TILE_SIZE / 2) / TILE_SIZE, (py + TILE_SIZE - 1) / TILE_SIZE);
 	}
+
+	inline sf::Vector2u correctTilePosition(unsigned int px, unsigned int py)
+	{
+		return sf::Vector2u(px / TILE_SIZE, py/ TILE_SIZE);
+	}
 }
 
 enum class Direction

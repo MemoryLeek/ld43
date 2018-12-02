@@ -28,7 +28,7 @@ class ProjectileHitDetector
 		sf::IntRect getCollisionBoxInWorldSpace(const IMovableActor& actor) const;
 
 		bool checkIfTargetIsInLine(const sf::Vector2u& origin, Direction direction, const sf::IntRect& target) const;
-		bool checkIfObstructed(const sf::Vector2u& origin, Direction direction, const sf::IntRect& target) const;
+		bool checkIfObstructed(const sf::Vector2u& origin, Direction direction, const sf::Vector2u& target) const;
 };
 
 #endif // PROJECTILEHITDETECTOR_H
