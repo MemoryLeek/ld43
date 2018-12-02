@@ -46,8 +46,7 @@ void BlobBehavior::invokeOnActor(IBehaviorControllable& actor)
 
 sf::Sprite BlobBehavior::currentSpriteForActor(const SpriteSheetMapper& spriteSheetMapper, const IBehaviorControllable& actor) const
 {
-	const int spriteIndex = (int)(m_elapsed * 5) % 3;
-	auto sprite = spriteSheetMapper.get(SpriteId::Blob, spriteIndex);
+	auto sprite = spriteSheetMapper.get(SpriteId::Blob, 0);
 	sprite.setPosition(actor.position());
 	return sprite;
 }

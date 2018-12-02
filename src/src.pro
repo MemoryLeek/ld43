@@ -46,7 +46,9 @@ SOURCES += main.cpp \
     behaviors/BlobBehavior.cpp \
     SpawnPoint.cpp \
     EnemyPool.cpp \
-    EnemyFactory.cpp
+    EnemyFactory.cpp \
+    behaviors/ExpandyBehavior.cpp \
+    behaviors/TurretBehavior.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -79,7 +81,9 @@ HEADERS += \
     behaviors/IBehaviorControllable.h \
     SpawnPoint.h \
     EnemyPool.h \
-    EnemyFactory.h
+    EnemyFactory.h \
+    behaviors/ExpandyBehavior.h \
+    behaviors/TurretBehavior.h
 
 OTHER_FILES += \
     ../resources/shaders/decay.frag

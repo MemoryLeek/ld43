@@ -4,8 +4,11 @@
 #include "Enemy.h"
 #include "SpawnPoint.h"
 #include "IUpdatable.h"
+
 #include "behaviors/BlobBehavior.h"
 #include "behaviors/StationaryEnemyBehavior.h"
+#include "behaviors/ExpandyBehavior.h"
+#include "behaviors/TurretBehavior.h"
 
 class EnemyFactory : public IUpdatable
 {
@@ -22,6 +25,8 @@ class EnemyFactory : public IUpdatable
 
 		BlobBehavior m_blobBehavior;
 		StationaryEnemyBehavior m_dummyBehavior;
+		ExpandyBehavior m_expandyBehavior;
+		TurretBehavior m_turretBehavior;
 };
 
 #endif // ENEMYFACTORY_H

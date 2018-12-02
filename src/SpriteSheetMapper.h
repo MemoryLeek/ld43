@@ -14,6 +14,9 @@ enum class SpriteId
 	PlayerLookingUp,
 	PlayerLookingDown,
 	Blob,
+	Expandy,
+	TurretLookingLeft,
+	TurretLookingRight,
 };
 
 class SpriteSheetMapper

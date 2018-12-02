@@ -9,6 +9,8 @@ enum class SpawnType
 {
 	Unknown,
 	Blob,
+	Expandy,
+	Turret,
 };
 
 struct SpawnTypeResolver
@@ -18,6 +20,16 @@ struct SpawnTypeResolver
 		if (name == "blob")
 		{
 			return SpawnType::Blob;
+		}
+
+		if (name == "expandy")
+		{
+			return SpawnType::Expandy;
+		}
+
+		if (name == "turret")
+		{
+			return SpawnType::Turret;
 		}
 
 		return SpawnType::Unknown;
