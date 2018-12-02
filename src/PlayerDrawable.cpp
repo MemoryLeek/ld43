@@ -27,7 +27,7 @@ void PlayerDrawable::update(float delta)
 {
 	m_elapsed += delta;
 
-	m_decayShader.setUniform("decay", m_player.decay() / 5000.0f);
+	m_decayShader.setUniform("decay", m_player.decay() / DECAY);
 }
 
 sf::Sprite PlayerDrawable::spriteForDirection() const

@@ -5,10 +5,11 @@
 
 constexpr int RES_X = 1280;
 constexpr int RES_Y = 720;
+constexpr int TILE_SIZE = 32;
 
 constexpr float RENDERSCALE = 4;
 constexpr float GRAVITY = 10;
-constexpr int TILE_SIZE = 32;
+constexpr float DECAY = 4000.0f;
 
 template<typename T>
 void UNUSED(T &)

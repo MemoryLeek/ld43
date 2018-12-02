@@ -8,7 +8,6 @@
 #include "Player.h"
 
 constexpr float JUMPVELOCITY = 2.5f;
-constexpr float DECAY = 5000.0f;
 
 Player::Player(const IMapInformationProvider& collisionInformationProvider)
 	: m_collisionInformationProvider(collisionInformationProvider)
