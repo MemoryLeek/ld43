@@ -11,6 +11,7 @@
 #include "PlayerDrawable.h"
 #include "EnemyFactory.h"
 #include "EnemyPool.h"
+#include "ProjectileHitDetector.h"
 
 class Settings;
 
@@ -42,6 +43,8 @@ class DummyState : public IState
 		EnemyFactory m_enemyFactory;
 		EnemyPool m_enemyPool;
 		EnemyDrawable m_enemyDrawable;
+
+		ProjectileHitDetector m_projectileHitDetector;
 };
 
 #endif // DUMMYSTATE_H

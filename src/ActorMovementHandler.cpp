@@ -6,8 +6,6 @@
 
 #include "ActorMovementHandler.h"
 
-constexpr int ACTOROFFSET = 8;
-
 void ActorMovementHandler::updateActorPosition(IMovableActor& actor, const IMapInformationProvider& mapInformationProvider, float delta)
 {
 	auto position = actor.position();

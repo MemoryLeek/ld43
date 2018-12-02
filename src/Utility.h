@@ -34,6 +34,8 @@ enum class Direction
 {
 	Left,
 	Right,
+	Up,
+	Down,
 };
 
 #endif // UTILITY_H

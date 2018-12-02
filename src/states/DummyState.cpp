@@ -12,6 +12,7 @@ DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
 	, m_enemyFactory(m_player, m_map)
 	, m_enemyPool(m_enemyFactory, m_map)
 	, m_enemyDrawable(m_enemyPool, m_spriteSheetMapper)
+	, m_projectileHitDetector(m_map, m_enemyPool, m_player)
 {
 	InputMapping &inputMapping = settings
 		.inputMapping();

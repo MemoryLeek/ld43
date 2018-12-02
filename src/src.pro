@@ -48,7 +48,8 @@ SOURCES += main.cpp \
     EnemyPool.cpp \
     EnemyFactory.cpp \
     behaviors/ExpandyBehavior.cpp \
-    behaviors/TurretBehavior.cpp
+    behaviors/TurretBehavior.cpp  \
+    ProjectileHitDetector.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -83,7 +84,8 @@ HEADERS += \
     EnemyPool.h \
     EnemyFactory.h \
     behaviors/ExpandyBehavior.h \
-    behaviors/TurretBehavior.h
+    behaviors/TurretBehavior.h \
+    ProjectileHitDetector.h
 
 OTHER_FILES += \
     ../resources/shaders/decay.frag
