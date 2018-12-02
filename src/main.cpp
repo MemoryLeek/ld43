@@ -31,7 +31,8 @@ const float TICK = 0.005;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(RES_X, RES_Y), "ld43");
+	sf::RenderWindow window(sf::VideoMode(RES_X, RES_Y), "ld43", sf::Style::Close);
+	window.setFramerateLimit(200);
 
 	sf::Texture spriteSheet;
 	spriteSheet.loadFromFile("resources/spritesheet.png");
