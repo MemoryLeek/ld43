@@ -7,18 +7,18 @@
 
 #include "ProjectileHitDetector.h"
 
-ProjectileHitDetector::ProjectileHitDetector(const IMapInformationProvider& mapInformationProvider, const EnemyPool& enemyPool, Player& player)
+ProjectileHitDetector::ProjectileHitDetector(const IMapInformationProvider& mapInformationProvider, EnemyPool& enemyPool, Player& player)
 	: m_mapInformationProvider(mapInformationProvider)
 	, m_enemyPool(enemyPool)
 	, m_player(player)
 {
 }
 
-const Enemy* ProjectileHitDetector::queryForEnemyHit(const sf::Vector2u& origin, Direction direction) const
+Enemy* ProjectileHitDetector::queryForEnemyHit(const sf::Vector2u& origin, Direction direction) const
 {
-	for (const auto& enemy : m_enemyPool.enemies())
+	for (auto enemy : m_enemyPool.enemies())
 	{
-		const auto cb = getCollisionBoxInWorldSpace(enemy);
+		const auto cb = getCollisionBoxInWorldSpace(*enemy);
 		if (!checkIfTargetIsInLine(origin, direction, cb))
 		{
 			continue;
@@ -28,7 +28,7 @@ const Enemy* ProjectileHitDetector::queryForEnemyHit(const sf::Vector2u& origin,
 			continue;
 		}
 
-		return &enemy;
+		return enemy;
 	}
 
 	return nullptr;

@@ -4,6 +4,7 @@
 #include "Utility.h"
 
 #include "ActorMovementHandler.h"
+#include "Enemy.h"
 #include "IMapInformationProvider.h"
 #include "ProjectileHitDetector.h"
 #include "Player.h"
@@ -152,10 +153,11 @@ void Player::shoot()
 {
 	std::cout << "shoot" << std::endl;
 	const auto gunPosition = sf::Vector2u(m_position.x + TILE_SIZE / 2, m_position.y + TILE_SIZE / 2);
-	const auto result = m_projectileHitDetector.queryForEnemyHit(gunPosition, shootDirection());
+	auto* result = m_projectileHitDetector.queryForEnemyHit(gunPosition, shootDirection());
 	if (result)
 	{
 		std::cout << "Hit enemy " << result << std::endl;
+		result->kill();
 	}
 }
 

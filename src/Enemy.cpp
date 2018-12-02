@@ -19,6 +19,11 @@ IEnemyBehavior& Enemy::behavior() const
 	return m_behavior;
 }
 
+void Enemy::kill()
+{
+	m_isDead = true;
+}
+
 bool Enemy::isDead() const
 {
 	return m_isDead;

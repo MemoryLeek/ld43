@@ -14,14 +14,18 @@ class EnemyPool : public IUpdatable
 	public:
 		EnemyPool(EnemyFactory& enemyFactory, const IMapInformationProvider& mapInformationProvider);
 
-		std::vector<Enemy> enemies() const;
+		std::vector<Enemy*> enemies() const;
 
 		void update(float delta) override;
+
+		bool canRespawn(size_t index) const;
+		void setRespawnCooldown(size_t index, float cooldown);
 
 	private:
 		const IMapInformationProvider& m_mapInformationProvider;
 
-		std::vector<Enemy> m_enemies;
+		std::vector<Enemy*> m_enemies;
+		std::vector<float> m_respawnTimers;
 };
 
 #endif // ENEMYPOOL_H

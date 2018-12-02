@@ -17,6 +17,7 @@ class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControlla
 
 		IEnemyBehavior& behavior() const;
 
+		void kill();
 		bool isDead() const;
 		void respawn(const sf::Vector2f& position);
 

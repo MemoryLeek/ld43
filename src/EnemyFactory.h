@@ -15,7 +15,7 @@ class EnemyFactory : public IUpdatable
 	public:
 		EnemyFactory(const Player& player, const IMapInformationProvider& mapInformationProvider);
 
-		Enemy createInstance(SpawnType type);
+		Enemy* createInstance(SpawnType type);
 
 		void update(float delta) override;
 

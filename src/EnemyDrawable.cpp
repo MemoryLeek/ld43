@@ -20,12 +20,12 @@ void EnemyDrawable::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 {
 	for (const auto& enemy : m_enemyPool.enemies())
 	{
-		if (enemy.isDead())
+		if (enemy->isDead())
 		{
 			continue;
 		}
 
-		const auto& sprite = enemy.behavior().currentSpriteForActor(m_spriteSheetMapper, enemy);
+		const auto& sprite = enemy->behavior().currentSpriteForActor(m_spriteSheetMapper, *enemy);
 		target.draw(sprite, states);
 	}
 }

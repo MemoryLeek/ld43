@@ -7,18 +7,18 @@ EnemyFactory::EnemyFactory(const Player& player, const IMapInformationProvider& 
 {
 }
 
-Enemy EnemyFactory::createInstance(SpawnType type)
+Enemy* EnemyFactory::createInstance(SpawnType type)
 {
 	switch (type)
 	{
 		case SpawnType::Blob:
-			return Enemy(m_blobBehavior, m_mapInformationProvider);
+			return new Enemy(m_blobBehavior, m_mapInformationProvider);
 		case SpawnType::Expandy:
-			return Enemy(m_expandyBehavior, m_mapInformationProvider);
+			return new Enemy(m_expandyBehavior, m_mapInformationProvider);
 		case SpawnType::Turret:
-			return Enemy(m_turretBehavior, m_mapInformationProvider);
+			return new Enemy(m_turretBehavior, m_mapInformationProvider);
 		default:
-			return Enemy(m_dummyBehavior, m_mapInformationProvider);
+			return new Enemy(m_dummyBehavior, m_mapInformationProvider);
 	}
 }
 
