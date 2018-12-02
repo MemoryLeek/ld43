@@ -22,6 +22,7 @@ class Map : public sf::Drawable, public IMapInformationProvider
 
 		bool isCollidable(const unsigned int tx, const unsigned int ty) const override;
 		bool isCheckpoint(const unsigned int tx, const unsigned int ty) const override;
+		bool intersectsKillzone(const sf::FloatRect& collisionBox) const override;
 
 		std::vector<SpawnPoint> spawnPoints() const override;
 
@@ -44,6 +45,7 @@ class Map : public sf::Drawable, public IMapInformationProvider
 		std::vector<uint8_t> m_collidables;
 		std::vector<sf::Vector2u> m_checkpoints;
 		std::vector<SpawnPoint> m_spawnPoints;
+		std::vector<sf::FloatRect> m_killZones;
 };
 
 #endif // MAP_H

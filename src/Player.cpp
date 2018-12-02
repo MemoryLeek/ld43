@@ -206,6 +206,13 @@ void Player::update(float delta)
 		m_lastCheckpointTilePosition = currentTile;
 	}
 
+	const auto& cb = collisionBox();
+	const auto globalBoundingBox = sf::FloatRect(m_position.x + cb.left, m_position.y + cb.top, cb.width, cb.height);
+	if (m_collisionInformationProvider.intersectsKillzone(globalBoundingBox))
+	{
+		damage(DECAY / 2);
+	}
+
 	ActorMovementHandler::updateActorPosition(*this, m_collisionInformationProvider, delta);
 
 	m_decay -= abs(m_velocity.x) * delta;
