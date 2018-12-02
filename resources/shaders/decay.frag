@@ -4,6 +4,7 @@ uniform sampler2D texture;
 uniform sampler2D lookup;
 
 uniform float decay;
+uniform float opacity;
 
 const float TILE_SIZE = 32;
 const float NUM_TILES = 64;
@@ -30,10 +31,10 @@ void main()
 
 	if ((decay * (TILE_SIZE * TILE_SIZE)) <= index)
 	{
-		gl_FragColor = vec4(pixel.rgb, 0.2);
+		gl_FragColor = vec4(pixel.rgb, 0.2 * opacity);
 	}
 	else
 	{
-		gl_FragColor = pixel;
+		gl_FragColor = vec4(pixel.rgb, opacity);
 	}
 }

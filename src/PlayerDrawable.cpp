@@ -42,6 +42,13 @@ void PlayerDrawable::update(float delta)
 	m_elapsed += delta;
 
 	m_decayShader.setUniform("decay", m_player.decay() / DECAY);
+
+
+	const auto opacity = m_player.isInvulnerable()
+		? ((int)(m_elapsed * 10) % 2) * .6f
+		: 1.f;
+
+	m_decayShader.setUniform("opacity", opacity);
 }
 
 sf::Sprite PlayerDrawable::spriteForDirection() const

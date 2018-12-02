@@ -13,14 +13,14 @@
 class EnemyFactory : public IUpdatable
 {
 	public:
-		EnemyFactory(const Player& player, const IMapInformationProvider& mapInformationProvider);
+		EnemyFactory(Player& player, const IMapInformationProvider& mapInformationProvider);
 
 		Enemy* createInstance(SpawnType type);
 
 		void update(float delta) override;
 
 	private:
-		const Player& m_player;
+		Player& m_player;
 		const IMapInformationProvider& m_mapInformationProvider;
 
 		BlobBehavior m_blobBehavior;

@@ -12,6 +12,7 @@
 #include "Player.h"
 
 constexpr float JUMPVELOCITY = 2.5f;
+constexpr float INVULNERABILITY_TIME = 2.f;
 
 Player::Player(const IMapInformationProvider& collisionInformationProvider, const ProjectileHitDetector& projectileHitDetector, EnemyPool& enemyPool)
 	: m_collisionInformationProvider(collisionInformationProvider)
@@ -22,6 +23,7 @@ Player::Player(const IMapInformationProvider& collisionInformationProvider, cons
 	, m_lastCheckpointTilePosition(0, 0)
 	, m_direction(0, 0)
 	, m_decay(DECAY)
+	, m_safeTimer(0)
 {
 }
 
@@ -86,6 +88,27 @@ void Player::setVelocity(sf::Vector2f velocity)
 int Player::decay() const
 {
 	return m_decay;
+}
+
+void Player::damage(float decay)
+{
+	if (m_safeTimer > 0)
+	{
+		// We're still invuln
+		return;
+	}
+
+	m_decay -= decay;
+
+	if (m_decay > 0)
+	{
+		m_safeTimer = INVULNERABILITY_TIME;
+	}
+}
+
+bool Player::isInvulnerable() const
+{
+	return m_safeTimer > 0;
 }
 
 float Player::mass() const
@@ -182,6 +205,11 @@ void Player::update(float delta)
 	if (m_decay <= 0)
 	{
 		respawn();
+	}
+
+	if (m_safeTimer > 0)
+	{
+		m_safeTimer -= delta;
 	}
 }
 

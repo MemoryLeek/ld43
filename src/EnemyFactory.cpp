@@ -1,6 +1,6 @@
 #include "EnemyFactory.h"
 
-EnemyFactory::EnemyFactory(const Player& player, const IMapInformationProvider& mapInformationProvider)
+EnemyFactory::EnemyFactory(Player& player, const IMapInformationProvider& mapInformationProvider)
 	: m_player(player)
 	, m_mapInformationProvider(mapInformationProvider)
 	, m_blobBehavior(m_player)

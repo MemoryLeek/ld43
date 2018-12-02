@@ -11,7 +11,7 @@ class Player;
 class BlobBehavior : public IEnemyBehavior
 {
 	public:
-		BlobBehavior(const Player& player);
+		BlobBehavior(Player& player);
 
 		void update(float delta) override;
 
@@ -22,7 +22,7 @@ class BlobBehavior : public IEnemyBehavior
 		sf::FloatRect currentCollisionBoxForActor(const IBehaviorControllable& actor) const override;
 
 	private:
-		const Player& m_player;
+		Player& m_player;
 
 		std::map<IBehaviorControllable*, float> m_jumpCoolDowns;
 		float m_elapsed;
