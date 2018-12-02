@@ -18,7 +18,7 @@ Player::Player(const IMapInformationProvider& collisionInformationProvider, cons
 	: m_collisionInformationProvider(collisionInformationProvider)
 	, m_projectileHitDetector(projectileHitDetector)
 	, m_enemyPool(enemyPool)
-	, m_position(1856, 608)
+	, m_position(0, 0)
 	, m_velocity(0, 0)
 	, m_lastCheckpointTilePosition(0, 0)
 	, m_direction(0, 0)

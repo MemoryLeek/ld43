@@ -8,7 +8,7 @@ class Player;
 class ExpandyBehavior : public IEnemyBehavior
 {
 	public:
-		ExpandyBehavior(const Player &player);
+		ExpandyBehavior(Player& player);
 
 		void update(float delta) override;
 		void invokeOnActor(IBehaviorControllable &actor) override;
@@ -19,7 +19,7 @@ class ExpandyBehavior : public IEnemyBehavior
 	private:
 		int getSpriteIndex(const IBehaviorControllable &actor) const;
 
-		const Player &m_player;
+		Player& m_player;
 };
 
 #endif // EXPANDYBEHAVIOR_H
