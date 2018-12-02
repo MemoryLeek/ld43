@@ -116,6 +116,7 @@ void DummyState::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 	auto view = target.getDefaultView();
 	view.setCenter(m_camera.position());
+	view.zoom(1.f / RENDERSCALE);
 	target.setView(view);
 
 	target.clear(sf::Color(124, 115, 139));
