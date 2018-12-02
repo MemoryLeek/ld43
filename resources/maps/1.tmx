@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="81">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="82">
  <tileset firstgid="1" source="../spritesheet.tsx"/>
+ <objectgroup id="15" name="Goal">
+  <object id="81" x="1440" y="1536" width="32" height="32"/>
+ </objectgroup>
  <objectgroup id="10" name="Checkpoints">
   <object id="4" x="848" y="240">
    <point/>
@@ -154,7 +157,7 @@
  </objectgroup>
  <layer id="13" name="Tile Layer 2" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2EsKwCAMBUAP4Ml7tVyqq0IRhBax9TMDgUA2Lp74SQkAYH757wWwPRkEYBaRnFvsSe4BgJ7cNQAAAACAFfn75CILQKso6umMbxy3ejMD+suVHgAAgDajv7Gi0sPKRt+XAAAAAAAAAAAAAAAAAAAAAAAAwN5OBA0Meg==
+   eJzt2MEKgCAMAFChq9/Vx/Vr/lSnIAKhMC31PRgMdtlh4FwIAAD9i183wPTMIAC9SMG7xZzMPQBQk10DAAAAABiR2ycHswCUSpe4W6ON7RRPakB9MZMDAABQpvSPtS6vtJGVMjmMzO0DAAAAAAAAAAAAAAAAAAAAAAAA+LMd/UAMww==
   </data>
  </layer>
  <layer id="14" name="Tile Layer 1" width="100" height="100">

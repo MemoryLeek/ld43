@@ -2,13 +2,15 @@
 #include "Utility.h"
 #include "PlayerDrawable.h"
 #include "Settings.h"
+#include "StateHandler.h"
 
-DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet)
+DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet, StateHandler &stateHandler)
 	: m_settings(settings)
 	, m_spriteSheetMapper(spriteSheet)
 	, m_map("resources/maps/1.tmx", spriteSheet)
 	, m_player(m_map, m_projectileHitDetector, m_enemyPool)
 	, m_playerDrawable(m_player, m_spriteSheetMapper)
+	, m_stateHandler(stateHandler)
 	, m_enemyFactory(m_player, m_map, m_projectileHitDetector)
 	, m_enemyPool(m_enemyFactory, m_map)
 	, m_enemyDrawable(m_enemyPool, m_spriteSheetMapper)
@@ -117,7 +119,7 @@ void DummyState::update(float delta)
 
 	if (m_map.intersectsGoal(playerBox))
 	{
-		std::cout << "GOOOOOOL" << std::endl;
+		m_stateHandler.changeState(&m_goalState);
 	}
 }
 

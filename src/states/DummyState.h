@@ -12,13 +12,15 @@
 #include "EnemyFactory.h"
 #include "EnemyPool.h"
 #include "ProjectileHitDetector.h"
+#include "GoalState.h"
 
 class Settings;
+class StateHandler;
 
 class DummyState : public IState
 {
 	public:
-		DummyState(Settings &settings, const sf::Texture& spriteSheet);
+		DummyState(Settings &settings, const sf::Texture& spriteSheet, StateHandler &stateHandler);
 
 		void keyPressed(const sf::Event &event) override;
 		void keyReleased(const sf::Event &event) override;
@@ -39,6 +41,8 @@ class DummyState : public IState
 		Player m_player;
 		PlayerDrawable m_playerDrawable;
 		Camera m_camera;
+		StateHandler &m_stateHandler;
+		GoalState m_goalState;
 
 		EnemyFactory m_enemyFactory;
 		EnemyPool m_enemyPool;

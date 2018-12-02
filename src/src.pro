@@ -50,7 +50,8 @@ SOURCES += main.cpp \
     behaviors/ExpandyBehavior.cpp \
     behaviors/TurretBehavior.cpp  \
     ProjectileHitDetector.cpp \
-    behaviors/ShakeyBehavior.cpp
+    behaviors/ShakeyBehavior.cpp \
+    states/GoalState.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -87,7 +88,8 @@ HEADERS += \
     behaviors/ExpandyBehavior.h \
     behaviors/TurretBehavior.h \
     ProjectileHitDetector.h \
-    behaviors/ShakeyBehavior.h
+    behaviors/ShakeyBehavior.h \
+    states/GoalState.h
 
 OTHER_FILES += \
     ../resources/shaders/decay.frag

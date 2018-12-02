@@ -6,7 +6,7 @@
 #include "Utility.h"
 
 LogoState::LogoState(StateHandler &stateHandler, Settings &settings, const sf::Texture& spriteSheet)
-	: m_dummyState(settings, spriteSheet)
+	: m_dummyState(settings, spriteSheet, stateHandler)
 	, m_stateHandler(stateHandler)
 	, m_duration(0.0f)
 {
