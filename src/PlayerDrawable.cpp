@@ -58,15 +58,15 @@ sf::Sprite PlayerDrawable::spriteForDirection() const
 
 	const int runningIndex = getSpriteIndex();
 
-	if (direction.y < 0)
-	{
-		return m_spriteSheetMapper.get(SpriteId::PlayerLookingUp, 0);
-	}
+//	if (direction.y < 0)
+//	{
+//		return m_spriteSheetMapper.get(SpriteId::PlayerLookingUp, 0);
+//	}
 
-	if (direction.y > 0)
-	{
-		return m_spriteSheetMapper.get(SpriteId::PlayerLookingDown, 0);
-	}
+//	if (direction.y > 0)
+//	{
+//		return m_spriteSheetMapper.get(SpriteId::PlayerLookingDown, 0);
+//	}
 
 	if (direction.x < 0)
 	{
