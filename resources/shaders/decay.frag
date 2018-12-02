@@ -29,8 +29,10 @@ void main()
 
 	if ((decay * 1024) <= lookup[index])
 	{
-		discard;
+		gl_FragColor = vec4(pixel.rgb, 0.2);
 	}
-
-	gl_FragColor = pixel;
+	else
+	{
+		gl_FragColor = pixel;
+	}
 }

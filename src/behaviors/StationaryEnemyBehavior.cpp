@@ -23,5 +23,7 @@ sf::Sprite StationaryEnemyBehavior::currentSpriteForActor(const SpriteSheetMappe
 
 sf::FloatRect StationaryEnemyBehavior::currentCollisionBoxForActor(const IBehaviorControllable& actor) const
 {
+	UNUSED(actor);
+
 	return sf::FloatRect(4, 16, 25, 16);
 }
