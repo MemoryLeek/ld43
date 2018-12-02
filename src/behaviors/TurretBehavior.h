@@ -6,6 +6,8 @@
 #include "IEnemyBehavior.h"
 #include "SpriteSheetMapper.h"
 
+class ProjectileHitDetector;
+
 struct TurretState
 {
 	TurretState()
@@ -21,7 +23,7 @@ struct TurretState
 class TurretBehavior : public IEnemyBehavior
 {
 	public:
-		TurretBehavior(int spawnDirection);
+		TurretBehavior(int spawnDirection, ProjectileHitDetector& projectileHitDetector);
 
 		void update(float delta) override;
 		void invokeOnActor(IBehaviorControllable &actor) override;
@@ -34,6 +36,7 @@ class TurretBehavior : public IEnemyBehavior
 		SpriteId getSprite(const TurretState &state) const;
 		int getSpriteIndex(const TurretState &state) const;
 
+		ProjectileHitDetector& m_projectileHitDetector;
 		int m_spawnDirection;
 
 		std::map<const IBehaviorControllable*, TurretState> m_states;

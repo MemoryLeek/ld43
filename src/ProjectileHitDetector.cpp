@@ -34,7 +34,7 @@ Enemy* ProjectileHitDetector::queryForEnemyHit(const sf::Vector2u& origin, Direc
 	return nullptr;
 }
 
-const Player* ProjectileHitDetector::queryForPlayerHit(const sf::Vector2u& origin, Direction direction) const
+Player* ProjectileHitDetector::queryForPlayerHit(const sf::Vector2u& origin, Direction direction) const
 {
 	const auto cb = getCollisionBoxInWorldSpace(m_player);
 	if (checkIfTargetIsInLine(origin, direction, cb)

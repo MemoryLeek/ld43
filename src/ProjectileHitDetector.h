@@ -15,15 +15,15 @@ class IMovableActor;
 class ProjectileHitDetector
 {
 	public:
-		ProjectileHitDetector(const IMapInformationProvider& mapInformationProvider, EnemyPool& enemyPool, class Player& player);
+		ProjectileHitDetector(const IMapInformationProvider& mapInformationProvider, EnemyPool& enemyPool, Player& player);
 
 		Enemy* queryForEnemyHit(const sf::Vector2u& origin, Direction direction) const;
-		const Player* queryForPlayerHit(const sf::Vector2u& origin, Direction direction) const;
+		Player* queryForPlayerHit(const sf::Vector2u& origin, Direction direction) const;
 
 	private:
 		const IMapInformationProvider& m_mapInformationProvider;
 		EnemyPool& m_enemyPool;
-		const Player& m_player;
+		Player& m_player;
 
 		sf::IntRect getCollisionBoxInWorldSpace(const IMovableActor& actor) const;
 

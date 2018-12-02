@@ -2,9 +2,12 @@
 #include "Utility.h"
 #include "SpriteSheetMapper.h"
 #include "IBehaviorControllable.h"
+#include "ProjectileHitDetector.h"
+#include "Player.h"
 
-TurretBehavior::TurretBehavior(int spawnDirection)
-	: m_spawnDirection(spawnDirection)
+TurretBehavior::TurretBehavior(int spawnDirection, ProjectileHitDetector& projectileHitDetector)
+	: m_projectileHitDetector(projectileHitDetector)
+	, m_spawnDirection(spawnDirection)
 {
 }
 
@@ -27,6 +30,26 @@ void TurretBehavior::invokeOnActor(IBehaviorControllable &actor)
 	if (iterator == m_states.end())
 	{
 		m_states[&actor].direction = m_spawnDirection;
+	}
+
+	const auto &state = getTurretState(actor);
+	const auto gunPosition = sf::Vector2u(actor.position().x + TILE_SIZE / 2, actor.position().y + TILE_SIZE / 2);
+
+	if (state.direction == 0) // Left
+	{
+		auto player = m_projectileHitDetector.queryForPlayerHit(gunPosition, Direction::Left);
+		if (player)
+		{
+			player->damage(DECAY / 2);
+		}
+	}
+	else
+	{
+		auto player = m_projectileHitDetector.queryForPlayerHit(gunPosition, Direction::Right);
+		if (player)
+		{
+			player->damage(DECAY / 2);
+		}
 	}
 }
 

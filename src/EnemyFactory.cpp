@@ -1,12 +1,12 @@
 #include "EnemyFactory.h"
 
-EnemyFactory::EnemyFactory(Player& player, const IMapInformationProvider& mapInformationProvider)
+EnemyFactory::EnemyFactory(Player& player, const IMapInformationProvider& mapInformationProvider, ProjectileHitDetector& projectileHitDetector)
 	: m_player(player)
 	, m_mapInformationProvider(mapInformationProvider)
 	, m_blobBehavior(m_player)
 	, m_expandyBehavior(m_player)
-	, m_turretLeftBehavior(0)
-	, m_turretRightBehavior(1)
+	, m_turretLeftBehavior(0, projectileHitDetector)
+	, m_turretRightBehavior(1, projectileHitDetector)
 {
 }
 

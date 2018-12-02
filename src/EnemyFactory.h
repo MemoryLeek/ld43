@@ -13,7 +13,7 @@
 class EnemyFactory : public IUpdatable
 {
 	public:
-		EnemyFactory(Player& player, const IMapInformationProvider& mapInformationProvider);
+		EnemyFactory(Player& player, const IMapInformationProvider& mapInformationProvider, ProjectileHitDetector& projectileHitDetector);
 
 		Enemy* createInstance(SpawnType type);
 
