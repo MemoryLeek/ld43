@@ -6,9 +6,13 @@
 enum class SpriteId
 {
 	PlayerIdleLeft,
+	PlayerIdleLeftShooting,
 	PlayerIdleRight,
+	PlayerIdleRightShooting,
 	PlayerRunningLeft,
+	PlayerRunningLeftShooting,
 	PlayerRunningRight,
+	PlayerRunningRightShooting,
 	PlayerJumpingLeft,
 	PlayerJumpingRight,
 	PlayerLookingUp,

@@ -56,7 +56,7 @@ sf::Sprite PlayerDrawable::spriteForDirection() const
 	const sf::Vector2i &direction = m_player.direction();
 	const sf::Vector2f &velocity = m_player.velocity();
 
-	const int runningIndex = (int)(m_elapsed * 20) % 4;
+	const int runningIndex = getSpriteIndex();
 
 	if (direction.y < 0)
 	{
@@ -72,7 +72,17 @@ sf::Sprite PlayerDrawable::spriteForDirection() const
 	{
 		if (velocity.x == 0)
 		{
+			if (m_player.isShooting())
+			{
+				return m_spriteSheetMapper.get(SpriteId::PlayerIdleLeftShooting, 0);
+			}
+
 			return m_spriteSheetMapper.get(SpriteId::PlayerIdleLeft, 0);
+		}
+
+		if (m_player.isShooting())
+		{
+			return m_spriteSheetMapper.get(SpriteId::PlayerRunningLeftShooting, runningIndex);
 		}
 
 		return m_spriteSheetMapper.get(SpriteId::PlayerRunningLeft, runningIndex);
@@ -80,10 +90,30 @@ sf::Sprite PlayerDrawable::spriteForDirection() const
 
 	if (velocity.x == 0)
 	{
+		if (m_player.isShooting())
+		{
+			return m_spriteSheetMapper.get(SpriteId::PlayerIdleRightShooting, 0);
+		}
+
 		return m_spriteSheetMapper.get(SpriteId::PlayerIdleRight, 0);
 	}
 
+	if (m_player.isShooting())
+	{
+		return m_spriteSheetMapper.get(SpriteId::PlayerRunningRightShooting, runningIndex);
+	}
+
 	return m_spriteSheetMapper.get(SpriteId::PlayerRunningRight, runningIndex);
+}
+
+int PlayerDrawable::getSpriteIndex() const
+{
+	if (m_player.velocity().y != 0)
+	{
+		return 0;
+	}
+
+	return (int)(m_elapsed * 20) % 4;
 }
 
 void PlayerDrawable::draw(sf::RenderTarget &target, sf::RenderStates states) const

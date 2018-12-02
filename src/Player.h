@@ -27,6 +27,7 @@ class Player : public IUpdatable, public IMovableActor
 		void damage(float decay);
 
 		bool isInvulnerable() const;
+		bool isShooting() const;
 
 		float mass() const override;
 
@@ -70,7 +71,9 @@ class Player : public IUpdatable, public IMovableActor
 		sf::Vector2i m_direction;
 
 		int m_decay;
+
 		float m_safeTimer;
+		float m_shootTimer;
 };
 
 #endif // PLAYER_H

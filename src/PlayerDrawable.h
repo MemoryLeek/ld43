@@ -21,6 +21,8 @@ class PlayerDrawable : public sf::Drawable, public IUpdatable
 	private:
 		sf::Sprite spriteForDirection() const;
 
+		int getSpriteIndex() const;
+
 		sf::Shader m_decayShader;
 		sf::Texture m_decayTexture;
 

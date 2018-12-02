@@ -24,6 +24,7 @@ Player::Player(const IMapInformationProvider& collisionInformationProvider, cons
 	, m_direction(0, 0)
 	, m_decay(DECAY)
 	, m_safeTimer(0)
+	, m_shootTimer(0)
 {
 }
 
@@ -111,6 +112,11 @@ bool Player::isInvulnerable() const
 	return m_safeTimer > 0;
 }
 
+bool Player::isShooting() const
+{
+	return m_shootTimer > 0;
+}
+
 float Player::mass() const
 {
 	return m_decay / DECAY / 2 + .5f;
@@ -182,6 +188,8 @@ void Player::shoot()
 		result->kill();
 		m_decay = std::min(DECAY, m_decay + DAMAGE);
 	}
+
+	m_shootTimer = 0.2;
 }
 
 void Player::stopShooting()
@@ -210,6 +218,11 @@ void Player::update(float delta)
 	if (m_safeTimer > 0)
 	{
 		m_safeTimer -= delta;
+	}
+
+	if (m_shootTimer > 0)
+	{
+		m_shootTimer -= delta;
 	}
 }
 
