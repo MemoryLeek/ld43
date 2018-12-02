@@ -134,16 +134,12 @@ void Player::resetLook()
 
 void Player::jump()
 {
-	const sf::Vector2u currentTile = Utility::tilePosition(x(), y());
-	if (!m_collisionInformationProvider.isCollidable(currentTile.x, currentTile.y + 1))
+	if (!ActorMovementHandler::isOnGround(*this, m_collisionInformationProvider))
 	{
 		return;
 	}
 
-	if (y() == (int)currentTile.y * TILE_SIZE)
-	{
-		m_velocity.y = -JUMPVELOCITY;
-	}
+	m_velocity.y = -JUMPVELOCITY;
 }
 
 void Player::stopJumping()

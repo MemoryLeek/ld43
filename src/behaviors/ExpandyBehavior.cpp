@@ -26,7 +26,7 @@ int ExpandyBehavior::getSpriteIndex(const IBehaviorControllable &actor) const
 {
 	const sf::Vector2f &position = actor.position();
 
-	return Utility::clamp(17 - abs(position.x - m_player.x()) / 5, 0, 17);
+	return Utility::clamp<int>(17 - abs(position.x - m_player.x()) / 5, 0, 17);
 }
 
 sf::Sprite ExpandyBehavior::currentSpriteForActor(const SpriteSheetMapper &spriteSheetMapper, const IBehaviorControllable &actor) const

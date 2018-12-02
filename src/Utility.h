@@ -39,6 +39,11 @@ namespace Utility
 		return sf::Vector2u(px / TILE_SIZE, py/ TILE_SIZE);
 	}
 
+	inline sf::Vector2u correctTilePosition(const sf::Vector2f& point)
+	{
+		return correctTilePosition((int)point.x, (int)point.y);
+	}
+
 	template<typename T>
 	T clamp(T value, T min, T max)
 	{
