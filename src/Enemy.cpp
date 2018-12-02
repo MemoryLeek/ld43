@@ -93,5 +93,7 @@ void Enemy::move(Direction direction, float velocity)
 		case Direction::Right:
 			m_velocity.x = velocity;
 			break;
+		default:
+			break;
 	}
 }

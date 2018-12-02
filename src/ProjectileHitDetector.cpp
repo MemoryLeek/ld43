@@ -62,7 +62,7 @@ bool ProjectileHitDetector::checkIfTargetIsInLine(const sf::Vector2u& origin, Di
 	if (direction == Direction::Left || direction == Direction::Right)
 	{
 		// Check that we're horizoontal
-		if (origin.y < target.top || origin.y > target.top + target.height)
+		if ((int)origin.y < target.top || (int)origin.y > target.top + target.height)
 		{
 			return false;
 		}
@@ -71,7 +71,7 @@ bool ProjectileHitDetector::checkIfTargetIsInLine(const sf::Vector2u& origin, Di
 	if (direction == Direction::Up || direction == Direction::Down)
 	{
 		// Check that we're verticalo
-		if (origin.x < target.left || origin.x > target.left + target.width)
+		if ((int)origin.x < target.left || (int)origin.x > target.left + target.width)
 		{
 			return false;
 		}
@@ -80,13 +80,13 @@ bool ProjectileHitDetector::checkIfTargetIsInLine(const sf::Vector2u& origin, Di
 	switch (direction)
 	{
 		case Direction::Left:
-			return target.left < origin.x;
+			return target.left < (int)origin.x;
 		case Direction::Right:
-			return target.left + target.width > origin.x;
+			return target.left + target.width > (int)origin.x;
 		case Direction::Up:
-			return target.top < origin.y;
+			return target.top < (int)origin.y;
 		case Direction::Down:
-			return target.top + target.height > origin.y;
+			return target.top + target.height > (int)origin.y;
 	}
 
 	return false;
@@ -100,7 +100,7 @@ bool ProjectileHitDetector::checkIfObstructed(const sf::Vector2u& origin, Direct
 	switch (direction)
 	{
 		case Direction::Left:
-			for (int x = originTile.x; x > targetTile.x; x--)
+			for (unsigned int x = originTile.x; x > targetTile.x; x--)
 			{
 				if (m_mapInformationProvider.isCollidable(x, originTile.y))
 				{
@@ -109,7 +109,7 @@ bool ProjectileHitDetector::checkIfObstructed(const sf::Vector2u& origin, Direct
 			}
 			break;
 		case Direction::Right:
-			for (int x = originTile.x; x < targetTile.x; x++)
+			for (unsigned int x = originTile.x; x < targetTile.x; x++)
 			{
 				if (m_mapInformationProvider.isCollidable(x, originTile.y))
 				{
@@ -118,7 +118,7 @@ bool ProjectileHitDetector::checkIfObstructed(const sf::Vector2u& origin, Direct
 			}
 			break;
 		case Direction::Up:
-			for (int y = originTile.y; y > targetTile.y; y--)
+			for (unsigned int y = originTile.y; y > targetTile.y; y--)
 			{
 				if (m_mapInformationProvider.isCollidable(originTile.x, y))
 				{
@@ -127,7 +127,7 @@ bool ProjectileHitDetector::checkIfObstructed(const sf::Vector2u& origin, Direct
 			}
 			break;
 		case Direction::Down:
-			for (int y = originTile.y; y < targetTile.y; y++)
+			for (unsigned int y = originTile.y; y < targetTile.y; y++)
 			{
 				if (m_mapInformationProvider.isCollidable(originTile.x, y))
 				{
