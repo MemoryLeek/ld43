@@ -79,13 +79,7 @@ float Enemy::mass() const
 
 void Enemy::jump(float velocity)
 {
-	const sf::Vector2u currentTile = Utility::tilePosition(m_position.x, m_position.y);
-	if (!m_mapInformationProvider.isCollidable(currentTile.x, currentTile.y + 1))
-	{
-		return;
-	}
-
-	if ((int)m_position.y == (int)currentTile.y * TILE_SIZE)
+	if (ActorMovementHandler::isOnGround(*this, m_mapInformationProvider))
 	{
 		m_velocity.y = -velocity;
 	}

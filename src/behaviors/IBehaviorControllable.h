@@ -6,6 +6,7 @@
 class IBehaviorControllable
 {
 	public:
+		virtual sf::Vector2f velocity() const = 0;
 		virtual sf::Vector2f position() const = 0;
 
 		virtual void jump(float velocity) = 0;

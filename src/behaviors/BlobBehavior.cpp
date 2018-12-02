@@ -3,13 +3,15 @@
 #include "Player.h"
 #include "IBehaviorControllable.h"
 #include "SpriteSheetMapper.h"
-
+#include "ActorMovementHandler.h"
 #include "BlobBehavior.h"
+#include "Enemy.h"
 
 const sf::FloatRect COLLISION_BOX = sf::FloatRect(6, 23, 20, 9);
 
-BlobBehavior::BlobBehavior(Player& player)
+BlobBehavior::BlobBehavior(Player& player, const IMapInformationProvider &mapInformationProvider)
 	: m_player(player)
+	, m_mapInformationProvider(mapInformationProvider)
 	, m_elapsed(0)
 {
 }
@@ -29,20 +31,35 @@ void BlobBehavior::update(float delta)
 
 void BlobBehavior::invokeOnActor(IBehaviorControllable& actor)
 {
-	if (m_player.position().x < actor.position().x)
+	const auto playerPosition = m_player.position();
+	const auto actorPosition = actor.position();
+
+	if (ActorMovementHandler::isOnGround((Enemy &)actor, m_mapInformationProvider))
 	{
-		actor.move(Direction::Left, 0.15f);
-	}
-	else
-	{
-		actor.move(Direction::Right, 0.15f);
+		actor.move(Direction::Left, 0.0f);
 	}
 
 	// Blob likey jumpey
 	if (m_jumpCoolDowns[&actor] <= 0)
 	{
-		actor.jump(1.f);
-		m_jumpCoolDowns[&actor] = .8f;
+		if (abs(playerPosition.x - actorPosition.x) > 500 ||
+			abs(playerPosition.y - actorPosition.y) > 500)
+		{
+			return;
+		}
+
+		if (playerPosition.x < actorPosition.x)
+		{
+			actor.move(Direction::Left, 0.25f);
+		}
+		else
+		{
+			actor.move(Direction::Right, 0.25f);
+		}
+
+		actor.jump(2.f);
+
+		m_jumpCoolDowns[&actor] = 1.0f;
 	}
 
 	const auto playerBox = sf::FloatRect(m_player.position().x + m_player.collisionBox().left

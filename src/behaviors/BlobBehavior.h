@@ -6,12 +6,13 @@
 #include "IEnemyBehavior.h"
 
 class IBehaviorControllable;
+class IMapInformationProvider;
 class Player;
 
 class BlobBehavior : public IEnemyBehavior
 {
 	public:
-		BlobBehavior(Player& player);
+		BlobBehavior(Player& player, const IMapInformationProvider &mapInformationProvider);
 
 		void update(float delta) override;
 
@@ -23,6 +24,7 @@ class BlobBehavior : public IEnemyBehavior
 
 	private:
 		Player& m_player;
+		const IMapInformationProvider &m_mapInformationProvider;
 
 		std::map<IBehaviorControllable*, float> m_jumpCoolDowns;
 		float m_elapsed;
