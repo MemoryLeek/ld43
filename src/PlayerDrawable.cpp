@@ -14,13 +14,27 @@ PlayerDrawable::PlayerDrawable(const Player &player, const SpriteSheetMapper &sp
 {
 	std::default_random_engine generator(TILE_SIZE * TILE_SIZE);
 
-	static std::vector<float> elements(TILE_SIZE * TILE_SIZE);
+	static std::vector<sf::Uint32> elements(TILE_SIZE * TILE_SIZE);
 
-	std::iota(begin(elements), end(elements), 0);
+	for (sf::Uint8 x = 0; x < TILE_SIZE; x++)
+	{
+		for (sf::Uint8 y = 0; y < TILE_SIZE; y++)
+		{
+			const sf::Uint8 pixel[] =  { x, y, 0, 0 };
+
+			elements[x + (y * TILE_SIZE)] = *(sf::Uint32 *)pixel;
+		}
+	}
+
 	std::shuffle(begin(elements), end(elements), generator);
 
+	sf::Image image;
+	image.create(TILE_SIZE, TILE_SIZE, (sf::Uint8 *)elements.data());
+
+	m_decayTexture.loadFromImage(image);
+
 	m_decayShader.loadFromFile("resources/shaders/decay.frag", sf::Shader::Fragment);
-	m_decayShader.setUniformArray("lookup", elements.data(), elements.size());
+	m_decayShader.setUniform("lookup", m_decayTexture);
 }
 
 void PlayerDrawable::update(float delta)

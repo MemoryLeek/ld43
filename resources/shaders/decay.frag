@@ -1,8 +1,8 @@
 #version 130
 
 uniform sampler2D texture;
+uniform sampler2D lookup;
 
-uniform float[1024] lookup;
 uniform float decay;
 
 const float TILE_SIZE = 32;
@@ -23,11 +23,12 @@ void main()
 
 	vec2 p = 1.0f - position;
 	vec2 i = floor(p * NUM_TILES) / NUM_TILES;
-	vec2 f = ((p - i) / tileSize) * TILE_SIZE;
+	vec2 f = ((p - i) / tileSize);
+	vec2 m = texture2D(lookup, f).rg * 255.0f;
 
-	int index = int(f.x + (TILE_SIZE * f.y));
+	float index = m.x + (TILE_SIZE * m.y);
 
-	if ((decay * 1024) <= lookup[index])
+	if ((decay * (TILE_SIZE * TILE_SIZE)) <= index)
 	{
 		gl_FragColor = vec4(pixel.rgb, 0.2);
 	}
