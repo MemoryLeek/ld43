@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="39">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="41">
  <tileset firstgid="1" source="../spritesheet.tsx"/>
  <objectgroup id="5" name="Checkpoints">
   <object id="3" x="536" y="456">
@@ -34,10 +34,10 @@
   <object id="17" type="blob" x="1168" y="320">
    <point/>
   </object>
-  <object id="21" type="turret" x="2000" y="608">
+  <object id="21" type="turret_left" x="2000" y="608">
    <point/>
   </object>
-  <object id="22" type="turret" x="1744" y="608">
+  <object id="22" type="turret_right" x="1744" y="608">
    <point/>
   </object>
   <object id="23" type="expandy" x="1728" y="192">
@@ -52,16 +52,16 @@
   <object id="28" type="expandy" x="1632" y="640">
    <point/>
   </object>
-  <object id="29" type="turret" x="2112" y="832">
+  <object id="29" type="turret_left" x="2112" y="832">
    <point/>
   </object>
-  <object id="30" type="turret" x="1792" y="960">
+  <object id="30" type="turret_right" x="1792" y="960">
    <point/>
   </object>
   <object id="31" type="blob" x="1776" y="1056">
    <point/>
   </object>
-  <object id="32" type="turret" x="2112" y="1120">
+  <object id="32" type="turret_left" x="2112" y="1120">
    <point/>
   </object>
   <object id="33" type="shakey" x="1744" y="1440">

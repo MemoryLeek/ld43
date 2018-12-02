@@ -26,7 +26,8 @@ class EnemyFactory : public IUpdatable
 		BlobBehavior m_blobBehavior;
 		StationaryEnemyBehavior m_dummyBehavior;
 		ExpandyBehavior m_expandyBehavior;
-		TurretBehavior m_turretBehavior;
+		TurretBehavior m_turretLeftBehavior;
+		TurretBehavior m_turretRightBehavior;
 };
 
 #endif // ENEMYFACTORY_H

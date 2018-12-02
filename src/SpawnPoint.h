@@ -10,7 +10,8 @@ enum class SpawnType
 	Unknown,
 	Blob,
 	Expandy,
-	Turret,
+	TurretLeft,
+	TurretRight,
 };
 
 struct SpawnTypeResolver
@@ -27,9 +28,14 @@ struct SpawnTypeResolver
 			return SpawnType::Expandy;
 		}
 
-		if (name == "turret")
+		if (name == "turret_left")
 		{
-			return SpawnType::Turret;
+			return SpawnType::TurretLeft;
+		}
+
+		if (name == "turret_right")
+		{
+			return SpawnType::TurretRight;
 		}
 
 		return SpawnType::Unknown;
