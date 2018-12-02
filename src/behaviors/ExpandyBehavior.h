@@ -3,16 +3,23 @@
 
 #include "IEnemyBehavior.h"
 
+class Player;
+
 class ExpandyBehavior : public IEnemyBehavior
 {
 	public:
-		ExpandyBehavior();
+		ExpandyBehavior(const Player &player);
 
 		void update(float delta) override;
 		void invokeOnActor(IBehaviorControllable &actor) override;
 
 		sf::Sprite currentSpriteForActor(const SpriteSheetMapper &spriteSheetMapper, const IBehaviorControllable &actor) const override;
 		sf::FloatRect currentCollisionBoxForActor(const IBehaviorControllable &actor) const override;
+
+	private:
+		int getSpriteIndex(const IBehaviorControllable &actor) const;
+
+		const Player &m_player;
 };
 
 #endif // EXPANDYBEHAVIOR_H

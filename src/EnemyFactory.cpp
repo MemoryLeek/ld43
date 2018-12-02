@@ -4,6 +4,7 @@ EnemyFactory::EnemyFactory(const Player& player, const IMapInformationProvider& 
 	: m_player(player)
 	, m_mapInformationProvider(mapInformationProvider)
 	, m_blobBehavior(m_player)
+	, m_expandyBehavior(m_player)
 {
 }
 
@@ -26,4 +27,6 @@ void EnemyFactory::update(float delta)
 {
 	m_blobBehavior.update(delta);
 	m_dummyBehavior.update(delta);
+	m_expandyBehavior.update(delta);
+	m_turretBehavior.update(delta);
 }

@@ -1,6 +1,10 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include <algorithm>
+#include <iostream>
+#include <cmath>
+
 #include <SFML/System/Vector2.hpp>
 
 constexpr int RES_X = 1280;
@@ -33,6 +37,19 @@ namespace Utility
 	inline sf::Vector2u correctTilePosition(unsigned int px, unsigned int py)
 	{
 		return sf::Vector2u(px / TILE_SIZE, py/ TILE_SIZE);
+	}
+
+	template<typename T>
+	T clamp(T value, T min, T max)
+	{
+		return std::min(max, std::max(min, value));
+	}
+
+	inline unsigned int pingPong(unsigned int index, unsigned int max)
+	{
+		const float q = (index % max) / (max / 2.0f) - 1.0f;
+
+		return std::max(1.0 - fabs(q), 0.0) * max;
 	}
 }
 
