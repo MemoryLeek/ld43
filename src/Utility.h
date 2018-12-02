@@ -9,7 +9,7 @@ constexpr int TILE_SIZE = 32;
 
 constexpr float RENDERSCALE = 2;
 constexpr float GRAVITY = 10;
-constexpr float DECAY = 4000.0f;
+constexpr float DECAY = 2000.0f;
 constexpr float DAMAGE = 2000.0f;
 
 template<typename T>

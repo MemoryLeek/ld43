@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iostream>
+#include <assert.h>
 
 #include "Utility.h"
 
@@ -178,4 +179,6 @@ void Player::update(float delta)
 	ActorMovementHandler::updateActorPosition(*this, m_collisionInformationProvider, delta);
 
 	m_decay -= abs(m_velocity.x) * delta;
+
+	assert(m_decay > 0);
 }
