@@ -38,9 +38,10 @@ void TurretBehavior::update(float delta)
 		}
 	}
 
-	for (auto i = m_bullets.begin(); i < m_bullets.end(); i++)
+	for (auto it = m_bullets.begin(); it != m_bullets.end();)
 	{
-		Bullet &bullet = *i;
+		Bullet &bullet = *it;
+		auto iteratorModified = false;
 
 		if (bullet.direction == Direction::Left)
 		{
@@ -56,7 +57,8 @@ void TurretBehavior::update(float delta)
 
 		if (m_mapInformationProvider.isCollidable(btx, bty))
 		{
-			m_bullets.erase(i);
+			it = m_bullets.erase(it);
+			iteratorModified = true;
 		}
 
 		const sf::Vector2f &position = m_player.position();
@@ -67,7 +69,13 @@ void TurretBehavior::update(float delta)
 		if (bbox.intersects(bulletRect))
 		{
 			m_player.damage(DECAY / 2);
-			m_bullets.erase(i);
+			it = m_bullets.erase(it);
+			iteratorModified = true;
+		}
+
+		if (!iteratorModified)
+		{
+			it++;
 		}
 	}
 }
@@ -129,7 +137,7 @@ sf::FloatRect TurretBehavior::currentCollisionBoxForActor(const IBehaviorControl
 	return sf::FloatRect(8, 21 - index, 15, 11 + index);
 }
 
-std::vector<Bullet> TurretBehavior::bullets() const
+std::list<Bullet> TurretBehavior::bullets() const
 {
 	return m_bullets;
 }

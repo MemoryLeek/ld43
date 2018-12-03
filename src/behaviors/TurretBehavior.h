@@ -2,6 +2,7 @@
 #define TURRETBEHAVIOR_H
 
 #include <map>
+#include <list>
 
 #include "IEnemyBehavior.h"
 #include "SpriteSheetMapper.h"
@@ -40,7 +41,7 @@ class TurretBehavior : public IEnemyBehavior
 		sf::Sprite currentSpriteForActor(const SpriteSheetMapper &spriteSheetMapper, const IBehaviorControllable &actor) const override;
 		sf::FloatRect currentCollisionBoxForActor(const IBehaviorControllable &actor) const override;
 
-		std::vector<Bullet> bullets() const;
+		std::list<Bullet> bullets() const;
 
 	private:
 		TurretState getTurretState(const IBehaviorControllable &actor) const;
@@ -55,7 +56,7 @@ class TurretBehavior : public IEnemyBehavior
 		int m_spawnDirection;
 
 		std::map<const IBehaviorControllable*, TurretState> m_states;
-		std::vector<Bullet> m_bullets;
+		std::list<Bullet> m_bullets;
 };
 
 #endif // TURRETBEHAVIOR_H
