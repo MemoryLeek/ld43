@@ -7,9 +7,10 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider)
+Enemy::Enemy(IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider, const Player &player)
 	: m_behavior(behavior)
 	, m_mapInformationProvider(m_mapInformationProvider)
+	, m_player(player)
 	, m_deathTimer(0)
 	, m_isDead(true)
 	, m_bulletImpactDirection(Direction::Left)

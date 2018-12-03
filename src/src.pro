@@ -89,7 +89,8 @@ HEADERS += \
     behaviors/TurretBehavior.h \
     ProjectileHitDetector.h \
     behaviors/ShakeyBehavior.h \
-    states/GoalState.h
+    states/GoalState.h \
+    Bullet.h
 
 OTHER_FILES += \
     ../resources/shaders/decay.frag

@@ -5,6 +5,8 @@
 
 #include "IUpdatable.h"
 #include "IMovableActor.h"
+#include "Player.h"
+
 #include "behaviors/IBehaviorControllable.h"
 
 class IEnemyBehavior;
@@ -13,7 +15,7 @@ class IMapInformationProvider;
 class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControllable
 {
 	public:
-		Enemy(IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider);
+		Enemy(IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInformationProvider, const Player &player);
 
 		IEnemyBehavior& behavior() const;
 
@@ -41,6 +43,7 @@ class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControlla
 	private:
 		IEnemyBehavior& m_behavior;
 		const IMapInformationProvider& m_mapInformationProvider;
+		const Player &m_player;
 
 		float m_deathTimer;
 		bool m_isDead;

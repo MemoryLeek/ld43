@@ -1,12 +1,15 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <vector>
+
 #include <SFML/System/Vector2.hpp>
 
 #include "Utility.h"
 
 #include "IUpdatable.h"
 #include "IMovableActor.h"
+#include "Bullet.h"
 
 class IMapInformationProvider;
 class ProjectileHitDetector;
@@ -42,6 +45,8 @@ class Player : public IUpdatable, public IMovableActor
 		sf::Vector2f velocity() const override;
 		void setVelocity(sf::Vector2f velocity) override;
 
+		std::vector<Bullet> bullets() const;
+
 		void moveLeft();
 		void stopMovingLeft();
 		void moveRight();
@@ -62,6 +67,8 @@ class Player : public IUpdatable, public IMovableActor
 	private:
 		void respawn();
 
+		sf::Vector2u getGunPosition() const;
+
 		const IMapInformationProvider& m_collisionInformationProvider;
 		const ProjectileHitDetector& m_projectileHitDetector;
 		EnemyPool& m_enemyPool;
@@ -70,6 +77,8 @@ class Player : public IUpdatable, public IMovableActor
 		sf::Vector2f m_velocity;
 		sf::Vector2u m_lastCheckpointTilePosition;
 		sf::Vector2i m_direction;
+
+		std::vector<Bullet> m_bullets;
 
 		int m_decay;
 

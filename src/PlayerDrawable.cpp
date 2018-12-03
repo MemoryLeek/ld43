@@ -130,4 +130,16 @@ void PlayerDrawable::draw(sf::RenderTarget &target, sf::RenderStates states) con
 	sprite.setPosition(m_player.x(), m_player.y());
 
 	target.draw(sprite, &m_decayShader);
+
+	const auto &bullets = m_player.bullets();
+
+	for (const auto &bullet : bullets)
+	{
+		sf::RectangleShape bulletRect;
+		bulletRect.setPosition(sf::Vector2f(bullet.position.x - 2, bullet.position.y - 1));
+		bulletRect.setSize(sf::Vector2f(5, 3));
+		bulletRect.setFillColor(sf::Color(0xa69cb6ff));
+
+		target.draw(bulletRect);
+	}
 }

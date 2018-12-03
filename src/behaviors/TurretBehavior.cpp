@@ -4,9 +4,16 @@
 #include "IBehaviorControllable.h"
 #include "ProjectileHitDetector.h"
 #include "Player.h"
+#include "IMapInformationProvider.h"
 
-TurretBehavior::TurretBehavior(int spawnDirection, ProjectileHitDetector& projectileHitDetector)
-	: m_projectileHitDetector(projectileHitDetector)
+TurretBehavior::TurretBehavior(int spawnDirection
+	, ProjectileHitDetector &projectileHitDetector
+	, const IMapInformationProvider& mapInformationProvider
+	, Player &player
+	)
+	: m_mapInformationProvider(mapInformationProvider)
+	, m_projectileHitDetector(projectileHitDetector)
+	, m_player(player)
 	, m_spawnDirection(spawnDirection)
 {
 }
@@ -30,6 +37,49 @@ void TurretBehavior::update(float delta)
 			state.second.shootingTimer = 0;
 		}
 	}
+
+	for (auto i = m_bullets.begin(); i < m_bullets.end(); i++)
+	{
+		Bullet &bullet = *i;
+
+		if (bullet.direction == Direction::Left)
+		{
+			bullet.position.x -= delta * 1000;
+		}
+		else
+		{
+			bullet.position.x += delta * 1000;
+		}
+
+		const auto btx = round(bullet.position.x / TILE_SIZE);
+		const auto bty = round(bullet.position.y / TILE_SIZE);
+
+		if (m_mapInformationProvider.isCollidable(btx, bty))
+		{
+			m_bullets.erase(i);
+		}
+
+		const sf::Vector2f &position = m_player.position();
+
+		const sf::FloatRect bulletRect(bullet.position.x - 1, bullet.position.y - 1, 3, 3);
+		const sf::FloatRect bbox(position.x, position.y + 8, TILE_SIZE, TILE_SIZE - 8);
+
+		if (bbox.intersects(bulletRect))
+		{
+			m_player.damage(DECAY / 2);
+			m_bullets.erase(i);
+		}
+	}
+}
+
+sf::Vector2u getGunPosition(IBehaviorControllable &actor, const TurretState &state)
+{
+	if (state.direction == 0)
+	{
+		return sf::Vector2u(actor.position().x + 7, actor.position().y + 27);
+	}
+
+	return sf::Vector2u(actor.position().x + TILE_SIZE - 7, actor.position().y + 27);
 }
 
 void TurretBehavior::invokeOnActor(IBehaviorControllable &actor)
@@ -43,17 +93,17 @@ void TurretBehavior::invokeOnActor(IBehaviorControllable &actor)
 
 	auto &state = m_states[&actor];
 
-	const auto gunPosition = sf::Vector2u(actor.position().x + TILE_SIZE / 2, actor.position().y + TILE_SIZE / 2);
-
 	if (state.shootingTimer > -1)
 	{
 		return;
 	}
 
-	auto player = m_projectileHitDetector.queryForPlayerHit(gunPosition, (Direction)state.direction);
+	const auto &gunPosition = getGunPosition(actor, state);
+	const auto player = m_projectileHitDetector.queryForPlayerHit(gunPosition, (Direction)state.direction);
+
 	if (player)
 	{
-		player->damage(DECAY / 2);
+		m_bullets.push_back({ gunPosition, (Direction)state.direction });
 
 		state.shootingTimer = 0.2;
 	}
@@ -77,6 +127,11 @@ sf::FloatRect TurretBehavior::currentCollisionBoxForActor(const IBehaviorControl
 	const auto index = getSpriteIndex(state);
 
 	return sf::FloatRect(8, 21 - index, 15, 11 + index);
+}
+
+std::vector<Bullet> TurretBehavior::bullets() const
+{
+	return m_bullets;
 }
 
 TurretState TurretBehavior::getTurretState(const IBehaviorControllable &actor) const

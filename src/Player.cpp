@@ -86,6 +86,11 @@ void Player::setVelocity(sf::Vector2f velocity)
 	m_velocity = velocity;
 }
 
+std::vector<Bullet> Player::bullets() const
+{
+	return m_bullets;
+}
+
 int Player::decay() const
 {
 	return m_decay;
@@ -201,19 +206,12 @@ Direction getDirectionFromOffset(int offset)
 
 void Player::shoot()
 {
-	const auto gunPosition = sf::Vector2u(m_position.x + TILE_SIZE / 2, m_position.y + TILE_SIZE / 2);
-	auto* result = m_projectileHitDetector.queryForEnemyHit(gunPosition, shootDirection());
-
-	if (result)
+	if (m_shootTimer > 0)
 	{
-		const auto &enemyPosition = result->position();
-		const auto bulletImpactDirection = getDirectionFromOffset(enemyPosition.x - m_position.x);
-
-		result->kill(bulletImpactDirection);
-
-		m_decay = std::min(DECAY, m_decay + DAMAGE);
+		return;
 	}
 
+	m_bullets.push_back({ getGunPosition(), shootDirection() });
 	m_shootTimer = 0.2;
 }
 
@@ -223,6 +221,46 @@ void Player::stopShooting()
 
 void Player::update(float delta)
 {
+	for (auto i = m_bullets.begin(); i < m_bullets.end(); i++)
+	{
+		Bullet &bullet = *i;
+
+		if (bullet.direction == Direction::Left)
+		{
+			bullet.position.x -= delta * 1000;
+		}
+		else
+		{
+			bullet.position.x += delta * 1000;
+		}
+
+		const auto btx = round(bullet.position.x / TILE_SIZE);
+		const auto bty = round(bullet.position.y / TILE_SIZE);
+
+		if (m_collisionInformationProvider.isCollidable(btx, bty))
+		{
+			m_bullets.erase(i);
+		}
+
+		const sf::FloatRect bulletRect(bullet.position.x - 1, bullet.position.y - 1, 3, 3);
+
+		for (const auto &enemy : m_enemyPool.enemies())
+		{
+			const sf::Vector2f &position = enemy->position();
+
+			const sf::FloatRect &bbox = enemy->collisionBox();
+			const sf::FloatRect adjusted(bbox.left + position.x, bbox.top + position.y, bbox.width, bbox.height);
+
+			if (adjusted.intersects(bulletRect))
+			{
+				enemy->kill(bullet.direction);
+
+				m_bullets.erase(i);
+				m_decay = std::min(DECAY, m_decay + DAMAGE);
+			}
+		}
+	}
+
 	const sf::Vector2u currentTile = Utility::tilePosition(x(), y());
 
 	if (m_collisionInformationProvider.isCheckpoint(currentTile.x, currentTile.y) && m_lastCheckpointTilePosition != currentTile)
@@ -264,4 +302,14 @@ void Player::respawn()
 	m_decay = DECAY;
 
 	m_enemyPool.respawnAll();
+}
+
+sf::Vector2u Player::getGunPosition() const
+{
+	if (m_direction.x < 0)
+	{
+		return sf::Vector2u(m_position.x, m_position.y + 19);
+	}
+
+	return sf::Vector2u(m_position.x + TILE_SIZE, m_position.y + 19);
 }
