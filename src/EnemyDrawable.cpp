@@ -27,6 +27,7 @@ void EnemyDrawable::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 	for (const auto& enemy : m_enemyPool.enemies())
 	{
 		const auto deathTimer = enemy->deathTimer();
+		const auto spawnTimer = enemy->spawnTimer();
 
 		if (enemy->isDead() && deathTimer <= 0)
 		{
@@ -36,6 +37,10 @@ void EnemyDrawable::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 		if (deathTimer > 0)
 		{
 			m_enemyShader.setUniform("opacity", deathTimer / 0.5f);
+		}
+		else if (spawnTimer > 0)
+		{
+			m_enemyShader.setUniform("opacity", 1 - (spawnTimer / 1.0f));
 		}
 		else
 		{

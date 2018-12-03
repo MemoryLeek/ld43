@@ -12,7 +12,8 @@ Enemy::Enemy(IEnemyBehavior& behavior, const IMapInformationProvider& m_mapInfor
 	, m_mapInformationProvider(m_mapInformationProvider)
 	, m_player(player)
 	, m_deathTimer(0)
-	, m_isDead(true)
+	, m_spawnTimer(0)
+	, m_health(0)
 	, m_bulletImpactDirection(Direction::Left)
 {
 }
@@ -24,10 +25,17 @@ IEnemyBehavior& Enemy::behavior() const
 
 void Enemy::kill(Direction bulletImpactDirection)
 {
-	if (!m_isDead)
+	if (m_health)
 	{
-		m_deathTimer = 0.5f;
-		m_isDead = true;
+		if (m_health--)
+		{
+			m_deathTimer = 0.2f;
+		}
+		else
+		{
+			m_deathTimer = 0.5f;
+		}
+
 		m_bulletImpactDirection = bulletImpactDirection;
 		m_velocity.x = 0;
 		m_velocity.y = 0;
@@ -36,19 +44,25 @@ void Enemy::kill(Direction bulletImpactDirection)
 
 bool Enemy::isDead() const
 {
-	return m_isDead;
+	return !m_health;
 }
 
 void Enemy::respawn(const sf::Vector2f& position)
 {
 	m_position = position;
 	m_deathTimer = 0;
-	m_isDead = false;
+	m_health = m_behavior.health();
+	m_spawnTimer = 1.0f;
 }
 
 float Enemy::deathTimer() const
 {
 	return m_deathTimer;
+}
+
+float Enemy::spawnTimer() const
+{
+	return m_spawnTimer;
 }
 
 void Enemy::update(float delta)
@@ -58,13 +72,19 @@ void Enemy::update(float delta)
 		m_deathTimer -= delta;
 	}
 
+	if (m_spawnTimer > 0)
+	{
+		m_spawnTimer -= delta;
+	}
+
 	ActorMovementHandler::updateActorPosition(*this, m_mapInformationProvider, delta);
 
-	if (!m_isDead)
+	if (m_health && m_spawnTimer <= 0)
 	{
 		m_behavior.invokeOnActor(*this);
 	}
-	else
+
+	if (m_deathTimer > 0)
 	{
 		if (m_bulletImpactDirection == Direction::Right)
 		{

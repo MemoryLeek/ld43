@@ -43,6 +43,11 @@ int ExpandyBehavior::getSpriteIndex(const IBehaviorControllable &actor) const
 	return Utility::clamp<int>(17 - abs(position.x - m_player.x()) / 5, 0, 17);
 }
 
+int ExpandyBehavior::health() const
+{
+	return 1;
+}
+
 sf::Sprite ExpandyBehavior::currentSpriteForActor(const SpriteSheetMapper &spriteSheetMapper, const IBehaviorControllable &actor) const
 {
 	sf::Sprite sprite = spriteSheetMapper.get(SpriteId::Expandy, getSpriteIndex(actor));

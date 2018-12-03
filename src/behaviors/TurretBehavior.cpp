@@ -188,3 +188,8 @@ int TurretBehavior::getSpriteIndex(const TurretState &state) const
 
 	return (start + end) * 6;
 }
+
+int TurretBehavior::health() const
+{
+	return 1;
+}

@@ -95,3 +95,8 @@ sf::FloatRect BlobBehavior::currentCollisionBoxForActor(const IBehaviorControlla
 
 	return COLLISION_BOX_AIR;
 }
+
+int BlobBehavior::health() const
+{
+	return 1;
+}

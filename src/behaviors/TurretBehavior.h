@@ -57,6 +57,10 @@ class TurretBehavior : public IEnemyBehavior
 
 		std::map<const IBehaviorControllable*, TurretState> m_states;
 		std::list<Bullet> m_bullets;
+
+		// IEnemyBehavior interface
+	public:
+		int health() const override;
 };
 
 #endif // TURRETBEHAVIOR_H

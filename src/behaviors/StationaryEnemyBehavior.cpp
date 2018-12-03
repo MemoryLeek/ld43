@@ -27,3 +27,8 @@ sf::FloatRect StationaryEnemyBehavior::currentCollisionBoxForActor(const IBehavi
 
 	return sf::FloatRect(4, 16, 25, 16);
 }
+
+int StationaryEnemyBehavior::health() const
+{
+	return 1;
+}

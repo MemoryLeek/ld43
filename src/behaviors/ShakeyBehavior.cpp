@@ -114,6 +114,11 @@ int ShakeyBehavior::getSpriteIndex(const ShakeyState &state) const
 	return (int)(state.elapsed * 10) % 4;
 }
 
+int ShakeyBehavior::health() const
+{
+	return 3;
+}
+
 void ShakeyBehavior::invokeOnActor(IBehaviorControllable &actor)
 {
 	auto &state = m_states[&actor];

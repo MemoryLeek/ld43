@@ -52,6 +52,10 @@ class ShakeyBehavior : public IEnemyBehavior
 		Player& m_player;
 
 		std::map<const IBehaviorControllable*, ShakeyState> m_states;
+
+		// IEnemyBehavior interface
+	public:
+		int health() const override;
 };
 
 #endif // SHAKEYBEHAVIOR_H

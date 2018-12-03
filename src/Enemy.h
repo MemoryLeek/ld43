@@ -24,6 +24,7 @@ class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControlla
 		void respawn(const sf::Vector2f& position);
 
 		float deathTimer() const;
+		float spawnTimer() const;
 
 		void update(float delta) override;
 
@@ -46,7 +47,9 @@ class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControlla
 		const Player &m_player;
 
 		float m_deathTimer;
-		bool m_isDead;
+		float m_spawnTimer;
+
+		int m_health;
 
 		Direction m_bulletImpactDirection;
 

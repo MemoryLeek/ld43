@@ -28,6 +28,10 @@ class BlobBehavior : public IEnemyBehavior
 
 		std::map<IBehaviorControllable*, float> m_jumpCoolDowns;
 		float m_elapsed;
+
+		// IEnemyBehavior interface
+	public:
+		int health() const override;
 };
 
 #endif // BLOBBEHAVIOR_H

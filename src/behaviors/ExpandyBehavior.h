@@ -20,6 +20,10 @@ class ExpandyBehavior : public IEnemyBehavior
 		int getSpriteIndex(const IBehaviorControllable &actor) const;
 
 		Player& m_player;
+
+		// IEnemyBehavior interface
+	public:
+		int health() const override;
 };
 
 #endif // EXPANDYBEHAVIOR_H
