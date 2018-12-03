@@ -26,10 +26,12 @@ Settings DefaultSettingsProvider::load() const
 
 	inputMapping
 		.jump()
+		.setJoystickButton(0)
 		.setKey(sf::Keyboard::Space);
 
 	inputMapping
 		.shoot()
+		.setJoystickButton(1)
 		.setKey(sf::Keyboard::LShift)
 		.setMouseButton(sf::Mouse::Left);
 

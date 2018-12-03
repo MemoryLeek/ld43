@@ -45,3 +45,13 @@ void GoalState::mouseButtonReleased(const sf::Event &event)
 {
 	UNUSED(event);
 }
+
+void GoalState::joystickButtonPressed(const sf::Event &event)
+{
+	UNUSED(event);
+}
+
+void GoalState::joystickButtonReleased(const sf::Event &event)
+{
+	UNUSED(event);
+}

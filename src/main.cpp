@@ -72,6 +72,52 @@ int main()
 				stateHandler.mouseButtonReleased(event);
 			}
 
+			if (event.type == sf::Event::JoystickButtonPressed)
+			{
+				stateHandler.joystickButtonPressed(event);
+			}
+
+			if (event.type == sf::Event::JoystickButtonReleased)
+			{
+				stateHandler.joystickButtonReleased(event);
+			}
+
+			if (event.type == sf::Event::JoystickMoved)
+			{
+				if (event.joystickMove.axis == sf::Joystick::X)
+				{
+					if (event.joystickMove.position != 0)
+					{
+						sf::Event emulatedKeyEvent;
+						emulatedKeyEvent.type = sf::Event::KeyPressed;
+
+						if (event.joystickMove.position < 0.0f)
+						{
+							emulatedKeyEvent.key.code = sf::Keyboard::A;
+						}
+						else
+						{
+							emulatedKeyEvent.key.code = sf::Keyboard::D;
+						}
+
+						stateHandler.keyPressed(emulatedKeyEvent);
+					}
+					else
+					{
+						sf::Event emulatedKeyEvent1;
+						emulatedKeyEvent1.type = sf::Event::KeyReleased;
+						emulatedKeyEvent1.key.code = sf::Keyboard::A;
+
+						sf::Event emulatedKeyEvent2;
+						emulatedKeyEvent2.type = sf::Event::KeyReleased;
+						emulatedKeyEvent2.key.code = sf::Keyboard::D;
+
+						stateHandler.keyReleased(emulatedKeyEvent1);
+						stateHandler.keyReleased(emulatedKeyEvent2);
+					}
+				}
+			}
+
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();

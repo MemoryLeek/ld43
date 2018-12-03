@@ -13,6 +13,9 @@ class IState : public sf::Drawable, public IUpdatable
 
 		virtual void mouseButtonPressed(const sf::Event &event) = 0;
 		virtual void mouseButtonReleased(const sf::Event &event) = 0;
+
+		virtual void joystickButtonPressed(const sf::Event &event) = 0;
+		virtual void joystickButtonReleased(const sf::Event &event) = 0;
 };
 
 #endif // ISTATE_H

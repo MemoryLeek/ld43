@@ -17,6 +17,9 @@ class StateHandler : public sf::Drawable
 		void mouseButtonPressed(const sf::Event &event);
 		void mouseButtonReleased(const sf::Event &event);
 
+		void joystickButtonPressed(const sf::Event &event);
+		void joystickButtonReleased(const sf::Event &event);
+
 		void update(float delta);
 
 		void changeState(IState *next, float duration);

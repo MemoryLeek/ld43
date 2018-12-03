@@ -17,6 +17,9 @@ class LogoState : public IState
 		void mouseButtonPressed(const sf::Event &event) override;
 		void mouseButtonReleased(const sf::Event &event) override;
 
+		void joystickButtonPressed(const sf::Event &event) override;
+		void joystickButtonReleased(const sf::Event &event) override;
+
 		void update(float delta) override;
 
 	protected:

@@ -98,6 +98,30 @@ void DummyState::mouseButtonReleased(const sf::Event &event)
 	}
 }
 
+void DummyState::joystickButtonPressed(const sf::Event &event)
+{
+	KeyMapping *mapping = m_settings
+		.inputMapping()
+		.find(event);
+
+	if (mapping)
+	{
+		mapping->keyPressed();
+	}
+}
+
+void DummyState::joystickButtonReleased(const sf::Event &event)
+{
+	KeyMapping *mapping = m_settings
+		.inputMapping()
+		.find(event);
+
+	if (mapping)
+	{
+		mapping->keyReleased();
+	}
+}
+
 void DummyState::update(float delta)
 {
 	UNUSED(delta);
