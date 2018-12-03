@@ -28,6 +28,7 @@ void fpsTimer()
 #endif // SHOWFPS
 
 const float TICK = 0.005;
+const float JOY_DEAD = 20.f;
 
 int main()
 {
@@ -86,7 +87,7 @@ int main()
 			{
 				if (event.joystickMove.axis == sf::Joystick::X)
 				{
-					if (event.joystickMove.position != 0)
+					if (fabs(event.joystickMove.position) > JOY_DEAD)
 					{
 						sf::Event emulatedKeyEvent;
 						emulatedKeyEvent.type = sf::Event::KeyPressed;
