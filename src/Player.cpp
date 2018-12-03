@@ -86,7 +86,7 @@ void Player::setVelocity(sf::Vector2f velocity)
 	m_velocity = velocity;
 }
 
-std::vector<Bullet> Player::bullets() const
+std::list<Bullet> Player::bullets() const
 {
 	return m_bullets;
 }
@@ -221,9 +221,10 @@ void Player::stopShooting()
 
 void Player::update(float delta)
 {
-	for (auto i = m_bullets.begin(); i < m_bullets.end(); i++)
+	for (auto it = m_bullets.begin(); it != m_bullets.end();)
 	{
-		Bullet &bullet = *i;
+		Bullet &bullet = *it;
+		auto iteratorModified = false;
 
 		if (bullet.direction == Direction::Left)
 		{
@@ -239,7 +240,8 @@ void Player::update(float delta)
 
 		if (m_collisionInformationProvider.isCollidable(btx, bty))
 		{
-			m_bullets.erase(i);
+			it = m_bullets.erase(it);
+			iteratorModified = true;
 		}
 
 		const sf::FloatRect bulletRect(bullet.position.x - 2, bullet.position.y - 1, 5, 3);
@@ -260,9 +262,15 @@ void Player::update(float delta)
 			{
 				enemy->kill(bullet.direction);
 
-				m_bullets.erase(i);
+				it = m_bullets.erase(it);
+				iteratorModified = true;
 				m_decay = std::min(DECAY, m_decay + DAMAGE);
 			}
+		}
+
+		if (!iteratorModified)
+		{
+			it++;
 		}
 	}
 

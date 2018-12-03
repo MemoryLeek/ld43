@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <vector>
+#include <list>
 
 #include <SFML/System/Vector2.hpp>
 
@@ -45,7 +46,7 @@ class Player : public IUpdatable, public IMovableActor
 		sf::Vector2f velocity() const override;
 		void setVelocity(sf::Vector2f velocity) override;
 
-		std::vector<Bullet> bullets() const;
+		std::list<Bullet> bullets() const;
 
 		void moveLeft();
 		void stopMovingLeft();
@@ -78,7 +79,7 @@ class Player : public IUpdatable, public IMovableActor
 		sf::Vector2u m_lastCheckpointTilePosition;
 		sf::Vector2i m_direction;
 
-		std::vector<Bullet> m_bullets;
+		std::list<Bullet> m_bullets;
 
 		int m_decay;
 
