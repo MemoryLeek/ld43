@@ -61,7 +61,7 @@ void TurretBehavior::update(float delta)
 
 		const sf::Vector2f &position = m_player.position();
 
-		const sf::FloatRect bulletRect(bullet.position.x - 1, bullet.position.y - 1, 3, 3);
+		const sf::FloatRect bulletRect(bullet.position.x - 2, bullet.position.y - 1, 5, 3);
 		const sf::FloatRect bbox(position.x, position.y + 8, TILE_SIZE, TILE_SIZE - 8);
 
 		if (bbox.intersects(bulletRect))

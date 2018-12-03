@@ -242,10 +242,15 @@ void Player::update(float delta)
 			m_bullets.erase(i);
 		}
 
-		const sf::FloatRect bulletRect(bullet.position.x - 1, bullet.position.y - 1, 3, 3);
+		const sf::FloatRect bulletRect(bullet.position.x - 2, bullet.position.y - 1, 5, 3);
 
 		for (const auto &enemy : m_enemyPool.enemies())
 		{
+			if (enemy->isDead())
+			{
+				continue;
+			}
+
 			const sf::Vector2f &position = enemy->position();
 
 			const sf::FloatRect &bbox = enemy->collisionBox();
