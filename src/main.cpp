@@ -32,7 +32,7 @@ const float JOY_DEAD = 20.f;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(RES_X, RES_Y), "ld43", sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(RES_X, RES_Y), "Pixel Rot", sf::Style::Close);
 	window.setFramerateLimit(200);
 
 	sf::Texture spriteSheet;
