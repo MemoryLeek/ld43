@@ -264,7 +264,11 @@ void Player::update(float delta)
 
 				it = m_bullets.erase(it);
 				iteratorModified = true;
-				m_decay = std::min(DECAY, m_decay + DAMAGE);
+
+				if (enemy->isDead())
+				{
+					m_decay = std::min(DECAY, m_decay + DAMAGE);
+				}
 			}
 		}
 
