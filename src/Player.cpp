@@ -295,7 +295,7 @@ void Player::update(float delta)
 
 	ActorMovementHandler::updateActorPosition(*this, m_collisionInformationProvider, delta);
 
-	m_decay -= abs(m_velocity.x) * delta;
+	m_decay -= (abs(m_velocity.x) + abs(m_velocity.y * 200)) * delta;
 
 	if (m_decay <= 0)
 	{
