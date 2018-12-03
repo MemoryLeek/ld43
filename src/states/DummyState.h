@@ -12,7 +12,6 @@
 #include "EnemyFactory.h"
 #include "EnemyPool.h"
 #include "ProjectileHitDetector.h"
-#include "GoalState.h"
 
 class Settings;
 class StateHandler;
@@ -37,6 +36,8 @@ class DummyState : public IState
 		void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 	private:
+		sf::Texture m_goalTexture;
+
 		Settings &m_settings;
 
 		SpriteSheetMapper m_spriteSheetMapper;
@@ -45,13 +46,14 @@ class DummyState : public IState
 		PlayerDrawable m_playerDrawable;
 		Camera m_camera;
 		StateHandler &m_stateHandler;
-		GoalState m_goalState;
 
 		EnemyFactory m_enemyFactory;
 		EnemyPool m_enemyPool;
 		EnemyDrawable m_enemyDrawable;
 
 		ProjectileHitDetector m_projectileHitDetector;
+
+		bool m_goal;
 };
 
 #endif // DUMMYSTATE_H

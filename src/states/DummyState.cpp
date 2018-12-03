@@ -15,6 +15,7 @@ DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet, State
 	, m_enemyPool(m_enemyFactory, m_map)
 	, m_enemyDrawable(m_enemyPool, m_spriteSheetMapper)
 	, m_projectileHitDetector(m_map, m_enemyPool, m_player)
+	, m_goal(false)
 {
 	InputMapping &inputMapping = settings
 		.inputMapping();
@@ -48,10 +49,17 @@ DummyState::DummyState(Settings &settings, const sf::Texture& spriteSheet, State
 		.shoot()
 		.onPress(m_player, &Player::shoot)
 		.onRelease(m_player, &Player::stopShooting);
+
+	m_goalTexture.loadFromFile("resources/congratulations.png");
 }
 
 void DummyState::keyPressed(const sf::Event &event)
 {
+	if (m_goal)
+	{
+		return;
+	}
+
 	KeyMapping *mapping = m_settings
 		.inputMapping()
 		.find(event);
@@ -64,6 +72,11 @@ void DummyState::keyPressed(const sf::Event &event)
 
 void DummyState::keyReleased(const sf::Event &event)
 {
+	if (m_goal)
+	{
+		return;
+	}
+
 	KeyMapping *mapping = m_settings
 		.inputMapping()
 		.find(event);
@@ -76,6 +89,11 @@ void DummyState::keyReleased(const sf::Event &event)
 
 void DummyState::mouseButtonPressed(const sf::Event &event)
 {
+	if (m_goal)
+	{
+		return;
+	}
+
 	KeyMapping *mapping = m_settings
 		.inputMapping()
 		.find(event);
@@ -88,6 +106,11 @@ void DummyState::mouseButtonPressed(const sf::Event &event)
 
 void DummyState::mouseButtonReleased(const sf::Event &event)
 {
+	if (m_goal)
+	{
+		return;
+	}
+
 	KeyMapping *mapping = m_settings
 		.inputMapping()
 		.find(event);
@@ -100,6 +123,11 @@ void DummyState::mouseButtonReleased(const sf::Event &event)
 
 void DummyState::joystickButtonPressed(const sf::Event &event)
 {
+	if (m_goal)
+	{
+		return;
+	}
+
 	KeyMapping *mapping = m_settings
 		.inputMapping()
 		.find(event);
@@ -112,6 +140,11 @@ void DummyState::joystickButtonPressed(const sf::Event &event)
 
 void DummyState::joystickButtonReleased(const sf::Event &event)
 {
+	if (m_goal)
+	{
+		return;
+	}
+
 	KeyMapping *mapping = m_settings
 		.inputMapping()
 		.find(event);
@@ -124,7 +157,10 @@ void DummyState::joystickButtonReleased(const sf::Event &event)
 
 void DummyState::update(float delta)
 {
-	UNUSED(delta);
+	if (m_goal)
+	{
+		return;
+	}
 
 	m_player.update(delta);
 	m_playerDrawable.update(delta);
@@ -143,7 +179,7 @@ void DummyState::update(float delta)
 
 	if (m_map.intersectsGoal(playerBox))
 	{
-		m_stateHandler.changeState(&m_goalState);
+		m_goal = true;
 	}
 }
 
@@ -160,4 +196,24 @@ void DummyState::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	target.draw(m_map);
 	target.draw(m_playerDrawable);
 	target.draw(m_enemyDrawable);
+
+	if (m_goal)
+	{
+		const auto &size = target.getSize();
+		const auto &topLeft = target.mapPixelToCoords(sf::Vector2i(0, 0), view);
+
+		const sf::Vector2f spritePosition(topLeft.x + ((size.x - 800) / 4), topLeft.y + ((size.y - 600) / 4));
+
+		sf::RectangleShape rect;
+		rect.setPosition(topLeft);
+		rect.setFillColor(sf::Color(0x272034AA));
+		rect.setSize(sf::Vector2f(size));
+
+		sf::Sprite goalSprite(m_goalTexture);
+		goalSprite.setScale(0.5, 0.5);
+		goalSprite.setPosition(spritePosition);
+
+		target.draw(rect);
+		target.draw(goalSprite);
+	}
 }

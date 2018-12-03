@@ -50,8 +50,7 @@ SOURCES += main.cpp \
     behaviors/ExpandyBehavior.cpp \
     behaviors/TurretBehavior.cpp  \
     ProjectileHitDetector.cpp \
-    behaviors/ShakeyBehavior.cpp \
-    states/GoalState.cpp
+    behaviors/ShakeyBehavior.cpp
 
 HEADERS += \
     states/LogoState.h \
@@ -89,7 +88,6 @@ HEADERS += \
     behaviors/TurretBehavior.h \
     ProjectileHitDetector.h \
     behaviors/ShakeyBehavior.h \
-    states/GoalState.h \
     Bullet.h
 
 OTHER_FILES += \
