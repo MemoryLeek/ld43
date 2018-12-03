@@ -41,13 +41,9 @@ void PlayerDrawable::update(float delta)
 {
 	m_elapsed += delta;
 
+	const auto opacity = getPlayerOpacity();
+
 	m_decayShader.setUniform("decay", m_player.decay() / DECAY);
-
-
-	const auto opacity = m_player.isInvulnerable()
-		? ((int)(m_elapsed * 10) % 2) * .6f
-		: 1.f;
-
 	m_decayShader.setUniform("opacity", opacity);
 }
 
@@ -114,6 +110,16 @@ int PlayerDrawable::getSpriteIndex() const
 	}
 
 	return (int)(m_elapsed * 20) % 4;
+}
+
+float PlayerDrawable::getPlayerOpacity() const
+{
+	if (m_player.isInvulnerable())
+	{
+		return ((int)(m_elapsed * 10) % 2) * .6f;
+	}
+
+	return 1.f;
 }
 
 void PlayerDrawable::draw(sf::RenderTarget &target, sf::RenderStates states) const

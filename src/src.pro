@@ -102,3 +102,6 @@ unix:PKGCONFIG += sfml-all
 
 debug:win32:LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-system-d -lsfml-window-d  -llibtmxlite-s-d
 release:win32:LIBS += -lsfml-audio -lsfml-graphics -lsfml-system -lsfml-window -llibtmxlite-s
+
+DISTFILES += \
+    ../resources/shaders/enemy.frag

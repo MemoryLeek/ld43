@@ -189,6 +189,16 @@ void Player::stopJumping()
 {
 }
 
+Direction getDirectionFromOffset(int offset)
+{
+	if (offset > 0)
+	{
+		return Direction::Right;
+	}
+
+	return Direction::Left;
+}
+
 void Player::shoot()
 {
 	const auto gunPosition = sf::Vector2u(m_position.x + TILE_SIZE / 2, m_position.y + TILE_SIZE / 2);
@@ -196,7 +206,11 @@ void Player::shoot()
 
 	if (result)
 	{
-		result->kill();
+		const auto &enemyPosition = result->position();
+		const auto bulletImpactDirection = getDirectionFromOffset(enemyPosition.x - m_position.x);
+
+		result->kill(bulletImpactDirection);
+
 		m_decay = std::min(DECAY, m_decay + DAMAGE);
 	}
 

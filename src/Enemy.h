@@ -17,9 +17,11 @@ class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControlla
 
 		IEnemyBehavior& behavior() const;
 
-		void kill();
+		void kill(Direction bulletImpactDirection);
 		bool isDead() const;
 		void respawn(const sf::Vector2f& position);
+
+		float deathTimer() const;
 
 		void update(float delta) override;
 
@@ -40,7 +42,10 @@ class Enemy : public IUpdatable, public IMovableActor, public IBehaviorControlla
 		IEnemyBehavior& m_behavior;
 		const IMapInformationProvider& m_mapInformationProvider;
 
+		float m_deathTimer;
 		bool m_isDead;
+
+		Direction m_bulletImpactDirection;
 
 		sf::Vector2f m_position;
 		sf::Vector2f m_velocity;

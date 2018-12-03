@@ -19,6 +19,8 @@ class EnemyDrawable : public sf::Drawable, public IUpdatable
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	private:
+		mutable sf::Shader m_enemyShader;
+
 		const EnemyPool &m_enemyPool;
 		const SpriteSheetMapper &m_spriteSheetMapper;
 };
